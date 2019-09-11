@@ -40,50 +40,16 @@
     <link href="{{ asset('css/bootstrap4.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/datatables/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/datatables/responsive.bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('lib/chosen/css/chosen.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('lib/chosen/css/chosen-bootstrap.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/component-chosen.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/floating-labels.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/estilos1.css') }}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="{{ asset('css/bracket.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/typeahead.css') }}" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .help-block {
-        color: #a94442;
-        background-color: #f2dede;
-        border-color: #ebccd1;
-        padding:1px 20px 1px 20px;
-      }
-
-      .dataTables_filter{
-        float: right;
-      }
-      
-      .icono-action a:hover{ 
-        font-size: 1.25em;
-      }
-
-      .icono-action-2 a:hover{ 
-        font-size: 1.25em;
-      }
-    </style>
+    
   <body>
 
     <!-- ########## START: LEFT PANEL ########## -->
@@ -99,32 +65,56 @@
         </a><!-- br-menu-link -->
         <a href="{{URL::to('consulta-medica')}}" class="br-menu-link">
           <div class="br-menu-item">
-            <i class="fas fa-tooth"></i>
+            <i class="menu-item-icon tx-18 fas fa-tooth"></i>
             <span class="menu-item-label">Consulta Médica</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <a href="{{URL::to('pacientes')}}" class="br-menu-link">
           <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-person-outline tx-24"></i>
+            <i class="menu-item-icon tx-18 far fa-user"></i>
             <span class="menu-item-label">Pacientes</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <a href="#" class="br-menu-link">
           <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Tablas</span>
+            <i class="menu-item-icon tx-18 fas fa-print"></i>
+            <span class="menu-item-label">Reportes</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="./card-dashboard.html" class="nav-link">Dashboard</a></li>
-          <li class="nav-item"><a href="./card-social.html" class="nav-link">Blog &amp; Social Media</a></li>
-          <li class="nav-item"><a href="./card-listing.html" class="nav-link">Shop &amp; Listing</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Administrativos</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Pacientes</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Laboratorio</a></li>
         </ul>
-        
+        <a href="#" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon tx-18 fas fa-user-cog"></i>           
+            <span class="menu-item-label">Administrador</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+        <ul class="br-menu-sub nav flex-column">
+          <li class="nav-item"><a href="#" class="nav-link">Usuarios</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Motivos</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Estados</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Convenios</a></li>
+        </ul>
+        <a href="#" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon tx-18 fas fa-tools"></i>            
+            <span class="menu-item-label">Configuración</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+        <ul class="br-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{URL::to('config-empresa')}}" class="nav-link">Empresa</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Agenda</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Correos</a></li>
+        </ul>
       </div><!-- br-sideleft-menu -->
 
-      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20 tx-info op-9">Information Summary</label>
+      <label class="sidebar-label pd-x-15 mg-t-25 mg-b-20 tx-info op-9">RESUMEN DE INFORMACIÓN</label>
 
       <br />
     </div><!-- br-sideleft -->
@@ -703,15 +693,15 @@
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
       @yield('contenido')      
-      <footer class="br-footer">
-        <div class="footer-left">
-          <div class="mg-b-2">Copyright &copy; 2019. MediSoft. All Rights Reserved.</div>
-          <div>Desarrollado por Ing. Alexander Marcano A.</div>
-        </div>
-        <div class="footer-right d-flex align-items-center">
-          <span class="tx-uppercase mg-r-10">Compartir:</span>
-          <a target="_blank" class="pd-x-5" href="#"><i class="fab fa-facebook-f"></i></a>
-          <a target="_blank" class="pd-x-5" href="#"><i class="fab fa-twitter"></i></a>
+
+     <footer class="footer-bottom">
+      <hr>
+        <div class="row">
+          <div class="col-lg-12" style="">
+            <span style="width: 100%;margin-left: 1em;">Copyright &copy; 2019. MediSoft. All Rights Reserved. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desarrollado por Ing. Alexander Marcano A.<span class="tx-uppercase mg-r-10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compartir:</span>
+            <a target="_blank" class="pd-x-5" href="#"><i class="fab fa-facebook-f"></i></a>
+            <a target="_blank" class="pd-x-5" href="#"><i class="fab fa-twitter"></i></a></span>
+          </div>
         </div>
       </footer>
     </div><!-- br-mainpanel -->

@@ -20,7 +20,13 @@
 
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link  active" href="#consultasTab" role="tab" data-toggle="tab" aria-selected="true"><i class="fas fa-tooth"></i> Consultas</a>
+          <a class="nav-link  active" href="#datos_personales" role="tab" data-toggle="tab" aria-selected="true"><i class="far fa-user"></i> Datos personales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#Anamnesis" role="tab" data-toggle="tab" aria-selected="true"><i class="far fa-question-circle"></i> Anamnesis General</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#consultasTab" role="tab" data-toggle="tab" aria-selected="true"><i class="fas fa-tooth"></i> Consultas</a>
         </li>
         <li class="nav-item" id="navOdontograma">
           <a class="nav-link" href="#odontogramaTab" role="tab" data-toggle="tab"><i class="fas fa-teeth-open"></i> Odontogramas</a>
@@ -41,14 +47,21 @@
 
       <!-- Tab panes -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="consultasTab">
+
+        <div role="tabpanel" class="tab-pane active" id="datos_personales">
+          @include('consultaMedica.datos_personales')
+        </div>
+        <div role="tabpanel" class="tab-pane" id="Anamnesis">
+          @include('consultaMedica.Anamnesis_general')
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="consultasTab">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               @include('consultaMedica.consultasPaciente')
             </div>            
           </div>          
         </div>
-        <div role="tabpanel" class="tab-pane active" id="odontogramaTab">
+        <div role="tabpanel" class="tab-pane" id="odontogramaTab">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               @include('consultaMedica.odontogramaPaciente')
@@ -59,6 +72,7 @@
         <div role="tabpanel" class="tab-pane fade" id="recipes">
           @include('consultaMedica.recipesPaciente')
         </div>
+        
       </div>
 
     </div>

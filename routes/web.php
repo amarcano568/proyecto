@@ -42,6 +42,8 @@ Route::get('buscar-medicamentos', 'consultaMedicaController@buscarMedicamentos')
 
 Route::get('agregar-recipe-paciente', 'consultaMedicaController@agregarRecipePaciente');
 
+Route::get('config-empresa', 'configuracionController@configEmpresa');
+
 // Route::get('listar-pacientes', function () {
 //     $BD = Auth::user()->Empresa;
 //     return \App\Pacientes::on($BD)->get();

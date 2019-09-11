@@ -3,6 +3,9 @@ $(document).on('ready', function() {
     var idMedicamento = '';
     var nombreMedicamento = '';
 
+    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="tooltip"]').tooltip();
+
     $('.chosen-select', this).chosen('destroy').chosen({
         width: '100%',
         height: '200%',
@@ -313,7 +316,7 @@ $(document).on('ready', function() {
         switch (accion_ok) {
 
             case 'verRecipePdf': // Edita firma
-                $('#'+idRecipe).show();
+                $('#' + idRecipe).show();
                 $.ajax({
                     url: 'ver-recipe-paciente',
                     type: 'get',
@@ -325,7 +328,7 @@ $(document).on('ready', function() {
                 }).fail(function(statusCode, errorThrown) {
                     alert(statusCode + ' ' + errorThrown);
                 }).done(function(data) {
-                    $('#'+idRecipe).hide();
+                    $('#' + idRecipe).hide();
                     console.log(data);
                     if (data.success == true) {
                         //user_jobs div defined on page
