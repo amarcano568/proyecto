@@ -62,6 +62,16 @@ $(document).on('ready', function() {
         }
     }
 
+    $('#sillones').ionRangeSlider({
+        grid: true,
+        min: 0,
+        max: 30,
+        from: 0,
+        step: 1,
+        //max_postfix: "+",
+        prefix: "",
+        postfix: " Sillones",
+    });
 
 
 });

@@ -43,6 +43,8 @@
     <link href="{{ asset('css/component-chosen.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/floating-labels.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/estilos1.css') }}" rel="stylesheet" />
+    <link href="{{ asset('lib/ion.rangeSlider/css/ion.rangeSlider.css') }}" rel="stylesheet" />
+    <link href="{{ asset('lib/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css') }}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
 
     <!-- Bracket CSS -->
@@ -53,7 +55,7 @@
   <body>
 
     <!-- ########## START: LEFT PANEL ########## -->
-    <div class="br-logo"><a href="./index.html"><span>[</span>Medisoft <i class="fas fa-tooth"></i><i>v1.0</i><span>]</span></a></div>
+    <div class="br-logo"><a href="./index.html"><span>[</span>Medisoft <img src="{{ asset('img/diente.png')}}" width="20" height="20">v1.0</i><span>]</span></a></div>
     <div class="br-sideleft overflow-y-auto">
       <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
       <div class="br-sideleft-menu">
@@ -729,7 +731,7 @@
     <script src="{{ asset('lib/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('lib/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('lib/datatables/responsive.bootstrap.min.js') }}"></script>
-  
+    <script src="{{ asset('lib/ion.rangeSlider/js/ion.rangeSlider.min.js') }}"></script>
     <script src="{{ asset('lib/datatables/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('lib/datatables/buttons.bootstrap.min.js') }}"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -740,6 +742,7 @@
     <script src="{{ asset('lib/chosen/js/chosen.jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery.blockUI.js') }}"></script>
     <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-slider.js') }}"></script>
     <script src="{{ asset('jsApp/funcGral.js') }}"></script>
 
     <script src="{{ asset('lib/alertifyjs/alertify.min.js') }}"></script>

@@ -2,120 +2,158 @@
 @section('contenido')
 <br>
 <div class="br-pagebody mg-t-5 pd-x-30">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="card bd-0 shadow-base">
-        <div id="config_empresa" class="sub_menu_tab">
-        <div class="menu_acciones">
-            <button id="btn_nva_sucursal" class="btn btn-link btn_big_circle">
-                <i class="pointer_circle"></i>
-                <p class="btn_text">Nueva Sucursal</p>
+  <div style="padding: 1em;" class="card bd-0 shadow-base">
+    <div id="config_empresa" class="sub_menu_tab">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12- col-xs-12">
+          <div class="barra_titulo ">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+              <button type="button" class="btn btn-secondary"><i class="fas fa-plus"></i></button>
+              <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sucursales
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                  <a class="dropdown-item" href="#">Sucursal 1</a>
+                  <a class="dropdown-item" href="#">Sucursal 2</a>
+                </div>
+              </div>
+            </div>
+          </div>          
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12- col-xs-12">
+          <div class="menu_acciones" style="float: right;">        
+            <button class="btn btn-outline-primary btn-oblong bd-2 pd-x-30 pd-y-10 tx-uppercase tx-bold tx-spacing-6 tx-12">
+              <i class="fa-2x far fa-save"></i> Guardar
             </button>
+          </div>
         </div>
-        <div class="barra_titulo ">
-            <h5 id="titulo_sucursal" class="color_dd_title">Datos de Alejandro Marcan S. (Sucursal Principal)</h5>
-        </div>
-    <form>
-      <div class="col-lg-7 ">
-        <input type="hidden" id="id_sucursal" value="879">
-        
-        <div class="form-group" id="empresa_config_group">
-            <label for="empresa_config" style="color: #337ab7; font-size: 14px;">Nombre Clínica</label>
-            <input type="text" class="form-control input-sm" id="empresa_config" placeholder="Nombre Clínica" value="Alejandro Marcan S.">
-        </div>
-        
-        <div class="form-group margin_row_top">
-            <label for="sucursal_config">Nombre Sucursal</label>
-            <input type="text" class="form-control input-sm" id="sucursal_config" placeholder="Nombre Sucursal" value="Alejandro Marcan S.">
-        </div>
-        <div class="form-group margin_row_top">
-            <label for="direccion_config">Dirección</label>
-            <input type="text" class="form-control input-sm" id="direccion_config" placeholder="Dirección" value="">
-        </div>
-        <div class="form-group margin_row_top">
-            <label for="direccion2_config">Dirección 2</label>
-            <input type="text" class="form-control input-sm" id="direccion2_config" placeholder="Dirección 2" value="">
-        </div>
+      </div>
+      <br>
+      <form>
         <div class="row">
-            <div class="col-md-6">
+          <div class="col-lg-7 ">
+            <input type="hidden" id="id_sucursal" value="">
+            <div class="form-group" id="empresa_config_group">
+                <div class="form-label-group">
+                    <input type="text" class="form-control input-sm" id="nombre_clinica" placeholder="Nombre de la Clínica" style="border: 1px solid #7FB3D5;background-color: #EAF2F8;">
+                    <label for="nombre_clinica"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de la Clínica</font></font></label>
+                </div>
+            </div>
+            <div class="row margin_row_top">
+            <div class="col-lg-6">
+              <div class="form-label-group">
+                <input type="text" class="form-control input-sm" id="nroDocFiscal" placeholder="# Documento fiscal">
+                <label for="nroDocFiscal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"># Documento fiscal</font></font></label>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-label-group">
+                <input type="text" class="form-control input-sm" id="nombre_corto_config" placeholder="Nombre corto sucursal" value="">
+                <label for="Nombre corto sucursal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre corto sucursal</font></font></label>
+              </div>
+            </div>
+            </div>
+            <div class="form-group margin_row_top">
+              <div class="form-label-group">
+                    <input type="text" class="form-control input-sm" id="sucursal_config" placeholder="Nombre Sucursal">
+                    <label for="sucursal_config"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre Sucursal</font></font></label>
+                </div>
+            </div>
+            <div class="form-group margin_row_top">
+              <label for="direccion_config">Dirección</label>
+               <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-map-signs"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-sm" id="direccion1" placeholder="Dirección" value="">
+                </div>
+            </div>
+            <div class="form-group margin_row_top">
+              <label for="direccion2_config">Dirección 2</label>
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-map-signs"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-sm" id="direccion2" placeholder="Dirección 2" value="">
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
                 <label for="fono1_config">Teléfono Principal</label>
-                <input type="text" class="form-control input-sm" id="fono1_config" placeholder="Teléfono Principal" value="931299300">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-sm" id="fono1_config" placeholder="Teléfono Principal" value="">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="fono1_config">Teléfono Secundario</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-sm" id="fono2_config" placeholder="Teléfono Secundario" value="">
+                </div>
+              </div>
             </div>
-            <div class="col-md-6">
-                <label for="fono2_config">Teléfono Secundario</label>
-                <input type="text" class="form-control input-sm" id="fono2_config" placeholder="Teléfono Secundario" value="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label for="contacto_email_config">Correo de Contacto</label>
-                <input type="text" class="form-control input-sm" id="contacto_email_config" placeholder="Correo de Contacto" value="amarcano568@hotmail.com">
-            </div>
-            <div id="config_pagina_web" class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="fono1_config">Correo de contacto</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+                  </div>
+                  <input type="email" class="form-control input-sm" id="email" placeholder="Email contacto" value="">
+                </div>
+              </div>
+              <div id="config_pagina_web" class="col-md-6">
                 <label for="pagina_web_config">Página Web</label>
                 <input type="text" class="form-control input-sm" id="pagina_web_config" placeholder="Página Web" value="">
+              </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label for="nombre_corto_config">Nombre corto sucursal</label>
-                <input type="text" class="form-control input-sm" id="nombre_corto_config" placeholder="Nombre corto sucursal" value="">
-            </div>
-            <div class="col-md-6 row_agenda_online">
+            <div class="row">
+              
+              <!-- <div class="col-md-6 row_agenda_online">
                 <label>¿Agendamiento Online? </label><br>
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-radio btn-success active">
-                        <input type="radio" name="agendamiento_online" value="1" checked=""> Activo
-                    </label>
-                    <label class="btn btn-radio btn-success ">
-                        <input type="radio" name="agendamiento_online" value="0"> Inactivo
-                    </label>
+                  <label class="btn btn-radio btn-success active">
+                    <input type="radio" name="agendamiento_online" value="1" checked=""> Activo
+                  </label>
+                  <label class="btn btn-radio btn-success ">
+                    <input type="radio" name="agendamiento_online" value="0"> Inactivo
+                  </label>
                 </div>
-             </div>
-        </div>
-        <div class="row">
-            <div class="form-inline">
-                <div class="col-md-6">
-                    <label for="sillones_config"># sillones (boxes)</label>
-                    <select id="sillones_config" class="form-control input-sm pull-right">
-                        <option value="0" selected="">0</option>
-                        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option>                    </select>
-                </div>
+              </div> -->
             </div>
-        </div>
-        <div class="row">
-            <div class="form-inline">
-                <div id="div_seleccione_color" class="col-md-6">
-                    <label for="color_sucursal">
-                        Color Sucursal                        <i class="glyphicon glyphicon-question-sign color_dd" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Color que aparece en los correos a pacientes."></i>
-                    </label>
-                    <a id="color_sucursal" class="dropdown-toggle pull-right rectangulo_color clickeable" rel="popover" data-placement="right" style="background-color:#FFF" data-original-title="" title=""></a>
-                    <input type="hidden" value="#FFF" class="span3" id="color_seleccionado_sucursal">
-                </div>
+            
+
             </div>
-        </div>
-        <div class="form-group">
-            <label for="sucursal_config">Enlace de google maps para correos                <i class="glyphicon glyphicon-question-sign color_dd" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Si se define, los correos de confirmación mostrarán el mapa de la sucursal"></i>
-            </label>
-            <input type="text" class="form-control input-sm" id="sucursal_google_maps_config" placeholder="Enlace Google Maps" value="">
-        </div>
-    </div>
-    <div class="col-lg-4" id="div_logo_empresa">
-      <h5>Presiona aquí para ingresar el<br>Logo de tu Clínica</h5>
-      <img id="icono_empresa" src="i/logo_big.png" alt="Logo" class="clickeable">
-    </div>
-    <!-- <div class="col-md-12 acciones_finales">
-        <div class="pull-right">
-            <button type="button" id="btn_eliminar_config" class="btn btn-default invisible">Eliminar Sucursal</button>
-            <button type="button" id="btn_guardar_config" class="btn btn-primary">Guardar</button>
-        </div>
-    </div> -->
-    </form>
-</div>
+            <div class="col-lg-4">              
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12- col-xs-12">
+                  <label for="formControlRange"># sillones (boxes)</label>
+                    <input type="text" id="sillones" name="sillones" value="0" />
+                </div>
+              </div>
+              <br><br>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12- col-xs-12 img-thumbnail" style="text-align: center;">
+                  <h6>Presiona aquí para agregar el Logo.</h6>
+                  <a href="">            
+                      <i class="img-thumbnail fa-10x far fa-hospital" data-toggle="popover" data-placement="bottom"  title="Logo." data-content="Click para agregar el logo de tu Clínica." data-trigger="hover"></i>
+                      <br>
+                      <label>Logo de tu Clínica</label>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
 
 @endsection
 
