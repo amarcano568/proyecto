@@ -158,5 +158,5 @@
 @endsection
 
 @section('javascript')
-  <script src="{{ asset('jsApp/configuracion.js') }}"></script>  
+  <script src="{{ asset('jsApp/configEmpresa.js') }}"></script>  
 @stop

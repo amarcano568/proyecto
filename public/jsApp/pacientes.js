@@ -1,3 +1,4 @@
+selectedOptionMenu('20000', 'br-menu-link active');
 $(document).on('ready', function() {
 
     $("#tablePacientes").DataTable({
@@ -355,30 +356,6 @@ $(document).on('ready', function() {
         $("#modal-paciente").modal('show');
     });
 
-    function ajaxError(statusCode, errorThrown) {
 
-        if (statusCode.status == 0) {
-            alertify.alert('Alerta...', '<h4 class="yellow">Internet: Problemas de Conexion</h4>', function() {
-                alertify.success('Ok');
-            });
-        } else if (statusCode.status == 422) {
-            console.warn(statusCode.responseJSON.errors);
-            // display errors on each form field
-            $.each(statusCode.responseJSON.errors, function(i, error) {
-                var el = $(document).find('[name="' + i + '"]');
-                console.log(el)
-                el.after($('<p style="color: #a94442;background-color: #f2dede;border-color: #ebccd1;padding:1px 20px 1px 20px;">' + error[0] + '</p>'));
-            })
-
-        } else {
-            console.log(statusCode);
-            console.log(errorThrown);
-            alertify.alert('Alerta...', '<h4 class="text-danger"><i class="text-danger fas fa-exclamation-triangle"></i> Error del Sistema</h4>', function() {
-                alertify.success('Ok');
-            });
-        }
-
-
-    }
 
 });

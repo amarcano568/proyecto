@@ -1,4 +1,9 @@
+/**
+ * Activa opción menú.
+ */
+selectedOptionMenu('10000', 'br-menu-link active');
 $(document).on('ready', function() {
+
     var objetoDataTables_personal = ''
     var idMedicamento = '';
     var nombreMedicamento = '';
@@ -216,14 +221,6 @@ $(document).on('ready', function() {
             $("#fecNacPac").text(response.fecNac);
             $("#edadPac").text(response.edad);
         });
-    }
-
-    function destroy_existing_data_table(tableDestry) {
-        var existing_table = $(tableDestry).dataTable();
-        if (existing_table != undefined) {
-            existing_table.fnClearTable();
-            existing_table.fnDestroy();
-        }
     }
 
     function cargaConsultas(idPaciente) {

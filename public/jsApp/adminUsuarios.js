@@ -1,5 +1,6 @@
-$(document).on('ready', function() {
+selectedOptionMenu('40000', 'br-menu-link active show-sub', '40001', 'nav-link active');
 
+$(document).on('ready', function() {
 
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();

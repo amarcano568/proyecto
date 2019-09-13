@@ -44,6 +44,15 @@ Route::get('agregar-recipe-paciente', 'consultaMedicaController@agregarRecipePac
 
 Route::get('config-empresa', 'configuracionController@configEmpresa');
 
+Route::get('administrador-usuarios', 'administradorController@administradorUsuarios');
+
+Route::get('motivos-consultas', 'administradorController@motivosConsultas');
+
+Route::get('carga-motivos', 'administradorController@cargaMotivos');
+
+Route::post('registrar-motivo', 'administradorController@registrarMotivo');
+
+
 // Route::get('listar-pacientes', function () {
 //     $BD = Auth::user()->Empresa;
 //     return \App\Pacientes::on($BD)->get();

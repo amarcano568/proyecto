@@ -5,19 +5,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
- <!--    Twitter 
-    <meta name="twitter:site" content="@themepixels" />
-    <meta name="twitter:creator" content="@themepixels" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Bracket Plus" />
-    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard." />
-    <meta name="twitter:image" content="http://themepixels.me/bracketplus/img/bracketplus-social.png" />
-
-
-    <meta property="og:url" content="http://themepixels.me/bracketplus" />
-    <meta property="og:title" content="Bracket Plus" />
-    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard." /> -->
-
     <meta property="og:image" content="http://themepixels.me/bracketplus/img/bracketplus-social.png" />
     <meta property="og:image:secure_url" content="http://themepixels.me/bracketplus/img/bracketplus-social.png" />
     <meta property="og:image:type" content="image/png" />
@@ -46,8 +33,7 @@
     <link href="{{ asset('lib/ion.rangeSlider/css/ion.rangeSlider.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css') }}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
-
-    <!-- Bracket CSS -->
+    
     <link rel="stylesheet" href="{{ asset('css/bracket.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/typeahead.css') }}" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
@@ -59,25 +45,25 @@
     <div class="br-sideleft overflow-y-auto">
       <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
       <div class="br-sideleft-menu">
-        <a href="./index.html" class="br-menu-link active">
+        <a href="./index.html" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
             <span class="menu-item-label">Inicio</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        <a href="{{URL::to('consulta-medica')}}" class="br-menu-link">
+        <a id="10000" href="{{URL::to('consulta-medica')}}" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon tx-18 fas fa-tooth"></i>
             <span class="menu-item-label">Consulta Médica</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        <a href="{{URL::to('pacientes')}}" class="br-menu-link">
+        <a id="20000" href="{{URL::to('pacientes')}}" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon tx-18 far fa-user"></i>
             <span class="menu-item-label">Pacientes</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        <a href="#" class="br-menu-link">
+        <a id="30000" href="#" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon tx-18 fas fa-print"></i>
             <span class="menu-item-label">Reportes</span>
@@ -89,7 +75,7 @@
           <li class="nav-item"><a href="#" class="nav-link">Pacientes</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Laboratorio</a></li>
         </ul>
-        <a href="#" class="br-menu-link">
+        <a id="40000" href="#" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon tx-18 fas fa-user-cog"></i>           
             <span class="menu-item-label">Administrador</span>
@@ -97,12 +83,12 @@
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="#" class="nav-link">Usuarios</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Motivos</a></li>
+          <li class="nav-item"><a id="40001"  href="{{URL::to('administrador-usuarios')}}" class="nav-link">Usuarios</a></li>
+          <li class="nav-item"><a id="40002" href="{{URL::to('motivos-consultas')}}" class="nav-link">Motivos</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Estados</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Convenios</a></li>
         </ul>
-        <a href="#" class="br-menu-link">
+        <a id="50000" href="#" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon tx-18 fas fa-tools"></i>            
             <span class="menu-item-label">Configuración</span>
@@ -110,7 +96,7 @@
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{URL::to('config-empresa')}}" class="nav-link">Empresa</a></li>
+          <li class="nav-item"><a id="50001" href="{{URL::to('config-empresa')}}" class="nav-link">Empresa</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Agenda</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Correos</a></li>
         </ul>
@@ -153,7 +139,7 @@
                 <!-- loop starts here -->
                 <a href="./index.html" class="media-list-link">
                   <div class="media pd-x-20 pd-y-15">
-                    <img src="../img/img3.jpg" class="wd-40 rounded-circle" alt="" />
+                    <img src="" class="wd-40 rounded-circle" alt="" />
                     <div class="media-body">
                       <div class="d-flex align-items-center justify-content-between mg-b-5">
                         <p class="mg-b-0 tx-medium tx-gray-800 tx-14">Donna Seay</p>
@@ -166,7 +152,7 @@
                 <!-- loop ends here -->
                 <a href="./index.html" class="media-list-link read">
                   <div class="media pd-x-20 pd-y-15">
-                    <img src="../img/img4.jpg" class="wd-40 rounded-circle" alt="" />
+                    <img src="" class="wd-40 rounded-circle" alt="" />
                     <div class="media-body">
                       <div class="d-flex align-items-center justify-content-between mg-b-5">
                         <p class="mg-b-0 tx-medium tx-gray-800 tx-14">Samantha Francis</p>
@@ -178,7 +164,7 @@
                 </a>
                 <a href="./index.html" class="media-list-link read">
                   <div class="media pd-x-20 pd-y-15">
-                    <img src="../img/img7.jpg" class="wd-40 rounded-circle" alt="" />
+                    <img src="" class="wd-40 rounded-circle" alt="" />
                     <div class="media-body">
                       <div class="d-flex align-items-center justify-content-between mg-b-5">
                         <p class="mg-b-0 tx-medium tx-gray-800 tx-14">Robert Walker</p>
@@ -190,7 +176,7 @@
                 </a>
                 <a href="./index.html" class="media-list-link read">
                   <div class="media pd-x-20 pd-y-15">
-                    <img src="../img/img5.jpg" class="wd-40 rounded-circle" alt="" />
+                    <img src="" class="wd-40 rounded-circle" alt="" />
                     <div class="media-body">
                       <div class="d-flex align-items-center justify-content-between mg-b-5">
                         <p class="mg-b-0 tx-medium tx-gray-800 tx-14">Larry Smith</p>
@@ -223,7 +209,7 @@
                 <!-- loop starts here -->
                 <a href="./index.html" class="media-list-link read">
                   <div class="media pd-x-20 pd-y-15">
-                    <img src="../img/img8.jpg" class="wd-40 rounded-circle" alt="" />
+                    <img src="" class="wd-40 rounded-circle" alt="" />
                     <div class="media-body">
                       <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Suzzeth Bungaos</strong> tagged you and 18 others in a post.</p>
                       <span class="tx-12">October 03, 2017 8:45am</span>
@@ -233,7 +219,7 @@
                 <!-- loop ends here -->
                 <a href="./index.html" class="media-list-link read">
                   <div class="media pd-x-20 pd-y-15">
-                    <img src="../img/img9.jpg" class="wd-40 rounded-circle" alt="" />
+                    <img src="" class="wd-40 rounded-circle" alt="" />
                     <div class="media-body">
                       <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Mellisa Brown</strong> appreciated your work <strong class="tx-medium tx-gray-800">The Social Network</strong></p>
                       <span class="tx-12">October 02, 2017 12:44am</span>
@@ -242,7 +228,7 @@
                 </a>
                 <a href="./index.html" class="media-list-link read">
                   <div class="media pd-x-20 pd-y-15">
-                    <img src="../img/img10.jpg" class="wd-40 rounded-circle" alt="" />
+                    <img src="" class="wd-40 rounded-circle" alt="" />
                     <div class="media-body">
                       <p class="tx-13 mg-b-0 tx-gray-700">20+ new items added are for sale in your <strong class="tx-medium tx-gray-800">Sale Group</strong></p>
                       <span class="tx-12">October 01, 2017 10:20pm</span>
@@ -251,7 +237,7 @@
                 </a>
                 <a href="./index.html" class="media-list-link read">
                   <div class="media pd-x-20 pd-y-15">
-                    <img src="../img/img5.jpg" class="wd-40 rounded-circle" alt="" />
+                    <img src="" class="wd-40 rounded-circle" alt="" />
                     <div class="media-body">
                       <p class="tx-13 mg-b-0 tx-gray-700"><strong class="tx-medium tx-gray-800">Julius Erving</strong> wants to connect with you on your conversation with <strong class="tx-medium tx-gray-800">Ronnie Mara</strong></p>
                       <span class="tx-12">October 01, 2017 6:08pm</span>
@@ -322,7 +308,7 @@
             <a href="./index.html" class="contact-list-link new">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img2.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-success"></div>
                 </div>
                 <div class="contact-person">
@@ -335,7 +321,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img3.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-success"></div>
                 </div>
                 <div class="contact-person">
@@ -347,7 +333,7 @@
             <a href="./index.html" class="contact-list-link new">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img4.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-success"></div>
                 </div>
                 <div class="contact-person">
@@ -360,7 +346,7 @@
             <a href="./index.html" class="contact-list-link new">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img5.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-success"></div>
                 </div>
                 <div class="contact-person">
@@ -373,7 +359,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img6.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-success"></div>
                 </div>
                 <div class="contact-person">
@@ -385,7 +371,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img7.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-success"></div>
                 </div>
                 <div class="contact-person">
@@ -397,7 +383,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img8.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-success"></div>
                 </div>
                 <div class="contact-person">
@@ -414,7 +400,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img2.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-gray-500"></div>
                 </div>
                 <div class="contact-person">
@@ -426,7 +412,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img3.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-gray-500"></div>
                 </div>
                 <div class="mg-l-10">
@@ -438,7 +424,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img4.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-gray-500"></div>
                 </div>
                 <div class="contact-person">
@@ -450,7 +436,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img5.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-gray-500"></div>
                 </div>
                 <div class="contact-person">
@@ -462,7 +448,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img6.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-gray-500"></div>
                 </div>
                 <div class="contact-person">
@@ -474,7 +460,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img7.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-gray-500"></div>
                 </div>
                 <div class="contact-person">
@@ -486,7 +472,7 @@
             <a href="./index.html" class="contact-list-link">
               <div class="d-flex">
                 <div class="pos-relative">
-                  <img src="../img/img8.jpg" class="wd-40 rounded-circle" alt="" />
+                  <img src="" class="wd-40 rounded-circle" alt="" />
                   <div class="contact-status-indicator bg-gray-500"></div>
                 </div>
                 <div class="contact-person">
@@ -711,6 +697,8 @@
     
 
     <script src="{{ asset('lib/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('jsApp/funcGral.js') }}"></script>
+    <!-- Bracket CSS -->
     <script src="{{ asset('lib/jquery.validate/jquery.validate.js') }}"></script>
     <script src="{{ asset('lib/popper.js/popper.js') }}"></script>
     <script src="{{ asset('lib/bootstrap/bootstrap.js') }}"></script>
@@ -743,7 +731,7 @@
     <script src="{{ asset('js/jquery.blockUI.js') }}"></script>
     <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('js/bootstrap-slider.js') }}"></script>
-    <script src="{{ asset('jsApp/funcGral.js') }}"></script>
+    
 
     <script src="{{ asset('lib/alertifyjs/alertify.min.js') }}"></script>
       <!-- CSS -->

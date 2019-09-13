@@ -35,3 +35,54 @@ function responseUI(message, color) {
         $.unblockUI();
     }, 2000);
 }
+
+// $(".nav-link").click(function(event) {
+
+// })
+
+
+function selectedOptionMenu(id, clase, subId = '', navlink = '') {
+
+    if (subId != '') {
+        $(".nav-link").attr('class', 'nav-link');
+        $("#" + subId).attr('class', navlink);
+    }
+
+    $(".br-menu-link").attr('class', 'br-menu-link');
+    $("#" + id).attr('class', clase);
+
+}
+
+function destroy_existing_data_table(tableDestry) {
+    var existing_table = $(tableDestry).dataTable();
+    if (existing_table != undefined) {
+        existing_table.fnClearTable();
+        existing_table.fnDestroy();
+    }
+}
+
+function ajaxError(statusCode, errorThrown) {
+
+    if (statusCode.status == 0) {
+        alertify.alert('Alerta...', '<h4 class="yellow">Internet: Problemas de Conexion</h4>', function() {
+            alertify.success('Ok');
+        });
+    } else if (statusCode.status == 422) {
+        console.warn(statusCode.responseJSON.errors);
+        // display errors on each form field
+        $.each(statusCode.responseJSON.errors, function(i, error) {
+            var el = $(document).find('[name="' + i + '"]');
+            console.log(el)
+            el.after($('<p style="color: #a94442;background-color: #f2dede;border-color: #ebccd1;padding:1px 20px 1px 20px;">' + error[0] + '</p>'));
+        })
+
+    } else {
+        console.log(statusCode);
+        console.log(errorThrown);
+        alertify.alert('Alerta...', '<h4 class="text-danger"><i class="text-danger fas fa-exclamation-triangle"></i> Error del Sistema</h4>', function() {
+            alertify.success('Ok');
+        });
+    }
+
+
+}
