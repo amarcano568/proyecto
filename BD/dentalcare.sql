@@ -87,6 +87,24 @@ REPLACE INTO `especialidades_medicas` (`id`, `nombre`) VALUES
 	(15, 'TTM');
 /*!40000 ALTER TABLE `especialidades_medicas` ENABLE KEYS */;
 
+-- Volcando estructura para tabla dentalcare.estados
+CREATE TABLE IF NOT EXISTS `estados` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `email` int(11) DEFAULT NULL,
+  `icono` varchar(100) DEFAULT NULL,
+  `color` varchar(45) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Estados de la citas';
+
+-- Volcando datos para la tabla dentalcare.estados: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `estados` DISABLE KEYS */;
+REPLACE INTO `estados` (`id`, `nombre`, `email`, `icono`, `color`, `updated_at`, `created_at`) VALUES
+	(1, 'No Confirmado', 1, '<i class=\'text-danger fas fa-minus-circle\'></i>', NULL, '2019-09-18 19:54:01', '2019-09-18 19:45:57');
+/*!40000 ALTER TABLE `estados` ENABLE KEYS */;
+
 -- Volcando estructura para procedimiento dentalcare.listarRecipes
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listarRecipes`(
@@ -18050,19 +18068,22 @@ REPLACE INTO `medicos` (`id`, `nombres`, `apellidos`, `cmp`, `telefono`, `direcc
 
 -- Volcando estructura para tabla dentalcare.motivos
 CREATE TABLE IF NOT EXISTS `motivos` (
-  `idmotivos` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `tiempo` int(11) DEFAULT NULL,
   `agenda` tinyint(4) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`idmotivos`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Motivos de la Consulta';
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='Motivos de la Consulta';
 
--- Volcando datos para la tabla dentalcare.motivos: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.motivos: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `motivos` DISABLE KEYS */;
-REPLACE INTO `motivos` (`idmotivos`, `nombre`, `tiempo`, `agenda`, `updated_at`, `created_at`) VALUES
-	(1, 'Control de Tratamiento', 30, 1, '2019-09-13 22:05:52', '2019-09-13 22:05:52');
+REPLACE INTO `motivos` (`id`, `nombre`, `tiempo`, `agenda`, `updated_at`, `created_at`) VALUES
+	(1, 'Control de Tratamiento', 30, 1, '2019-09-13 22:05:52', '2019-09-13 22:05:52'),
+	(2, 'Primera Consulta', 40, 1, '2019-09-18 15:54:11', '2019-09-18 14:37:47'),
+	(3, 'Limpieza dental', 25, 1, '2019-09-18 15:38:09', '2019-09-18 15:38:09'),
+	(4, 'Urgencia', 40, 0, '2019-09-18 15:45:57', '2019-09-18 15:39:42');
 /*!40000 ALTER TABLE `motivos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla dentalcare.pacientes
@@ -18119,6 +18140,20 @@ REPLACE INTO `recipes` (`id`, `idPacientes`, `fecha`, `medicamentos_id`, `idMedi
 	(3, 1, '2019-09-04 17:29:48', 9, 1, 'dddddddddd', '2019-09-04 17:29:48', '2019-09-04 17:29:48'),
 	(4, 1, '2019-09-04 17:34:58', 681, 1, 'rreererer', '2019-09-04 17:34:58', '2019-09-04 17:34:58');
 /*!40000 ALTER TABLE `recipes` ENABLE KEYS */;
+
+-- Volcando estructura para tabla dentalcare.sucursales
+CREATE TABLE IF NOT EXISTS `sucursales` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  `nroFiscal` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla dentalcare.sucursales: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `sucursales` DISABLE KEYS */;
+REPLACE INTO `sucursales` (`id`, `nombre`, `nroFiscal`) VALUES
+	(1, 'Sucursal de Prueba', '1234567890');
+/*!40000 ALTER TABLE `sucursales` ENABLE KEYS */;
 
 -- Volcando estructura para tabla dentalcare.tratamientos
 CREATE TABLE IF NOT EXISTS `tratamientos` (

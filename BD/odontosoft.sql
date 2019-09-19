@@ -78,6 +78,20 @@ REPLACE INTO `estados_provincias` (`idPais`, `id`, `nombre`) VALUES
 	('PE', 50, 'Ucayali');
 /*!40000 ALTER TABLE `estados_provincias` ENABLE KEYS */;
 
+-- Volcando estructura para procedimiento odontosoft.listar_usuarios
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listar_usuarios`(
+in empresaIn varchar(50)
+)
+BEGIN
+
+	SET @t1 =CONCAT("SELECT T0.id, name, lastName, email, email_verified_at, password, remember_token, created_at, updated_at, Empresa, sucursal, status, T1.id, nombre as nombreSucursal, nroFiscal FROM odontosoft.users T0 inner join ",empresaIn,".sucursales T1 on T0.sucursal = T1.id where Empresa='",empresaIn,"'");
+	PREPARE stmt3 FROM @t1;
+	EXECUTE stmt3;
+	DEALLOCATE PREPARE stmt3;
+END//
+DELIMITER ;
+
 -- Volcando estructura para tabla odontosoft.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -374,14 +388,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `Empresa` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sucursal` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla odontosoft.users: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`id`, `name`, `lastName`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Empresa`) VALUES
-	(1, 'Alexander J', 'Marcano A', 'amarcano568@gmail.com', NULL, '$2y$10$WjJFwV7nCQ6nzMWZel.44OLxGBpDa03dsHF1nKM7.jFpLflsiX.3W', '3c9EDS67I83pFEFM2xJ7e3DBi0eylkkvc4pYkPzhS2biQGosO3r9CyFjB4Ls', '2019-07-30 15:47:32', '2019-07-30 15:47:32', 'DentalCare');
+REPLACE INTO `users` (`id`, `name`, `lastName`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Empresa`, `sucursal`, `status`) VALUES
+	(1, 'Alexander J', 'Marcano A', 'amarcano568@gmail.com', NULL, '$2y$10$WjJFwV7nCQ6nzMWZel.44OLxGBpDa03dsHF1nKM7.jFpLflsiX.3W', '3c9EDS67I83pFEFM2xJ7e3DBi0eylkkvc4pYkPzhS2biQGosO3r9CyFjB4Ls', '2019-07-30 15:47:32', '2019-07-30 15:47:32', 'DentalCare', 1, 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
