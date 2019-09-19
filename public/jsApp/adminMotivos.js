@@ -82,8 +82,14 @@ $(document).on('ready', function() {
                 "data": 4,
             }],
             "columnDefs": [{
-                "width": "50%",
+                "width": "5%",
+                "targets": 0
+            }, {
+                "width": "45%",
                 "targets": 1
+            }, {
+                "width": "10%",
+                "targets": 2
             }, {
                 "targets": [2, 3],
                 className: "text-center",
@@ -211,6 +217,52 @@ $(document).on('ready', function() {
                 modal: true,
                 closableByDimmer: false
             });
+
+        }
+
+    });
+
+    $('body').on('click', '#body-motivos a', function(e) {
+        e.preventDefault();
+
+        accion_ok = $(this).attr('data-accion');
+        idMotivo = $(this).attr('idMotivo');
+
+        switch (accion_ok) {
+
+            case 'editarMotivo': // Edita firma
+
+                $.ajax({
+                    url: 'buscar_motivo',
+                    type: 'get',
+                    datatype: 'json',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        idMotivo: idMotivo
+                    }
+                }).fail(function(statusCode, errorThrown) {
+                    alert(statusCode + ' ' + errorThrown);
+                }).done(function(data) {
+                    console.log(data)
+                    $("#div_listar_motivos").hide();
+                    $("#admin_edicion_motivos").show()
+                    $("#text_titulo").html('<i class="far fa-edit"></i> Editar Motivo de Consulta.');
+                    $("#idMotivo").val(data.id);
+                    $("#nomMotivo").val(data.nombre);
+
+                    var instance = $("#tiempo").data("ionRangeSlider");
+
+                    instance.update({
+                        from: data.tiempo
+                    });
+
+                    statusAgenda = data.agenda == 1 ? true : false;
+                    $("#agenda").switchButton({
+                        checked: statusAgenda
+                    });
+
+                });
+                break;
 
         }
 

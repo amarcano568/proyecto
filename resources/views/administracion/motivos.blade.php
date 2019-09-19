@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-layout-footer mg-t-30">
                           <button type="submit" class="btn btn-info">Guardar Motivo</button>
-                          <button id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+                          <button type="button" id="btnCancelar" class="btn btn-secondary">Cancelar</button>
                         </div><!-- form-layout-footer -->
                     </form>
                     </div><!-- form-layout -->

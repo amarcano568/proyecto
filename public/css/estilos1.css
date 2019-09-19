@@ -70,3 +70,12 @@
     border: 0;
     background-color: SILVER;
 }*/
+
+/*.valid-feedback.feedback-icon,
+.invalid-feedback.feedback-icon {
+    position: absolute;
+    width: auto;
+    bottom: 10px;
+    right: 10px;
+    margin-top: 0;
+}*/

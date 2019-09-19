@@ -52,6 +52,18 @@ Route::get('carga-motivos', 'administradorController@cargaMotivos');
 
 Route::post('registrar-motivo', 'administradorController@registrarMotivo');
 
+Route::get('buscar_motivo', 'administradorController@buscarMotivo');
+
+Route::get('estados_citas', 'administradorController@estadosCitas');
+
+Route::get('carga-Estados', 'administradorController@cargaEstados');
+
+Route::post('registrar-estado', 'administradorController@registrarEstado');
+
+Route::get('buscar_Estado', 'administradorController@buscarEstado');
+
+Route::get('carga-Usuarios', 'administradorController@cargaUsuarios');
+
 
 // Route::get('listar-pacientes', function () {
 //     $BD = Auth::user()->Empresa;

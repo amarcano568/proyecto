@@ -24,7 +24,7 @@
     <link href="{{ asset('lib/jquery-switchbutton/jquery.switchButton.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/rickshaw/rickshaw.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/select2/css/select2.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/bootstrap4.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/datatables/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/datatables/responsive.bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/component-chosen.css') }}" rel="stylesheet" />
@@ -33,12 +33,11 @@
     <link href="{{ asset('lib/ion.rangeSlider/css/ion.rangeSlider.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css') }}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
-    
     <link rel="stylesheet" href="{{ asset('css/bracket.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/typeahead.css') }}" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
     
-  <body>
+  <body style="overflow-x: hidden;">
 
     <!-- ########## START: LEFT PANEL ########## -->
     <div class="br-logo"><a href="./index.html"><span>[</span>Medisoft <img src="{{ asset('img/diente.png')}}" width="20" height="20">v1.0</i><span>]</span></a></div>
@@ -85,7 +84,7 @@
         <ul class="br-menu-sub nav flex-column">
           <li class="nav-item"><a id="40001"  href="{{URL::to('administrador-usuarios')}}" class="nav-link">Usuarios</a></li>
           <li class="nav-item"><a id="40002" href="{{URL::to('motivos-consultas')}}" class="nav-link">Motivos</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Estados</a></li>
+          <li class="nav-item"><a id="40003" href="{{URL::to('estados_citas')}}" class="nav-link">Estados</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Convenios</a></li>
         </ul>
         <a id="50000" href="#" class="br-menu-link">
@@ -701,7 +700,7 @@
     <!-- Bracket CSS -->
     <script src="{{ asset('lib/jquery.validate/jquery.validate.js') }}"></script>
     <script src="{{ asset('lib/popper.js/popper.js') }}"></script>
-    <script src="{{ asset('lib/bootstrap/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
     <script src="{{ asset('lib/moment/moment.js') }}"></script>
     <script src="{{ asset('lib/jquery-ui/jquery-ui.js') }}"></script>
