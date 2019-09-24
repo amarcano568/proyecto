@@ -158,14 +158,16 @@ $(document).on('ready', function() {
         $("#div_listar_Usuarios").hide();
         $("#admin_edicion_usuario").show()
         $("#barra_titulo").html('<i class="fas fa-user-plus"></i> Nuevo Usuario.');
-
+        $('#form_register_usuario').each(function() {
+            this.reset();
+        });
     });
 
-    $('#btnCancelarNewUsuario').click(function() {
-        cancelarNewUsuario();
+    $('#btnBtncancelarNewUsuario').click(function() {
+        BtncancelarNewUsuario();
     });
 
-    function cancelarNewUsuario() {
+    function BtncancelarNewUsuario() {
         $("#div_listar_Usuarios").show();
         $("#admin_edicion_usuario").hide();
     }
@@ -213,22 +215,18 @@ $(document).on('ready', function() {
                 $.unblockUI();
                 alertify.success('Usuario registrado...');
                 objetoDataTables_Usuarios.ajax.reload();
-
+                $('#form_register_usuario').each(function() {
+                    this.reset();
+                });
+                BtncancelarNewUsuario();
             }).fail(function(statusCode, errorThrown) {
                 $.unblockUI();
                 console.log(errorThrown);
                 ajaxError(statusCode, errorThrown);
             });
 
-            $('#form_register_usuario').each(function() {
-                this.reset();
-            });
-
-            cancelarNewUsuario()
-
-
         }, function() { // En caso de Cancelar              
-            alertify.error('Se Cancelo el Proceso para Guardar el Estado de la Consulta.');
+            alertify.error('Se Cancelo el Proceso para Guardar el Usuario.');
         }).set('labels', {
             ok: 'Confirmar',
             cancel: 'Cancelar'
@@ -271,7 +269,7 @@ $(document).on('ready', function() {
                     $("#idUsuario").val(data.id);
                     $("#nombre_usuario").val(data.name);
                     $("#apellido_usuario").val(data.lastName);
-                    $("#email_usuario").val();
+                    $("#email_usuario").val(data.email);
                     $("#Username").val(data.userName);
                     $("#perfil_usuario").val(data.perfil).trigger("chosen:updated");
                     SelectRadioButton('radio-genero', data.sexo)
@@ -289,7 +287,6 @@ $(document).on('ready', function() {
 
                     $("#especialidadMedica").empty();
                     $(listaEspecialidades).each(function(i, data1) {
-                        console.log('id ' + data1.id)
                         if (especialidades.indexOf(data1.id) > -1) {
                             $("#especialidadMedica").append('<option selected value="' + data1.id + '">' + data1.nombre + '</option>');
                         } else {
@@ -298,14 +295,13 @@ $(document).on('ready', function() {
                     });
                     $("#especialidadMedica").trigger("chosen:updated");
 
-                    $("#select_sucursal").val();
-                    $("#idioma").val();
-                    $("#rut_usuario").val();
-                    $("#fec_nac_usuario").val();
-                    $("#edad_usuario").val();
-                    $("#fonofijo_usuario").val();
-                    $("#fonocell_usuario").val();
-                    $("#direccion_usuario").val();
+                    $("#idioma").val(data.idioma);
+                    $("#rut_usuario").val(data.rut_dni);
+                    $("#fec_nac_usuario").val(data.fecNacimiento);
+                    $("#edad_usuario").val(data.edad);
+                    $("#fonofijo_usuario").val(data.telefonoFijo);
+                    $("#fonocell_usuario").val(data.telefonoCelular);
+                    $("#direccion_usuario").val(data.direccion);
 
                 });
                 break;
@@ -318,6 +314,53 @@ $(document).on('ready', function() {
         $("input[name='" + name + "'][value='" + value + "']").prop('checked', true);
         return false;
     }
+
+    $(document).on('change', '#fec_nac_usuario', function(event) {
+        //if (existeFecha($(this).val())) {
+        edad = calcularEdad($(this).val());
+        $("#edad_usuario").val(edad);
+        //}
+    });
+
+
+    $("#formDropZone").append("<form id='dZUpload' class='dropzone borde-dropzone' style='cursor: pointer;'>" +
+        "<div  class='dz-default dz-message text-center'>" +
+        "<h1><i style='margin-top: -2em;' class='far fa-image'></i></h1>" +
+        "</div></form>");
+
+    myAwesomeDropzone = {
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            maxFilezise: 10,
+            maxFiles: 2,
+
+            init: function() {
+                var submitBtn = document.querySelector("#submit");
+                myDropzone = this;
+
+                submitBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    myDropzone.processQueue();
+                });
+                this.on("addedfile", function(file) {
+                    alert("file uploaded");
+                });
+
+                this.on("complete", function(file) {
+                    myDropzone.removeFile(file);
+                });
+
+                this.on("success",
+                    myDropzone.processQueue.bind(myDropzone)
+                );
+            }
+        } // FIN myAwesomeDropzone
+    var myDropzone = new Dropzone("#dZUpload", myAwesomeDropzone);
+    myDropzone.on("complete", function(file, response) {
+
+    });
+
 
 
 });

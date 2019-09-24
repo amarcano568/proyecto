@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="{{ asset('css/bracket.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/typeahead.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/tellis-sticky-note.css') }}" />
+    <link rel="stylesheet" href="{{ asset('lib/dropzone/dropzone.css') }}" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
     
   <body style="overflow-x: hidden;">
@@ -738,6 +739,7 @@
     <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('js/bootstrap-slider.js') }}"></script>
     <script src="{{ asset('js/tellis-sticky-note.js') }}"></script>
+    <script src="{{ asset('lib/dropzone/dropzone.js') }}"></script>
 
     <script src="{{ asset('lib/alertifyjs/alertify.min.js') }}"></script>
       <!-- CSS -->

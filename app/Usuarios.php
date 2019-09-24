@@ -12,8 +12,11 @@ class Usuarios extends Model
     protected function Guardar($request,$empresa)
     {
     	
-        if ( is_null($request->idMotivo) ){     
+        if ( is_null($request->idUsuario) ){     
             $user  = new \App\Usuarios();
+            $user->password           = Hash::make('12345678');
+            $user->status             = 1;
+			$user->changePassword     = 'S';
         }else{
             $user  = \App\Usuarios::find($request->idUsuario);    
         }
@@ -21,11 +24,9 @@ class Usuarios extends Model
 		$user->name               = $request->nombre_usuario;
 		$user->lastName           = $request->apellido_usuario;
 		$user->userName           = $request->Username;
-		$user->email              = $request->email_usuario;
-		$user->password           = Hash::make('12345678');
+		$user->email              = $request->email_usuario;		
 		$user->Empresa            = $empresa;
-		$user->sucursal           = $request->Sucursal;
-		$user->status             = 1;
+		$user->sucursal           = $request->Sucursal;		
 		$user->perfil             = $request->perfil_usuario;
 		$user->sexo               = $request->Sexo;
 		$user->especialidadMedica = $request->Especialidad;
@@ -35,7 +36,7 @@ class Usuarios extends Model
 		$user->telefonoFijo       = $request->fonofijo_usuario;
 		$user->telefonoCelular    = $request->fonocell_usuario;
 		$user->direccion          = $request->direccion_usuario;
-		$user->changePassword     = 'S';
+		
 
         return $user->save();
     }

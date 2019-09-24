@@ -113,7 +113,22 @@ class administradorController extends Controller
 
         try {
             DB::beginTransaction();   
-            $BD = Auth::user()->Empresa;      
+            $BD = Auth::user()->Empresa;  
+            if ( is_null($request->idUsuario) ){  
+
+            $rules = [
+                        'email_usuario' => ['required', 'email', 'unique:users,email' ],
+                        'Username' => ['required', 'unique:users,userName' ],
+                    ];
+
+            $customMessages =   [
+                                    'email_usuario.unique' => '<i class="fas fa-exclamation-triangle"></i> Existe otro Usuario con ese <strong>Correo</strong>',
+                                    'Username.unique'  => '<i class="fas fa-exclamation-triangle"></i> Existe otro Usuario con ese <strong>UserName</strong>',
+                                ];                                
+
+            $v =  $this->validate($request, $rules, $customMessages);
+
+        }    
             $save = \App\Usuarios::Guardar($request,$BD);
             DB::commit();
             if(!$save){
@@ -132,7 +147,10 @@ class administradorController extends Controller
         try {
 
             $BD = Auth::user()->Empresa;
-            return \App\Usuarios::find($request->idUsuario);
+            $usuarios = \App\Usuarios::find($request->idUsuario);
+            $edad = Carbon::parse($usuarios->fecNacimiento)->age;
+            $usuarios->edad = $edad;
+            return $usuarios;
 
         } catch (Exception $e) {
             return $this->internalException($e, __FUNCTION__);
@@ -141,9 +159,9 @@ class administradorController extends Controller
 
 
 
-    /****************************************************************************************************
+    /********************************************************************************************
      *                                  C O N V E N I O S
-     ***************************************************************************************************/
+     *******************************************************************************************/
     public function Convenios()
     {
         $BD = Auth::user()->Empresa;

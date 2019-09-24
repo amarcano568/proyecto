@@ -52,12 +52,9 @@
             <form id="form_register_usuario" class="needs-validation" novalidate  method="post" enctype="multipart/form-data" action="registrar-usuario">
             @csrf
             <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                    <a href="">
-                        <i class="img-thumbnail fa-6x far fa-user" data-toggle="popover" data-placement="bottom"  title="Foto del Usuario." data-content="Click para agregar foto al usuario." data-trigger="hover"></i>
-                        <label>Foto del Usuario</label>
-                    </a>
-                </div>
+             
+                <div  id="formDropZone" class="container col-lg-2 col-md-2 col-sm-12 col-xs-12" ></div>
+      
                 <input type="hidden" name="idUsuario" id="idUsuario" >
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                     <div class="row">

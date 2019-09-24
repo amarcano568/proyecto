@@ -10,6 +10,28 @@ function selectedOptionMenu(id, clase, subId = '', navlink = '') {
 
 }
 
+function existeFecha(fecha) {
+    var fechaf = fecha.split("/");
+    var day = fechaf[0];
+    var month = fechaf[1];
+    var year = fechaf[2];
+    var date = new Date(year, month, '0');
+    if ((day - 0) > (date.getDate() - 0)) {
+        return false;
+    }
+    return true;
+}
+
+function calcularEdad(birthday) {
+    console.log(birthday)
+    var birthday_arr = birthday.split("-");
+    var birthday_date = new Date(birthday_arr[0], birthday_arr[1] - 1, birthday_arr[2]);
+    var ageDifMs = Date.now() - birthday_date.getTime();
+    var ageDate = new Date(ageDifMs);
+    edad = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+    return edad === NaN ? '' : edad;
+}
 
 function loadingUI(message, color) {
     $.blockUI({
@@ -69,11 +91,11 @@ function ajaxError(statusCode, errorThrown) {
         });
     } else if (statusCode.status == 422) {
         console.warn(statusCode.responseJSON.errors);
-        // display errors on each form field
+        $('.errorDescripcion').remove();
         $.each(statusCode.responseJSON.errors, function(i, error) {
             var el = $(document).find('[name="' + i + '"]');
             console.log(el)
-            el.after($('<p style="color: #a94442;background-color: #f2dede;border-color: #ebccd1;padding:1px 20px 1px 20px;">' + error[0] + '</p>'));
+            el.after($('<p class="errorDescripcion" style="color: #a94442;background-color: #f2dede;border-color: #ebccd1;padding:1px 20px 1px 20px;">' + error[0] + '</p>'));
         })
 
     } else {
