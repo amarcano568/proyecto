@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+  
     <meta property="og:image" content="http://themepixels.me/bracketplus/img/bracketplus-social.png" />
     <meta property="og:image:secure_url" content="http://themepixels.me/bracketplus/img/bracketplus-social.png" />
     <meta property="og:image:type" content="image/png" />
@@ -17,7 +18,7 @@
 
     <title>.:: MediSoft versión Odontologica ::.</title>
 
-    <!-- vendor css -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/diente.ico" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href="{{ asset('lib/Ionicons/css/ionicons.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
@@ -35,6 +36,7 @@
     <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/bracket.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/typeahead.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/tellis-sticky-note.css') }}" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
     
   <body style="overflow-x: hidden;">
@@ -42,9 +44,9 @@
     <!-- ########## START: LEFT PANEL ########## -->
     <div class="br-logo"><a href="./index.html"><span>[</span>Medisoft <img src="{{ asset('img/diente.png')}}" width="20" height="20">v1.0</i><span>]</span></a></div>
     <div class="br-sideleft overflow-y-auto">
-      <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
+      <label class="sidebar-label pd-x-15 mg-t-20">Menú Principal</label>
       <div class="br-sideleft-menu">
-        <a href="./index.html" class="br-menu-link">
+        <a href="/inicio" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
             <span class="menu-item-label">Inicio</span>
@@ -60,6 +62,12 @@
           <div class="br-menu-item">
             <i class="menu-item-icon tx-18 far fa-user"></i>
             <span class="menu-item-label">Pacientes</span>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+        <a id="60000" href="#" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon tx-18 fas fa-book"></i>
+            <span class="menu-item-label">Agenda de citas</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <a id="30000" href="#" class="br-menu-link">
@@ -85,7 +93,7 @@
           <li class="nav-item"><a id="40001"  href="{{URL::to('administrador-usuarios')}}" class="nav-link">Usuarios</a></li>
           <li class="nav-item"><a id="40002" href="{{URL::to('motivos-consultas')}}" class="nav-link">Motivos</a></li>
           <li class="nav-item"><a id="40003" href="{{URL::to('estados_citas')}}" class="nav-link">Estados</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Convenios</a></li>
+          <li class="nav-item"><a id="40004" href="{{URL::to('convenios')}}" class="nav-link">Convenios</a></li>
         </ul>
         <a id="50000" href="#" class="br-menu-link">
           <div class="br-menu-item">
@@ -694,7 +702,6 @@
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
     
-
     <script src="{{ asset('lib/jquery/jquery.js') }}"></script>
     <script src="{{ asset('jsApp/funcGral.js') }}"></script>
     <!-- Bracket CSS -->
@@ -730,7 +737,7 @@
     <script src="{{ asset('js/jquery.blockUI.js') }}"></script>
     <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('js/bootstrap-slider.js') }}"></script>
-    
+    <script src="{{ asset('js/tellis-sticky-note.js') }}"></script>
 
     <script src="{{ asset('lib/alertifyjs/alertify.min.js') }}"></script>
       <!-- CSS -->

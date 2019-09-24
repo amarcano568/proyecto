@@ -85,10 +85,16 @@ in empresaIn varchar(50)
 )
 BEGIN
 
-	SET @t1 =CONCAT("SELECT T0.id, name, lastName, email, email_verified_at, password, remember_token, created_at, updated_at, Empresa, sucursal, status, T1.id, nombre as nombreSucursal, nroFiscal FROM odontosoft.users T0 inner join ",empresaIn,".sucursales T1 on T0.sucursal = T1.id where Empresa='",empresaIn,"'");
+	/*SET @t1 =CONCAT("SELECT T0.id, name, lastName, email, email_verified_at, password, remember_token, created_at, updated_at, Empresa, sucursal, status, T1.id as idSucursal, nombre as nombreSucursal, nroFiscal 
+    FROM odontosoft.users T0 
+    inner join ",empresaIn,".sucursales T1 on T0.sucursal = T1.id where Empresa='",empresaIn,"'");
 	PREPARE stmt3 FROM @t1;
 	EXECUTE stmt3;
-	DEALLOCATE PREPARE stmt3;
+	DEALLOCATE PREPARE stmt3;*/
+    
+    SELECT T0.id, name, lastName, email, email_verified_at, password, remember_token, created_at, updated_at, Empresa, sucursal, status,especialidadMedica
+    FROM odontosoft.users T0 
+    where Empresa=empresaIn;
 END//
 DELIMITER ;
 
@@ -374,6 +380,8 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 
 -- Volcando datos para la tabla odontosoft.password_resets: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+REPLACE INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+	('amarcano568@gmail.com', '$2y$10$ZwggspwRvzxF2rUhxTcVI.lJpaK6RzQfuSAImsz4d.ShD7BK05uKy', '2019-09-23 13:40:16');
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
 -- Volcando estructura para tabla odontosoft.users
@@ -381,23 +389,37 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastName` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `userName` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '\nUsername\nperfil_usuario\nfemenino\nespecialidadMedica\nselect_sucursal\nidioma\nrut_usuario\nfec_nac_usuario\nfonofijo_usuario\nfonocell_usuario\ndireccion_usuario',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `Empresa` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sucursal` int(11) DEFAULT NULL,
+  `sucursal` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(4) DEFAULT NULL,
+  `perfil` int(11) DEFAULT NULL,
+  `sexo` char(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `especialidadMedica` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `idioma` char(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rut_dni` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecNacimiento` date DEFAULT NULL,
+  `telefonoFijo` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telefonoCelular` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `direccion` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `changePassword` char(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='direccion_usuario';
 
--- Volcando datos para la tabla odontosoft.users: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla odontosoft.users: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`id`, `name`, `lastName`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Empresa`, `sucursal`, `status`) VALUES
-	(1, 'Alexander J', 'Marcano A', 'amarcano568@gmail.com', NULL, '$2y$10$WjJFwV7nCQ6nzMWZel.44OLxGBpDa03dsHF1nKM7.jFpLflsiX.3W', '3c9EDS67I83pFEFM2xJ7e3DBi0eylkkvc4pYkPzhS2biQGosO3r9CyFjB4Ls', '2019-07-30 15:47:32', '2019-07-30 15:47:32', 'DentalCare', 1, 1);
+REPLACE INTO `users` (`id`, `name`, `lastName`, `userName`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Empresa`, `sucursal`, `status`, `perfil`, `sexo`, `especialidadMedica`, `idioma`, `rut_dni`, `fecNacimiento`, `telefonoFijo`, `telefonoCelular`, `direccion`, `changePassword`) VALUES
+	(1, 'Alexander J', 'Marcano A', NULL, 'amarcano568@gmail.com', NULL, '$2y$10$WjJFwV7nCQ6nzMWZel.44OLxGBpDa03dsHF1nKM7.jFpLflsiX.3W', '1ocjTYw0SFMFC5yFtG6HsbHkb35CvMc9hrEWnpG2neR284BfPapkF3jbGUh4', '2019-07-30 15:47:32', '2019-07-30 15:47:32', 'DentalCare', '1', 1, 4, 'M', '2', 'ES', '87654321', '1974-09-06', '931288300', '931288300', 'Av. ', NULL),
+	(2, 'Luriannys', 'Salazar P.', 'luri', 'luriannys_salazar@hotmail.com', NULL, '$2y$10$HYaq5jTxWxLKvqniu9ebiu4NV5szhbSmtOkSMvcuGS.vA9LYIxxp2', NULL, '2019-09-23 16:39:17', '2019-09-23 16:39:17', 'DentalCare', '1,2', 1, 4, 'F', '2,3', 'ES', '12345678', '1981-10-31', '973253612', '3333', 'Prueba', 'S'),
+	(4, 'Adrian', 'Marcano C', 'adrian', 'adrian@hotmail.com', NULL, '$2y$10$02mKkCRSFZkhdjZybkEpB.Madh3i9VrfOArdf7cPHNEs/Qllq8QNK', NULL, '2019-09-23 20:28:34', '2019-09-23 20:28:34', 'DentalCare', '2', 1, 2, 'M', '1', 'ES', '2333333', '2002-09-17', '973253612', '3333', 'wwwww', 'S'),
+	(5, 'Alexandra de los Angeles', 'Marcano Salazar', 'pastorita', 'alexandra_pastorita@gmail.com', NULL, '$2y$10$73TQbhuVvhZe9AkNmbngKujtdMD566PfQnqfQ31ZC5KZa0SRaaQJ6', NULL, '2019-09-24 16:24:40', '2019-09-24 16:24:40', 'DentalCare', '1,2', 1, 2, 'F', '5,7', 'ES', '12345678', '2012-10-01', '973253612', '3333', NULL, 'S');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

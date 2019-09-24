@@ -1,3 +1,16 @@
+function selectedOptionMenu(id, clase, subId = '', navlink = '') {
+
+    if (subId != '') {
+        $(".nav-link").attr('class', 'nav-link');
+        $("#" + subId).attr('class', navlink);
+    }
+
+    $(".br-menu-link").attr('class', 'br-menu-link');
+    $("#" + id).attr('class', clase);
+
+}
+
+
 function loadingUI(message, color) {
     $.blockUI({
         baseZ: 2000,
@@ -40,19 +53,6 @@ function responseUI(message, color) {
 
 // })
 
-
-function selectedOptionMenu(id, clase, subId = '', navlink = '') {
-
-    if (subId != '') {
-        $(".nav-link").attr('class', 'nav-link');
-        $("#" + subId).attr('class', navlink);
-    }
-
-    $(".br-menu-link").attr('class', 'br-menu-link');
-    $("#" + id).attr('class', clase);
-
-}
-
 function destroy_existing_data_table(tableDestry) {
     var existing_table = $(tableDestry).dataTable();
     if (existing_table != undefined) {
@@ -86,3 +86,94 @@ function ajaxError(statusCode, errorThrown) {
 
 
 }
+
+$(document).on('ready', function() {
+
+    var sticky = Tellis_Sticky();
+    sticky.init();
+    sticky.write('<i class="text-success fas fa-check"></i> llamar al paciente Rigoberto Marcano G.');
+
+    cargaPacientess();
+
+    function cargaPacientess() {
+        destroy_existing_data_table('#datatable-citasHoy');
+        objetoDataTables_Pacientess = $('#atatable-citasHoy').DataTable({
+            responsive: true,
+            "order": [
+                [0, "desc"]
+            ],
+            dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            "paginationType": "input",
+            "sPaginationType": "full_numbers",
+            "language": {
+                "searchPlaceholder": "Buscar",
+                "sProcessing": "Procesando...",
+                "sLengthMenu": " _MENU_ Pacientess",
+                "sZeroRecords": "No se encontró ninguna Pacientes con la Condición del Filtro",
+                "sEmptyTable": "Ningún Pacientes Agregado aún...",
+                "sInfo": "Del _START_ al _END_ de un total de _TOTAL_ Pacientess",
+                "sInfoEmpty": "De 0 al 0 de un total de 0 Pacientess",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ Pacientess)",
+                "sInfoPostFix": "",
+                "sSearch": "",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": '<i class="text-info fa-2x fas fa-spinner fa-pulse"></i> espere cargando los Pacientess...',
+                "oPaginate": {
+                    "sFirst": "<<",
+                    "sLast": ">>",
+                    "sNext": ">",
+                    "sPrevious": "<",
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "lengthMenu": [
+                [5, 10, 20, 25, 50, -1],
+                [5, 10, 20, 25, 50, "Todos"]
+            ],
+            "iDisplayLength": 5,
+            "initComplete": function(settings, json) {
+                $.unblockUI();
+                $('[data-toggle="popover"]').popover();
+            },
+            "ajax": {
+                "method": "get",
+                "url": "carga-Pacientess",
+                "data": {
+
+                }
+            },
+            "columns": [{
+                "data": 0
+            }, {
+                "data": 1,
+            }, {
+                "data": 2,
+                "className": 'dt-center'
+            }, {
+                "data": 3,
+                "className": 'dt-center'
+            }, {
+                "data": 4,
+            }, {
+                "data": 5,
+            }],
+            "columnDefs": [{
+                "width": "5%",
+                "targets": 0
+            }, {
+                "width": "20%",
+                "targets": [1, 3, 4]
+            }, {
+                "targets": [4],
+                className: "text-center",
+            }]
+        });
+    }
+
+});

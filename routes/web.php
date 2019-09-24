@@ -13,56 +13,76 @@
 
 Auth::routes();
 
-Route::get('/', 'inicioController@index');
+Route::group(['middleware' => 'auth'], function (){
+	
+    Route::get('/', 'inicioController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get( '/inicio' , 'inicioController@getInicio' );
+	Route::get( '/inicio' , 'inicioController@getInicio' );
 
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout'); 
+	Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout'); 
 
-Route::get('pacientes', 'pacientesController@listarPacientes'); 
+	Route::get('pacientes', 'pacientesController@listarPacientes'); 
 
-Route::get('filtro-estadosProvincias', 'pacientesController@filtroEstadosProvincia'); 
+	Route::get('filtro-estadosProvincias', 'pacientesController@filtroEstadosProvincia'); 
 
-Route::get('buscar-paciente', 'pacientesController@buscarPaciente'); 
+	Route::get('buscar-paciente', 'pacientesController@buscarPaciente'); 
 
-Route::post( 'registrar-paciente', 'pacientesController@registrarPaciente');
+	Route::post( 'registrar-paciente', 'pacientesController@registrarPaciente');
 
-Route::get('consulta-medica', 'consultaMedicaController@consultaMedica');
+	Route::get('consulta-medica', 'consultaMedicaController@consultaMedica');
 
-Route::get('buscar-paciente-ficha', 'consultaMedicaController@buscarPacienteFicha');
+	Route::get('buscar-paciente-ficha', 'consultaMedicaController@buscarPacienteFicha');
 
-Route::get('carga-consultas', 'consultaMedicaController@cargaConsultas');
-Route::get('carga-recipes', 'consultaMedicaController@cargaRecipes');
+	Route::get('carga-consultas', 'consultaMedicaController@cargaConsultas');
+	Route::get('carga-recipes', 'consultaMedicaController@cargaRecipes');
 
-Route::get('ver-recipe-paciente', 'consultaMedicaController@verRecipePaciente');
+	Route::get('ver-recipe-paciente', 'consultaMedicaController@verRecipePaciente');
 
-Route::get('buscar-medicamentos', 'consultaMedicaController@buscarMedicamentos');
+	Route::get('buscar-medicamentos', 'consultaMedicaController@buscarMedicamentos');
 
-Route::get('agregar-recipe-paciente', 'consultaMedicaController@agregarRecipePaciente');
+	Route::get('agregar-recipe-paciente', 'consultaMedicaController@agregarRecipePaciente');
 
-Route::get('config-empresa', 'configuracionController@configEmpresa');
+	Route::get('config-empresa', 'configuracionController@configEmpresa');
 
-Route::get('administrador-usuarios', 'administradorController@administradorUsuarios');
+	Route::get('administrador-usuarios', 'administradorController@administradorUsuarios');
 
-Route::get('motivos-consultas', 'administradorController@motivosConsultas');
+	Route::get('motivos-consultas', 'administradorController@motivosConsultas');
 
-Route::get('carga-motivos', 'administradorController@cargaMotivos');
+	Route::get('carga-motivos', 'administradorController@cargaMotivos');
 
-Route::post('registrar-motivo', 'administradorController@registrarMotivo');
+	Route::post('registrar-motivo', 'administradorController@registrarMotivo');
 
-Route::get('buscar_motivo', 'administradorController@buscarMotivo');
+	Route::get('buscar_motivo', 'administradorController@buscarMotivo');
 
-Route::get('estados_citas', 'administradorController@estadosCitas');
+	Route::get('estados_citas', 'administradorController@estadosCitas');
 
-Route::get('carga-Estados', 'administradorController@cargaEstados');
+	Route::get('carga-Estados', 'administradorController@cargaEstados');
 
-Route::post('registrar-estado', 'administradorController@registrarEstado');
+	Route::post('registrar-estado', 'administradorController@registrarEstado');
 
-Route::get('buscar_Estado', 'administradorController@buscarEstado');
+	Route::get('buscar_Estado', 'administradorController@buscarEstado');
 
-Route::get('carga-Usuarios', 'administradorController@cargaUsuarios');
+	Route::get('carga-Usuarios', 'administradorController@cargaUsuarios');
+
+	Route::post('registrar-usuario', 'administradorController@registrarUsuario');
+
+	Route::get('convenios', 'administradorController@Convenios');
+
+	Route::get('carga-Convenios', 'administradorController@cargaConvenios');
+
+	Route::post('registrar-Convenio', 'administradorController@registrarConvenio');
+
+	Route::get('buscar_Convenio', 'administradorController@buscarConvenio');
+
+	Route::get('buscar_usuario', 'administradorController@buscarUsuario');
+
+	Route::get('listar_sucursales', 'administradorController@listarSucursales');
+
+	Route::get('listar_especialidades', 'administradorController@listarEspecialidades');
+});
+
 
 
 // Route::get('listar-pacientes', function () {

@@ -12,10 +12,57 @@ $(document).on('ready', function() {
         no_results_text: "Oops, busqueda no encontrada!"
     });
 
-    $("#chosenPacientes").on('change', function() {
+    $("#perfil_usuario").on('change', function() {
+        tipoProfesional = $(this).val();
+
+        if (tipoProfesional == 2 || tipoProfesional == 4) {
+            $('#especialidadMedica').prop('disabled', false).trigger("chosen:updated");
+        } else {
+            $('#especialidadMedica').val('');
+            $('#especialidadMedica').prop('disabled', true).trigger("chosen:updated");
+        }
 
     });
 
+    ListaSucursales = '';
+    listadoSucursales();
+
+    function listadoSucursales() {
+        $.ajax({
+            url: 'listar_sucursales',
+            type: 'get',
+            datatype: 'json',
+            data: {
+                _token: "{{ csrf_token() }}"
+            }
+        }).fail(function(statusCode, errorThrown) {
+            alert(statusCode + ' ' + errorThrown);
+        }).done(function(data) {
+            console.log(data)
+
+            ListaSucursales = data;
+        });
+    }
+
+    listaEspecialidades = '';
+    listadoEspecialidades();
+
+    function listadoEspecialidades() {
+        $.ajax({
+            url: 'listar_especialidades',
+            type: 'get',
+            datatype: 'json',
+            data: {
+                _token: "{{ csrf_token() }}"
+            }
+        }).fail(function(statusCode, errorThrown) {
+            alert(statusCode + ' ' + errorThrown);
+        }).done(function(data) {
+            console.log(data)
+
+            listaEspecialidades = data;
+        });
+    }
 
     listarUsuarios();
 
@@ -108,18 +155,18 @@ $(document).on('ready', function() {
     }
 
     $('#btnNuevoUsuario').click(function() {
-        $("#div_listar_Estados").hide();
+        $("#div_listar_Usuarios").hide();
         $("#admin_edicion_usuario").show()
         $("#barra_titulo").html('<i class="fas fa-user-plus"></i> Nuevo Usuario.');
 
     });
 
-    $('#btnCancelar').click(function() {
-        cancelarNewEstado();
+    $('#btnCancelarNewUsuario').click(function() {
+        cancelarNewUsuario();
     });
 
-    function cancelarNewEstado() {
-        $("#div_listar_Estados").show();
+    function cancelarNewUsuario() {
+        $("#div_listar_Usuarios").show();
         $("#admin_edicion_usuario").hide();
     }
 
@@ -135,7 +182,7 @@ $(document).on('ready', function() {
                     if (form.checkValidity() === false) {
                         event.stopPropagation();
                     } else {
-                        guardarEstadosCitas();
+                        guardarUsuarios();
                     }
                     form.classList.add('was-validated');
                 }, false);
@@ -143,11 +190,14 @@ $(document).on('ready', function() {
         }, false);
     })();
 
-    function guardarEstadosCitas() {
-        alertify.confirm('Datos del Estado', '<h4 class="text-info">Esta seguro de guardar este Estado ..?</h4>', function() {
+    function guardarUsuarios() {
+        alertify.confirm('Datos del Estado', '<h4 class="text-info">Esta seguro de guardar este Usuario ..?</h4>', function() {
 
-            var form = $('#form_register_estado');
-            var formData = form.serialize();
+            var sexo = $("input[name='radio-genero']:checked").val();
+            var sucursal = $('#select_sucursal').val();
+            var Especialidad = $('#especialidadMedica').val();
+            var form = $('#form_register_usuario');
+            var formData = form.serialize() + "&Sexo=" + sexo + "&Sucursal=" + sucursal + "&Especialidad=" + Especialidad;
 
             var route = form.attr('action');
 
@@ -161,8 +211,8 @@ $(document).on('ready', function() {
             }).done(function(data) {
                 console.log(data)
                 $.unblockUI();
-                alertify.success('Estado de cita registrado...');
-                objetoDataTables_Estados.ajax.reload();
+                alertify.success('Usuario registrado...');
+                objetoDataTables_Usuarios.ajax.reload();
 
             }).fail(function(statusCode, errorThrown) {
                 $.unblockUI();
@@ -170,9 +220,11 @@ $(document).on('ready', function() {
                 ajaxError(statusCode, errorThrown);
             });
 
-            $('#form_register_estado').each(function() {
+            $('#form_register_usuario').each(function() {
                 this.reset();
             });
+
+            cancelarNewUsuario()
 
 
         }, function() { // En caso de Cancelar              
@@ -186,6 +238,85 @@ $(document).on('ready', function() {
             modal: true,
             closableByDimmer: false
         });
+    }
+
+    $('body').on('click', '#body-usuarios a', function(e) {
+        e.preventDefault();
+
+        accion_ok = $(this).attr('data-accion');
+        idUsuario = $(this).attr('idUsuario');
+        sucursales = $(this).attr('sucursales');
+        especialidades = $(this).attr('EspMedica');
+
+        switch (accion_ok) {
+
+            case 'editarUsuario': // Edita Usuario
+
+                $.ajax({
+                    url: 'buscar_usuario',
+                    type: 'get',
+                    datatype: 'json',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        idUsuario: idUsuario
+                    }
+                }).fail(function(statusCode, errorThrown) {
+                    alert(statusCode + ' ' + errorThrown);
+                }).done(function(data) {
+                    console.log(data)
+                    $("#div_listar_Usuarios").hide();
+                    $("#admin_edicion_usuario").show()
+                    $("#text_titulo").html('<i class="far fa-edit"></i> Editar Usuario.');
+
+                    $("#idUsuario").val(data.id);
+                    $("#nombre_usuario").val(data.name);
+                    $("#apellido_usuario").val(data.lastName);
+                    $("#email_usuario").val();
+                    $("#Username").val(data.userName);
+                    $("#perfil_usuario").val(data.perfil).trigger("chosen:updated");
+                    SelectRadioButton('radio-genero', data.sexo)
+
+                    $("#select_sucursal").empty();
+                    $(ListaSucursales).each(function(i, data1) {
+                        console.log('id ' + data1.id)
+                        if (sucursales.indexOf(data1.id) > -1) {
+                            $("#select_sucursal").append('<option selected value="' + data1.id + '">' + data1.nombre + '</option>');
+                        } else {
+                            $("#select_sucursal").append('<option value="' + data1.id + '">' + data1.nombre + '</option>');
+                        }
+                    });
+                    $("#select_sucursal").trigger("chosen:updated");
+
+                    $("#especialidadMedica").empty();
+                    $(listaEspecialidades).each(function(i, data1) {
+                        console.log('id ' + data1.id)
+                        if (especialidades.indexOf(data1.id) > -1) {
+                            $("#especialidadMedica").append('<option selected value="' + data1.id + '">' + data1.nombre + '</option>');
+                        } else {
+                            $("#especialidadMedica").append('<option value="' + data1.id + '">' + data1.nombre + '</option>');
+                        }
+                    });
+                    $("#especialidadMedica").trigger("chosen:updated");
+
+                    $("#select_sucursal").val();
+                    $("#idioma").val();
+                    $("#rut_usuario").val();
+                    $("#fec_nac_usuario").val();
+                    $("#edad_usuario").val();
+                    $("#fonofijo_usuario").val();
+                    $("#fonocell_usuario").val();
+                    $("#direccion_usuario").val();
+
+                });
+                break;
+
+        }
+
+    });
+
+    function SelectRadioButton(name, value) {
+        $("input[name='" + name + "'][value='" + value + "']").prop('checked', true);
+        return false;
     }
 
 

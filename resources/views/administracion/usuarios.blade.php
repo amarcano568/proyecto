@@ -3,7 +3,7 @@
 <br>
 <div class="br-pagebody mg-t-5 pd-x-30">
     <div style="padding: 1em;" class="card bd-0 shadow-base">
-        <div id="div_listar_Estados">
+        <div id="div_listar_Usuarios">
             <div class="menu_acciones_vacio"></div>
             <div class="barra_titulo margin_bottom">
                 <h5 class="text-info"><i class="text-info fas fa-users"></i> Usuarios del Sistema.</h5>
@@ -45,11 +45,11 @@
                   <i class="fa-2x far fa-save"></i> Guardar
                 </button>
                 <br><br>
-                <button type="button" formnovalidate="formnovalidate" class="btn btn-outline-danger btn-oblong bd-2 pd-x-30 pd-y-10 tx-uppercase tx-bold tx-spacing-6 tx-12">
+                <button id="btnCancelarNewUsuario" type="button" formnovalidate="formnovalidate" class="btn btn-outline-danger btn-oblong bd-2 pd-x-30 pd-y-10 tx-uppercase tx-bold tx-spacing-6 tx-12">
                   <i class="fa-2x fas fa-ban"></i> Cancelar
                 </button>
               </div>
-            <form id="form_register_usuario" class="needs-validation" novalidate  method="post" enctype="multipart/form-data" action="registrar-motivo">
+            <form id="form_register_usuario" class="needs-validation" novalidate  method="post" enctype="multipart/form-data" action="registrar-usuario">
             @csrf
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
@@ -58,24 +58,25 @@
                         <label>Foto del Usuario</label>
                     </a>
                 </div>
+                <input type="hidden" name="idUsuario" id="idUsuario" >
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                     <div class="row">
                         <div class="col-lg-6  col-md-6 col-sm-12 col-xs-12 form-label-group">
-                           <input type="text" id="nombre_usuario" class="form-control input-sm" placeholder="Nombre" required="">
+                           <input type="text" id="nombre_usuario" name="nombre_usuario" class="form-control input-sm" placeholder="Nombre" required="">
                             <label for="nombre"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombres</font></font></label>
                         </div>
                         <div class="col-lg-6  col-md-6 col-sm-12 col-xs-12 form-label-group">
-                           <input type="text" id="apellido_usuario" class="form-control input-sm" placeholder="Apellidos" required="">
+                           <input type="text" id="apellido_usuario" name="apellido_usuario" class="form-control input-sm" placeholder="Apellidos" required="">
                             <label for="apellido_usuario"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Apellidos</font></font></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6  col-md-6 col-sm-12 col-xs-12 form-label-group">
-                           <input type="email" id="email_usuario" class="form-control input-sm" placeholder="correo@ejemplo.com" required="">
+                           <input type="email" id="email_usuario" name="email_usuario" class="form-control input-sm" placeholder="correo@ejemplo.com" required="">
                             <label for="email_usuario"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Correo Electrónico</font></font></label>
                         </div>
                         <div class="col-lg-6  col-md-6 col-sm-12 col-xs-12 form-label-group">
-                           <input type="text" id="Username" class="form-control input-sm" placeholder="Nombre de Usuario" required="">
+                           <input type="text" id="Username" name="Username" class="form-control input-sm" placeholder="Nombre de Usuario" required="">
                             <label for="Username"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Username</font></font></label>
                         </div>
                     </div>
@@ -87,25 +88,23 @@
                     <label for="perfil_usuario">
                         Perfil de Usuario <span class="text-danger">*</span>                        
                     </label>
-                    <select data-placeholder="Perfil de Usuario..." id="perfil_usuario"  class="chosen-select custom-select form-control-chosen" required>
-                        <option value="" ></option>
-                        <option value="1">Administrador Gr.</option>
-                        <option value="2">Profesional Doctor</option>
-                        <option value="3">Secretaria/Recepción</option>
-                        <option value="4">Profesional Doctor Administrador Gr.</option>
-                        <option value="5">Administrador Sucursal</option>
-                        <option value="6">Asistente</option>
-                        <option value="8">Profesional o Técnico (No Doctor)</option>
+                    <select data-placeholder="Perfil de Usuario..." id="perfil_usuario" name="perfil_usuario"  class="chosen-select custom-select form-control-chosen" required>
+                        <option></option>
+                                @foreach( $Perfiles as $perfil )
+                                    <option value="{{$perfil->id}}">
+                                      {{$perfil->nombrePerfil}}
+                                    </option>
+                                @endforeach
                     </select>
                 </div>
                 <div class="col-md-6">
                     <label>Género <span class="text-danger">*</span></label><br>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="masculino" name="radio-genero" required="">
+                        <input type="radio" class="custom-control-input" id="masculino" name="radio-genero" value='M' required="">
                         <label class="custom-control-label" for="masculino"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Masculino</font></font></label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="femenino" name="radio-genero" required="">
+                        <input type="radio" class="custom-control-input" id="femenino" name="radio-genero" required="" value='F'>
                         <label class="custom-control-label" for="femenino"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Femenino</font></font></label>
                     </div>
                 </div>
@@ -114,7 +113,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="especialidad_usuario">Especialidad <span class="text-danger">*</span></label>
-                            <select data-placeholder="Especialidad del Usuario..." id="perfil_usuario"  class="chosen-select form-control form-control-chosen" id="especialidad_usuario" multiple>
+                            <select  data-placeholder="Especialidad del Usuario..." name="especialidadMedica" id="especialidadMedica"  class="chosen-select form-control form-control-chosen" multiple>
                                 <option></option>
                                 @foreach( $Especialidades as $especialidad )
                                     <option value="{{$especialidad->id}}">
@@ -125,8 +124,13 @@
                         </div>
                         <div class="col-md-6">
                             <label for="select_clinicas">Sucursales <span class="text-danger">*</span></label>
-                            <select data-placeholder="Selecione las sucursales..." id="select_clinicas" class="chosen-select form-control form-control-chosen" data-live-search="true" title="Sucursales" required="" multiple="" tabindex="-98">
-                                <option value="879">Sucursal 1</option>
+                            <select data-placeholder="Selecione las sucursales..." name="select_sucursal" id="select_sucursal" class="chosen-select form-control form-control-chosen" required="" multiple="" tabindex="-98">
+                                <option></option>
+                                @foreach( $Sucursales as $sucursal )
+                                    <option value="{{$sucursal->id}}">
+                                      {{$sucursal->nombre}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -140,11 +144,11 @@
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <label>DNI</label>
-                            <input required="" type="text" id="rut_usuario" class="form-control input-sm" placeholder="DNI">
+                            <input required="" type="text" id="rut_usuario" name="rut_usuario" class="form-control input-sm" placeholder="DNI">
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <label>Fecha de Nacimiento</label><br>
-                            <input type="date" id="fec_nac_usuario" class="form-control" required="">
+                            <input type="date" id="fec_nac_usuario" name="fec_nac_usuario" class="form-control" required="">
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
                             <label>Edad</label><br>
@@ -154,22 +158,20 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Teléfono Fijo</label>
-                            <input type="text" id="fonofijo_usuario" class="form-control input-sm" placeholder="+51 912 345 678">
+                            <input type="text" id="fonofijo_usuario" name="fonofijo_usuario" class="form-control input-sm" placeholder="Teléfono Fijo">
                         </div>
+
                         <div class="col-md-6">
                             <label>Teléfono Celular</label>
-                            <input type="text" id="fonocell_usuario" class="form-control input-sm" placeholder="+51 912 345 678">
+                            <input type="text" id="fonocell_usuario" name="fonocell_usuario" class="form-control input-sm" placeholder="Teléfono Celular">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-lg-12 col-md-12">
                             <label>Dirección</label>
-                            <input type="text" id="direccion_usuario" class="form-control input-sm" placeholder="Dirección">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Dirección 2</label>
-                            <input type="text" id="direccion2_usuario" class="form-control input-sm" placeholder="Dirección 2">
-                        </div>
+                            <textarea class="form-control" id="direccion_usuario" name="direccion_usuario" rows="2" cols="100">
+                            </textarea>
+                        </div>                        
                     </div>
                 </form>
                 </div>

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 use \Auth;
 use Empresa;
 use Especialidades_medicas;
+use Perfil_usuarios;
 use Motivos;
 use Estados;
 use Usuarios;
+use Convenios;
+use Sucursales;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use \DB;
@@ -21,8 +24,12 @@ class administradorController extends Controller
     {
     	$BD = Auth::user()->Empresa;
     	$Espe_medicas = \App\Especialidades_medicas::on($BD)->get();
+        $perfiles = \App\Perfil_usuarios::on($BD)->get();
+        $sucursales = \App\Sucursales::on($BD)->get();
      
-    	$data = array(  'Especialidades' => $Espe_medicas
+    	$data = array(  'Especialidades' => $Espe_medicas,
+                        'Perfiles' => $perfiles,
+                        'Sucursales' => $sucursales
                      );
 
         return view('administracion.usuarios',$data);
@@ -53,10 +60,10 @@ class administradorController extends Controller
             $dataSet['aaData'][] = array(  $usuario->id,
                                            $usuario->name.' '. $usuario->lastName,
                                            $usuario->email,
-                                           $usuario->nombreSucursal,
+                                           $this->sucursales($usuario->sucursal),
                                            $status,
                                            '<div class="icono-action">
-                                                <a href="" data-accion="editarUsuario" idUsuario="'.$usuario->id.'">
+                                                <a href="" data-accion="editarUsuario" idUsuario="'.$usuario->id.'" sucursales="'.$usuario->sucursal.'" EspMedica="'.$usuario->especialidadMedica.'">
                                                     <i data-trigger="hover" data-html="true" data-toggle="popover" data-placement="top" data-content="Editar Usuario (<strong>'.$usuario->name.'</strong>)." class="icono-action text-primary far fa-edit">
                                                     </i>
                                                 </a>
@@ -69,6 +76,155 @@ class administradorController extends Controller
         echo $salidaDeDataSet;
     }
 
+    public function sucursales($sucursales){
+        $sucursales = explode(',',$sucursales);
+        $BD = Auth::user()->Empresa;
+        $etiquetaSucursal = '';    
+        foreach($sucursales as $sucursal)
+        {
+            $nomSucursal =  \App\Sucursales::on($BD)->select('sucursales.nombre')->find($sucursal);
+            $etiquetaSucursal .= '<span class="badge badge-pill badge-primary"><i class="far fa-hospital"></i> '.$nomSucursal->nombre.'</span>';
+        }
+
+        return $etiquetaSucursal;
+
+    }
+
+    public function listarSucursales()
+    {
+        $BD = Auth::user()->Empresa;
+        return \App\Sucursales::on($BD)->get();
+    }
+
+    public function listarEspecialidades()
+    {
+        $BD = Auth::user()->Empresa;
+        return \App\Especialidades_medicas::on($BD)->get();
+    }
+
+
+    /**
+     * [registrarMotivo description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function registrarUsuario(Request $request)
+    {
+
+        try {
+            DB::beginTransaction();   
+            $BD = Auth::user()->Empresa;      
+            $save = \App\Usuarios::Guardar($request,$BD);
+            DB::commit();
+            if(!$save){
+                App::abort(500, 'Error');
+            }
+
+        } catch (Exception $e) {
+            DB::rollback();
+            return $this->internalException($e, __FUNCTION__);
+        }
+    }
+
+    public function buscarUsuario(Request $request)
+    {
+        
+        try {
+
+            $BD = Auth::user()->Empresa;
+            return \App\Usuarios::find($request->idUsuario);
+
+        } catch (Exception $e) {
+            return $this->internalException($e, __FUNCTION__);
+        }
+    }
+
+
+
+    /****************************************************************************************************
+     *                                  C O N V E N I O S
+     ***************************************************************************************************/
+    public function Convenios()
+    {
+        $BD = Auth::user()->Empresa;
+        $responsables = \App\Usuarios::where('Empresa','=',$BD)->get();
+        $data = array(  'Responsables' => $responsables
+                     );
+        return view('administracion.convenios',$data);
+    }
+
+    /**
+     * [cargaMotivos description]
+     * @return [type] [description]
+     */
+    public function cargaConvenios()
+    {
+        $BD = Auth::user()->Empresa;
+        $convenios = \App\Convenios::on($BD)->select('convenios.*', 'users.name','users.lastName')->join('odontosoft.users', 'encargado', '=', 'users.id')->get();
+        $dataSet = array (
+            "sEcho"                 =>  0,
+            "iTotalRecords"         =>  1,
+            "iTotalDisplayRecords"  =>  1,
+            "aaData"                =>  array () 
+        );
+
+        foreach($convenios as $convenio)
+        {
+            if ( $convenio['status'] == 1){
+                $status = '<span class="badge badge-pill badge-success">Activo</span>';
+            }else{
+                $status = '<span class="badge badge-pill badge-danger">Inactivo</span>';
+            }
+
+
+            $dataSet['aaData'][] = array(  $convenio['id'],
+                                           $convenio['nombreConvenio'],
+                                           $convenio['porceDscto'].'%',
+                                           $convenio['name'].' '.$convenio['lastName'],
+                                           $status,
+                                           '<div class="icono-action">
+                                                <a href="" data-accion="editarConvenio" idConvenio="'.$convenio['id'].'">
+                                                    <i data-trigger="hover" data-html="true" data-toggle="popover" data-placement="top" data-content="Editar Convenio (<strong>'.$convenio['nombreConvenio'].'</strong>)." class="icono-action text-primary far fa-edit">
+                                                    </i>
+                                                </a>
+                                            </div>');
+        }
+
+        $salidaDeDataSet = json_encode ($dataSet, JSON_HEX_QUOT);
+    
+        /* SE DEVUELVE LA SALIDA */
+        echo $salidaDeDataSet;
+    }
+
+    public function registrarConvenio(Request $request)
+    {
+
+        try {
+            DB::beginTransaction();
+            $BD = Auth::user()->Empresa;            
+            $save = \App\Convenios::Guardar($request);
+            if(!$save){
+                App::abort(500, 'Error');
+            }
+
+        } catch (Exception $e) {
+            DB::rollback();
+            return $this->internalException($e, __FUNCTION__);
+        }
+    }
+
+    public function buscarConvenio(Request $request)
+    {
+        
+        try {
+
+            $BD = Auth::user()->Empresa;
+            return \App\Convenios::on($BD)->find($request->idConvenio);
+
+        } catch (Exception $e) {
+            return $this->internalException($e, __FUNCTION__);
+        }
+    }
 
     /****************************************************************************************************
      *                                  M O T I V O S   C O N S U L T A S
