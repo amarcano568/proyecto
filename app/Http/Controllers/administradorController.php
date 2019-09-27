@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use \DB;
 use PDF;
+use Illuminate\Support\Facades\Storage;
 
 class administradorController extends Controller
 {
@@ -157,7 +158,28 @@ class administradorController extends Controller
         }
     }
 
+    public function subirFoto(Request $request){
 
+        $BD       = Auth::user()->Empresa;
+        $ruta     = '/Empresas/'.$BD.'/fotos/';
+        $path     = public_path().$ruta;
+        $files    = $request->file('file');
+        $ext      = explode('/',$request->file('file')->getMimeType());
+        $fileName = $files->getClientOriginalName();
+        $files->move($path, $fileName);
+
+        rename($path.$fileName, $path.'usuario-'.$request->idUsuario.'.'.$ext[1]);
+        
+
+        DB::beginTransaction();   
+        $usuario = \App\Usuarios::find($request->idUsuario);
+        $usuario->foto = "Empresas\\".$BD."\\fotos\\".'usuario-'.$request->idUsuario.'.'.$ext[1];
+        $usuario->save();
+        DB::commit();
+        //Storage::move($path.$fileName, $path.'usuario-'.$request->idUsuario);
+        return "Empresas\\".$BD."\\fotos\\".'usuario-'.$request->idUsuario.'.'.$ext[1];
+        
+    }
 
     /********************************************************************************************
      *                                  C O N V E N I O S

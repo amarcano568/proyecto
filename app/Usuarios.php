@@ -17,14 +17,14 @@ class Usuarios extends Model
             $user->password           = Hash::make('12345678');
             $user->status             = 1;
 			$user->changePassword     = 'S';
+			$user->email              = $request->email_usuario;
         }else{
             $user  = \App\Usuarios::find($request->idUsuario);    
         }
 
 		$user->name               = $request->nombre_usuario;
 		$user->lastName           = $request->apellido_usuario;
-		$user->userName           = $request->Username;
-		$user->email              = $request->email_usuario;		
+		$user->userName           = $request->Username;				
 		$user->Empresa            = $empresa;
 		$user->sucursal           = $request->Sucursal;		
 		$user->perfil             = $request->perfil_usuario;
@@ -37,7 +37,6 @@ class Usuarios extends Model
 		$user->telefonoCelular    = $request->fonocell_usuario;
 		$user->direccion          = $request->direccion_usuario;
 		
-
         return $user->save();
     }
 }

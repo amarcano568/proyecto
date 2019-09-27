@@ -409,17 +409,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `telefonoCelular` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `direccion` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `changePassword` char(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='direccion_usuario';
 
--- Volcando datos para la tabla odontosoft.users: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla odontosoft.users: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`id`, `name`, `lastName`, `userName`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Empresa`, `sucursal`, `status`, `perfil`, `sexo`, `especialidadMedica`, `idioma`, `rut_dni`, `fecNacimiento`, `telefonoFijo`, `telefonoCelular`, `direccion`, `changePassword`) VALUES
-	(1, 'Alexander J', 'Marcano A', NULL, 'amarcano568@gmail.com', NULL, '$2y$10$WjJFwV7nCQ6nzMWZel.44OLxGBpDa03dsHF1nKM7.jFpLflsiX.3W', '1ocjTYw0SFMFC5yFtG6HsbHkb35CvMc9hrEWnpG2neR284BfPapkF3jbGUh4', '2019-07-30 15:47:32', '2019-07-30 15:47:32', 'DentalCare', '1', 1, 4, 'M', '2', 'ES', '87654321', '1974-09-06', '931288300', '931288300', 'Av. ', NULL),
-	(2, 'Luriannys', 'Salazar P.', 'luri', 'luriannys_salazar@hotmail.com', NULL, '$2y$10$HYaq5jTxWxLKvqniu9ebiu4NV5szhbSmtOkSMvcuGS.vA9LYIxxp2', NULL, '2019-09-23 16:39:17', '2019-09-23 16:39:17', 'DentalCare', '1,2', 1, 4, 'F', '2,3', 'ES', '12345678', '1981-10-31', '973253612', '3333', 'Prueba', 'S'),
-	(4, 'Adrian', 'Marcano C', 'adrian', 'adrian@hotmail.com', NULL, '$2y$10$02mKkCRSFZkhdjZybkEpB.Madh3i9VrfOArdf7cPHNEs/Qllq8QNK', NULL, '2019-09-23 20:28:34', '2019-09-23 20:28:34', 'DentalCare', '2', 1, 2, 'M', '1', 'ES', '2333333', '2002-09-17', '973253612', '3333', 'wwwww', 'S'),
-	(5, 'Alexandra de los Angeles', 'Marcano Salazar', 'pastorita', 'alexandra_pastorita@gmail.com', NULL, '$2y$10$73TQbhuVvhZe9AkNmbngKujtdMD566PfQnqfQ31ZC5KZa0SRaaQJ6', NULL, '2019-09-24 16:24:40', '2019-09-24 16:24:40', 'DentalCare', '1,2', 1, 2, 'F', '5,7', 'ES', '12345678', '2012-10-01', '973253612', '3333', NULL, 'S');
+REPLACE INTO `users` (`id`, `name`, `lastName`, `userName`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Empresa`, `sucursal`, `status`, `perfil`, `sexo`, `especialidadMedica`, `idioma`, `rut_dni`, `fecNacimiento`, `telefonoFijo`, `telefonoCelular`, `direccion`, `changePassword`, `foto`) VALUES
+	(1, 'Alexander Jose', 'Marcano A', 'amarcano', 'amarcano568@gmail.com', NULL, '$2y$10$WjJFwV7nCQ6nzMWZel.44OLxGBpDa03dsHF1nKM7.jFpLflsiX.3W', 'woJ5PvslXVaFUILYMHvsWcW023cIQKPHQHWb7jZbiop5TvrahsiobJfO7DKg', '2019-07-30 15:47:32', '2019-09-26 20:25:16', 'DentalCare', '1,2', 1, 4, 'M', '2', 'ES', '87654321', '1974-09-06', '931288300', '931288300', 'Av.', 'N', 'Empresas\\DentalCare\\fotos\\usuario-1.png'),
+	(2, 'Luriannys', 'Salazar P.', 'luri', 'luriannys_salazar@hotmail.com', NULL, '$2y$10$HYaq5jTxWxLKvqniu9ebiu4NV5szhbSmtOkSMvcuGS.vA9LYIxxp2', NULL, '2019-09-23 16:39:17', '2019-09-26 20:23:31', 'DentalCare', '1,2', 1, 4, 'F', '2,3', 'ES', '12345678', '1981-10-31', '973253612', '3333', 'Prueba', 'S', 'Empresas\\DentalCare\\fotos\\usuario-2.jpeg'),
+	(4, 'Adrian', 'Marcano C', 'adrian', 'adrian@hotmail.com', NULL, '$2y$10$02mKkCRSFZkhdjZybkEpB.Madh3i9VrfOArdf7cPHNEs/Qllq8QNK', NULL, '2019-09-23 20:28:34', '2019-09-23 20:28:34', 'DentalCare', '2', 1, 2, 'M', '1', 'ES', '2333333', '2002-09-17', '973253612', '3333', 'wwwww', 'S', NULL),
+	(5, 'Alexandra de los Angeles', 'Marcano Salazar', 'pastorita', 'alexandra_pastorita@gmail.com', NULL, '$2y$10$73TQbhuVvhZe9AkNmbngKujtdMD566PfQnqfQ31ZC5KZa0SRaaQJ6', NULL, '2019-09-24 16:24:40', '2019-09-24 16:24:40', 'DentalCare', '1,2', 1, 2, 'F', '5,7', 'ES', '12345678', '2012-10-01', '973253612', '3333', NULL, 'S', NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

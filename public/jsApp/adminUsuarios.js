@@ -2,6 +2,7 @@ selectedOptionMenu('40000', 'br-menu-link active show-sub', '40001', 'nav-link a
 
 $(document).on('ready', function() {
 
+    var fotoSubida = '';
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -156,14 +157,16 @@ $(document).on('ready', function() {
 
     $('#btnNuevoUsuario').click(function() {
         $("#div_listar_Usuarios").hide();
-        $("#admin_edicion_usuario").show()
+        $("#admin_edicion_usuario").show();
+        $("#formDropZone").html('<div data-trigger="hover" data-html="true" data-toggle="popover" data-placement="top" data-content="Para agregar una foto a un nuevo Usuario primero debe agregar todos sus datos y guardar." style="text-align: center;" class="img-thumbnail" ><i class="fa-6x far fa-user"></i></div>');
         $("#barra_titulo").html('<i class="fas fa-user-plus"></i> Nuevo Usuario.');
+        $('[data-toggle="popover"]').popover();
         $('#form_register_usuario').each(function() {
             this.reset();
         });
     });
 
-    $('#btnBtncancelarNewUsuario').click(function() {
+    $('#btnCancelarNewUsuario').click(function() {
         BtncancelarNewUsuario();
     });
 
@@ -261,12 +264,22 @@ $(document).on('ready', function() {
                 }).fail(function(statusCode, errorThrown) {
                     alert(statusCode + ' ' + errorThrown);
                 }).done(function(data) {
-                    console.log(data)
+                    //console.log(data)
+
+                    if (data.foto == '' || data.foto === null) {
+                        iconoDropZone = '<i class="far fa-user"></i><br><h6>Click para foto.</h6>';
+                    } else {
+                        iconoDropZone = '<img class="img-thumbnail" src="' + data.foto + '" style="width:100px;height:98px">';
+                    }
+
+                    $("#idUsuario").val(idUsuario);
+                    configuraDropZone(iconoDropZone, idUsuario);
+
                     $("#div_listar_Usuarios").hide();
                     $("#admin_edicion_usuario").show()
                     $("#text_titulo").html('<i class="far fa-edit"></i> Editar Usuario.');
 
-                    $("#idUsuario").val(data.id);
+
                     $("#nombre_usuario").val(data.name);
                     $("#apellido_usuario").val(data.lastName);
                     $("#email_usuario").val(data.email);
@@ -276,7 +289,6 @@ $(document).on('ready', function() {
 
                     $("#select_sucursal").empty();
                     $(ListaSucursales).each(function(i, data1) {
-                        console.log('id ' + data1.id)
                         if (sucursales.indexOf(data1.id) > -1) {
                             $("#select_sucursal").append('<option selected value="' + data1.id + '">' + data1.nombre + '</option>');
                         } else {
@@ -323,44 +335,70 @@ $(document).on('ready', function() {
     });
 
 
-    $("#formDropZone").append("<form id='dZUpload' class='dropzone borde-dropzone' style='cursor: pointer;'>" +
-        "<div  class='dz-default dz-message text-center'>" +
-        "<h1><i style='margin-top: -2em;' class='far fa-image'></i></h1>" +
-        "</div></form>");
+    function configuraDropZone(iconoDropZone, idUsuario) {
 
-    myAwesomeDropzone = {
-            autoProcessQueue: false,
-            uploadMultiple: true,
-            maxFilezise: 10,
-            maxFiles: 2,
+        Dropzone.autoDiscover = false;
+        if (Dropzone.instances.length > 0) Dropzone.instances.forEach(bz => bz.destroy());
+        $("#formDropZone").html('');
+        $("#formDropZone").append("<form action='subir-foto' method='POST' files='true' enctype='multipart/form-data' id='dZUpload' class='dropzone borde-dropzone' style='width: 100%;padding: 0;cursor: pointer;'>" +
+            "<div style='padding: 0;margin-top: 0em;' class='dz-default dz-message text-center'>" +
+            "<h1>" + iconoDropZone + "</h1>" +
+            "</div></form>");
 
-            init: function() {
-                var submitBtn = document.querySelector("#submit");
-                myDropzone = this;
-
-                submitBtn.addEventListener("click", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    myDropzone.processQueue();
+        myAwesomeDropzone = myAwesomeDropzone = {
+            maxFilesize: 12,
+            renameFile: function(file) {
+                var dt = new Date();
+                var time = dt.getTime();
+                return time + file.name;
+            },
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 50000,
+            removedfile: function(file) {
+                var name = file.upload.filename;
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: '{{ url("delete") }}',
+                    data: {
+                        filename: name
+                    },
+                    success: function(data) {
+                        console.log("File has been successfully removed!!");
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
                 });
-                this.on("addedfile", function(file) {
-                    alert("file uploaded");
-                });
-
-                this.on("complete", function(file) {
-                    myDropzone.removeFile(file);
-                });
-
-                this.on("success",
-                    myDropzone.processQueue.bind(myDropzone)
-                );
+                var fileRef;
+                return (fileRef = file.previewElement) != null ?
+                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
+            },
+            params: {
+                idUsuario: idUsuario,
+            },
+            success: function(file, response) {
+                console.log(response);
+                fotoSubida = response
+            },
+            error: function(file, response) {
+                return false;
             }
-        } // FIN myAwesomeDropzone
-    var myDropzone = new Dropzone("#dZUpload", myAwesomeDropzone);
-    myDropzone.on("complete", function(file, response) {
+        }
 
-    });
+        var myDropzone = new Dropzone("#dZUpload", myAwesomeDropzone);
 
+        myDropzone.on("queuecomplete", function(file, response) {
+
+            if (Dropzone.instances.length > 0) Dropzone.instances.forEach(bz => bz.destroy());
+            iconoDropZone = '<img class="img-thumbnail" src="' + fotoSubida + '" style="width:100px;height:98px">';
+            configuraDropZone(iconoDropZone, idUsuario);
+
+        });
+    }
 
 
 });

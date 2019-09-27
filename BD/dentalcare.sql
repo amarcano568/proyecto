@@ -18103,7 +18103,7 @@ REPLACE INTO `motivos` (`id`, `nombre`, `tiempo`, `agenda`, `updated_at`, `creat
 	(1, 'Control de Tratamiento', 30, 1, '2019-09-13 22:05:52', '2019-09-13 22:05:52'),
 	(2, 'Primera Consulta', 40, 1, '2019-09-18 15:54:11', '2019-09-18 14:37:47'),
 	(3, 'Limpieza dental', 25, 1, '2019-09-18 15:38:09', '2019-09-18 15:38:09'),
-	(4, 'Urgencia', 40, 0, '2019-09-18 15:45:57', '2019-09-18 15:39:42');
+	(4, 'Urgenciasss', 40, 1, '2019-09-24 19:43:40', '2019-09-18 15:39:42');
 /*!40000 ALTER TABLE `motivos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla dentalcare.pacientes
@@ -18185,16 +18185,28 @@ REPLACE INTO `recipes` (`id`, `idPacientes`, `fecha`, `medicamentos_id`, `idMedi
 -- Volcando estructura para tabla dentalcare.sucursales
 CREATE TABLE IF NOT EXISTS `sucursales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreEmpresa` varchar(100) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `nroFiscal` varchar(45) DEFAULT NULL,
+  `nombreCortoSucursal` varchar(20) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `telPrincipal` varchar(45) DEFAULT NULL,
+  `telSecundario` varchar(45) DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `web` varchar(200) DEFAULT NULL,
+  `sillones` int(11) DEFAULT NULL,
+  `logo` varchar(250) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla dentalcare.sucursales: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.sucursales: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `sucursales` DISABLE KEYS */;
-REPLACE INTO `sucursales` (`id`, `nombre`, `nroFiscal`) VALUES
-	(1, 'Sucursal 1', '1234567890'),
-	(2, 'Sucursal 2', '987654321');
+REPLACE INTO `sucursales` (`id`, `nombreEmpresa`, `nombre`, `nroFiscal`, `nombreCortoSucursal`, `direccion`, `telPrincipal`, `telSecundario`, `email`, `web`, `sillones`, `logo`, `updated_at`, `created_at`) VALUES
+	(1, 'Dental Caresssss', 'Sucursal 1', '1234567890', 'dentalCare', 'Av. Principal Surquillos', '931288300', NULL, 'contacto@dentalcare.com.pe', 'www.dentalcare.com', 10, NULL, '2019-09-27 21:44:20', NULL),
+	(2, NULL, 'Sucursal 2', '987654321', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(3, NULL, 'Sucursal 3', '1234567890', 'Sucursal3', 'Dirección para sucursal 3', '931288300', NULL, 'contacto@dentalcare.com.pe', NULL, 15, NULL, '2019-09-27 21:44:07', '2019-09-27 21:43:44');
 /*!40000 ALTER TABLE `sucursales` ENABLE KEYS */;
 
 -- Volcando estructura para tabla dentalcare.tratamientos

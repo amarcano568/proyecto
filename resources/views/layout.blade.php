@@ -25,6 +25,7 @@
     <link href="{{ asset('lib/jquery-switchbutton/jquery.switchButton.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/rickshaw/rickshaw.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('lib/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/datatables/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/datatables/responsive.bootstrap.min.css') }}" rel="stylesheet" />

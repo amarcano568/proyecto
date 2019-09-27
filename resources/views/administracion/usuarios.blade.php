@@ -39,7 +39,6 @@
                 <hr>
             </div>
 
-
               <div class="menu_acciones" style="float: right;">        
                 <button type="submit" form="form_register_usuario" class="btn btn-outline-primary btn-oblong bd-2 pd-x-30 pd-y-10 tx-uppercase tx-bold tx-spacing-6 tx-12">
                   <i class="fa-2x far fa-save"></i> Guardar
@@ -53,7 +52,7 @@
             @csrf
             <div class="row">
              
-                <div  id="formDropZone" class="container col-lg-2 col-md-2 col-sm-12 col-xs-12" ></div>
+                <div  id="formDropZone" class="col-lg-2 col-md-2 col-sm-12 col-xs-12" ></div>
       
                 <input type="hidden" name="idUsuario" id="idUsuario" >
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">

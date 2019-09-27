@@ -1,3 +1,16 @@
+.reversed{padding: 3rem 0 0 0;}
+.reversed .control-label{margin: -4.5rem 0 0 0; float: left;}
+
+input.is-valid ~ label{color: green;}
+input.is-invalid ~ label{color: red;}
+
+.help-block {
+  color: #DC3545;  
+  /* background-color: #f2dede;
+  border-color: #ebccd1;
+  padding:1px 20px 1px 20px;*/
+}
+
 .dropzone {
 width: 100px;
 height: 100px;
@@ -17,12 +30,12 @@ min-height: 0px !important;
     font-size: 3.5rem;
   }
 }
-.help-block {
+/*.help-block {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
   padding:1px 20px 1px 20px;
-}
+}*/
 .dataTables_filter{
   float: right;
 }
