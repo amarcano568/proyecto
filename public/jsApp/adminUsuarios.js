@@ -266,11 +266,11 @@ $(document).on('ready', function() {
                 }).done(function(data) {
                     //console.log(data)
 
-                    if (data.foto == '' || data.foto === null) {
-                        iconoDropZone = '<i class="far fa-user"></i><br><h6>Click para foto.</h6>';
-                    } else {
-                        iconoDropZone = '<img class="img-thumbnail" src="' + data.foto + '" style="width:100px;height:98px">';
-                    }
+                if (data.foto == '' || data.foto === null) {
+                    iconoDropZone = '<i class="far fa-user"></i><br><h6>Click para foto.</h6>';
+                } else {
+                    iconoDropZone = '<img class="img-thumbnail" src="' + data.foto + '" style="width:100px;height:98px">';
+                }
 
                     $("#idUsuario").val(idUsuario);
                     configuraDropZone(iconoDropZone, idUsuario);

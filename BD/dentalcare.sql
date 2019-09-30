@@ -125,6 +125,30 @@ REPLACE INTO `estados` (`id`, `nombre`, `email`, `icono`, `color`, `updated_at`,
 	(2, 'Confirmado', 1, '<i class="text-success fas fa-check-circle"></i>', NULL, '2019-09-23 15:29:33', '2019-09-23 15:29:33');
 /*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 
+-- Volcando estructura para tabla dentalcare.filestore
+CREATE TABLE IF NOT EXISTS `filestore` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idPaciente` int(11) DEFAULT NULL,
+  `nombreOriginal` varchar(100) DEFAULT NULL,
+  `nombre` varchar(20) DEFAULT NULL,
+  `titulo` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='Galería de Imagenes';
+
+-- Volcando datos para la tabla dentalcare.filestore: ~6 rows (aproximadamente)
+/*!40000 ALTER TABLE `filestore` DISABLE KEYS */;
+REPLACE INTO `filestore` (`id`, `idPaciente`, `nombreOriginal`, `nombre`, `titulo`, `descripcion`, `updated_at`, `created_at`) VALUES
+	(1, 1, 'imagen-1.jpg', 'imagen-1.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
+	(2, 1, 'imagen-2.jpg', 'imagen-2.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
+	(3, 1, 'imagen-3.jpg', 'imagen-3.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
+	(4, 1, 'imagen-4.jpg', 'imagen-4.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
+	(5, 1, 'imagen-5.jpg', 'imagen-5.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
+	(6, 1, 'imagen-6.jpg', 'imagen-6.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00');
+/*!40000 ALTER TABLE `filestore` ENABLE KEYS */;
+
 -- Volcando estructura para procedimiento dentalcare.listarRecipes
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listarRecipes`(
@@ -18201,10 +18225,10 @@ CREATE TABLE IF NOT EXISTS `sucursales` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla dentalcare.sucursales: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.sucursales: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `sucursales` DISABLE KEYS */;
 REPLACE INTO `sucursales` (`id`, `nombreEmpresa`, `nombre`, `nroFiscal`, `nombreCortoSucursal`, `direccion`, `telPrincipal`, `telSecundario`, `email`, `web`, `sillones`, `logo`, `updated_at`, `created_at`) VALUES
-	(1, 'Dental Caresssss', 'Sucursal 1', '1234567890', 'dentalCare', 'Av. Principal Surquillos', '931288300', NULL, 'contacto@dentalcare.com.pe', 'www.dentalcare.com', 10, NULL, '2019-09-27 21:44:20', NULL),
+	(1, 'Dental Caresssss', 'Sucursal 1', '1234567890', 'dentalCare', 'Av. Principal Surquillos', '931288300', NULL, 'contacto@dentalcare.com.pe', 'www.dentalcare.com', 10, 'Empresas\\DentalCare\\fotos\\logo-1.jpeg', '2019-09-30 15:06:23', NULL),
 	(2, NULL, 'Sucursal 2', '987654321', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(3, NULL, 'Sucursal 3', '1234567890', 'Sucursal3', 'Dirección para sucursal 3', '931288300', NULL, 'contacto@dentalcare.com.pe', NULL, 15, NULL, '2019-09-27 21:44:07', '2019-09-27 21:43:44');
 /*!40000 ALTER TABLE `sucursales` ENABLE KEYS */;

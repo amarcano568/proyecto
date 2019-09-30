@@ -83,6 +83,30 @@ class configuracionController extends Controller
         }
     }
 
+
+    public function subirLogo(Request $request){
+
+        $BD       = Auth::user()->Empresa;
+        $ruta     = '/Empresas/'.$BD.'/fotos/';
+        $path     = public_path().$ruta;
+        $files    = $request->file('file');
+        $ext      = explode('/',$request->file('file')->getMimeType());
+        $fileName = $files->getClientOriginalName();
+        $files->move($path, $fileName);
+
+        rename($path.$fileName, $path.'logo-'.$request->idSucursal.'.'.$ext[1]);
+        
+
+        DB::beginTransaction();   
+        $sucursal = \App\Sucursales::on($BD)->find($request->idSucursal);
+        $sucursal->logo = "Empresas\\".$BD."\\fotos\\".'logo-'.$request->idSucursal.'.'.$ext[1];
+        $sucursal->save();
+        DB::commit();
+        //Storage::move($path.$fileName, $path.'usuario-'.$request->idSucursal);
+        return "Empresas\\".$BD."\\fotos\\".'logo-'.$request->idSucursal.'.'.$ext[1];
+        
+    }
+
 }
 
 

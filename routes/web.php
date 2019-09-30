@@ -15,11 +15,11 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function (){
 	
-    Route::get('/', 'inicioController@index');
+    Route::get('/', 'inicioController@getInicio');
 
-	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/home', 'inicioController@getInicio');
 
-	Route::get( '/inicio' , 'inicioController@getInicio' );
+	Route::get( 'inicio' , 'inicioController@getInicio' );
 
 	Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout'); 
 
@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('ver-recipe-paciente', 'consultaMedicaController@verRecipePaciente');
 	Route::get('buscar-medicamentos', 'consultaMedicaController@buscarMedicamentos');
 	Route::get('agregar-recipe-paciente', 'consultaMedicaController@agregarRecipePaciente');
+	Route::get('listar-imagenes', 'consultaMedicaController@listarImagenes');
 
 	/**
 	 * 				configuracionController
@@ -48,6 +49,7 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('config-empresa', 'configuracionController@configEmpresa');
 	Route::get('buscar_sucursal', 'configuracionController@buscarSucursal');
 	Route::post('registrar-empresa', 'configuracionController@registrarEmpresa');
+	Route::post('subir-logo', 'configuracionController@subirLogo');
 	/**
 	 * 				administradorController
 	 */

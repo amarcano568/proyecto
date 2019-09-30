@@ -22,6 +22,8 @@ $(document).on('ready', function() {
         muestraFichaPaciente($(this).val());
         cargaConsultas($(this).val());
         cargaRecipes($(this).val());
+        cargaGaleriaImagenes($(this).val());
+
     });
 
     seeker($('.medicamentos-seeker'), 'Medicamentos', 'buscar-medicamentos');
@@ -277,6 +279,30 @@ $(document).on('ready', function() {
                 }
             }
         });
+    }
+
+    function cargaGaleriaImagenes(idPaciente) {
+
+        $.ajax({
+            url: 'listar-imagenes',
+            type: 'get',
+            dataType: "html",
+            data: {
+                _token: "{{ csrf_token() }}",
+                idPaciente: idPaciente
+            }
+        }).fail(function(statusCode, errorThrown) {
+            alert(statusCode + ' ' + errorThrown);
+        }).done(function(response) {
+            console.log(response)
+            $.unblockUI();
+            $("#galeriaImagenes").html(response);
+            baguetteBox.run('.cards-gallery', {
+                animation: 'slideIn'
+            });
+        });
+
+
     }
 
     //listarPacientes();

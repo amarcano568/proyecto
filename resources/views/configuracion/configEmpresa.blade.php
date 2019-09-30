@@ -126,14 +126,7 @@
               </div>
               <br><br>
               <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12- col-xs-12 img-thumbnail" style="text-align: center;">
-                  <h6>Presiona aquí para agregar el Logo.</h6>
-                  <a href="">            
-                      <i class="img-thumbnail fa-10x far fa-hospital" data-toggle="popover" data-placement="bottom"  title="Logo." data-content="Click para agregar el logo de tu Clínica." data-trigger="hover"></i>
-                      <br>
-                      <label>Logo de tu Clínica</label>
-                  </a>
-                </div>
+                <div  id="formDropZone" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ></div>
               </div>
             </div>
           </div>

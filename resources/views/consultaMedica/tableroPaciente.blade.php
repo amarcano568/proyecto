@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="row row-sm mg-t-20">
-  <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card bd-0 shadow-base">
 
       <ul class="nav nav-tabs" role="tablist">
@@ -41,7 +41,7 @@
           <a class="nav-link" href="#recipes" role="tab" data-toggle="tab"><i class="fas fa-tablets"></i> Recipes / Examenes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" role="tab" data-toggle="tab"><i class="far fa-images"></i> Imagenes</a>
+          <a class="nav-link" href="#Imagenes" role="tab" data-toggle="tab"><i class="far fa-images"></i> Imagenes</a>
         </li>
       </ul>
 
@@ -69,6 +69,9 @@
           </div>          
         </div>
         <div role="tabpanel" class="tab-pane fade" id="buzz">bbb</div>
+        <div role="tabpanel" class="tab-pane fade" id="Imagenes">
+          @include('consultaMedica.galeriaImagenes')
+        </div>
         <div role="tabpanel" class="tab-pane fade" id="recipes">
           @include('consultaMedica.recipesPaciente')
         </div>
@@ -77,9 +80,9 @@
 
     </div>
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+  <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
     @include('consultaMedica.fichaPaciente')
-  </div>
+  </div> -->
   
 </div>
 </div>

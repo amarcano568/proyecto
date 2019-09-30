@@ -12,6 +12,7 @@ use Recipes;
 use Empresa;
 use PDF;
 use Medicamentos;
+use FileStore;
 
 class consultaMedicaController extends Controller
 {
@@ -226,6 +227,34 @@ class consultaMedicaController extends Controller
             DB::rollback();
             return $this->internalException($e, __FUNCTION__);
         }
+    }
+
+    public function listarImagenes(Request $request)
+    {
+
+        $BD = Auth::user()->Empresa;
+        $galeria = \App\FileStore::on($BD)->where('idPaciente',$request->idPaciente)->get();
+        //$paciente = \App\Pacientes::on($BD)->find($request->idPaciente);
+        $salida = '';
+        foreach($galeria as $imagen)
+        {
+            $ima = "Empresas\\".$BD."\\galeriaImagenes\\".$imagen->nombre;
+            $salida .= '<div class="col-md-6 col-lg-4">
+                            <div class="card border-0 transform-on-hover">
+                                <a class="lightbox" href="'.$ima.'">
+                                    <img src="'.$ima.'" alt="Card Image" class="card-img-top" style="width: 330px;height:200px">
+                                </a>
+                                <div class="card-body">
+                                    <h6><a href="#">'.$imagen->titulo.'</a></h6>
+                                    <p class="text-muted card-text">'.$imagen->descripcion.'</p>
+                                </div>
+                            </div>
+                        </div>';
+            
+        }
+
+        return $salida;
+        
     }
 
     

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
   
-    <meta property="og:image" content="http://themepixels.me/bracketplus/img/bracketplus-social.png" />
-    <meta property="og:image:secure_url" content="http://themepixels.me/bracketplus/img/bracketplus-social.png" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:secure_url" content="" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="600" />
@@ -38,7 +38,10 @@
     <link rel="stylesheet" href="{{ asset('css/bracket.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/typeahead.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/tellis-sticky-note.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/baguetteBox.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('lib/dropzone/dropzone.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/cards-gallery.css') }}" />
+    
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
     
   <body style="overflow-x: hidden;">
@@ -275,7 +278,7 @@
               <ul class="list-unstyled user-profile-nav">
                 <li><a href="./index.html"><i class="icon ion-ios-person"></i> Editar Perfil</a></li>
                 <li><a href="./index.html"><i class="icon ion-ios-gear"></i> Configuraciones</a></li>
-                <li><a href="{{URL::to('logout')}}"><i class="icon ion-power"></i> Desconectar</a></li>
+                <li><a href="{{ route('logout') }}"><i class="icon ion-power"></i> Desconectar</a></li>
               </ul>
             </div><!-- dropdown-menu -->
           </div><!-- dropdown -->
@@ -730,16 +733,17 @@
     <script src="{{ asset('lib/ion.rangeSlider/js/ion.rangeSlider.min.js') }}"></script>
     <script src="{{ asset('lib/datatables/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('lib/datatables/buttons.bootstrap.min.js') }}"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script src="{{ asset('lib/datatables/jszip.min.js') }}"></script>
+    <script src="{{ asset('lib/datatables/jszip.min.js') }}"></script>
+    <script src="{{ asset('lib/datatables/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('lib/datatables/buttons.html5.min.js') }}"></script>
 
     <script src="{{ asset('lib/chosen/js/chosen.jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery.blockUI.js') }}"></script>
     <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('js/bootstrap-slider.js') }}"></script>
     <script src="{{ asset('js/tellis-sticky-note.js') }}"></script>
+    <script src="{{ asset('js/baguetteBox.min.js') }}"></script>
     <script src="{{ asset('lib/dropzone/dropzone.js') }}"></script>
 
     <script src="{{ asset('lib/alertifyjs/alertify.min.js') }}"></script>
