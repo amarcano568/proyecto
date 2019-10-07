@@ -242,7 +242,7 @@ class consultaMedicaController extends Controller
             $salida .= '<div class="col-md-6 col-lg-4">
                             <div class="card border-0 transform-on-hover">
                                 <a class="lightbox" href="'.$ima.'">
-                                    <img src="'.$ima.'" alt="Card Image" class="card-img-top" style="width: 330px;height:200px">
+                                    <img src="'.$ima.'" alt="Card Image" class="card-img-top" style="width: 323px;height:200px">
                                 </a>
                                 <div class="card-body">
                                     <h6><a href="#">'.$imagen->titulo.'</a></h6>
@@ -257,5 +257,35 @@ class consultaMedicaController extends Controller
         
     }
 
-    
+    public function subirImagenGaleria(Request $request){
+
+        $BD       = Auth::user()->Empresa;
+        $ruta     = '/Empresas/'.$BD.'/galeriaImagenes/';
+        $path     = public_path().$ruta;
+        $files    = $request->file('file');
+        $ext      = explode('/',$request->file('file')->getMimeType());
+        $fileName = $files->getClientOriginalName();
+        $files->move($path, $fileName);
+
+        $myPicture = date('mdYHis') . uniqid() . $request->fileName;
+
+        rename($path.$fileName, $path.$myPicture.'.'.$ext[1]);
+        
+        DB::beginTransaction();   
+        $fileStore = new \App\FileStore;
+        $fileStore->setConnection($BD);
+
+        $fileStore->idPaciente = $request->idPaciente;
+        $fileStore->nombreOriginal = $fileName;
+        $fileStore->nombre = $myPicture.'.'.$ext[1];
+        $fileStore->titulo = $request->tituloAux;
+        $fileStore->descripcion= $request->descripcionAux;
+        $fileStore->save();
+        DB::commit();
+        //Storage::move($path.$fileName, $path.'usuario-'.$request->idSucursal);
+        return;
+        
+    }
+
+        
 }

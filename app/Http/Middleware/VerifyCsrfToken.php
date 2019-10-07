@@ -19,6 +19,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'subir-foto','subir-logo'
+        'subir-foto','subir-logo','subir-imagen'
     ];
 }

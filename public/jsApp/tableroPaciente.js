@@ -4,6 +4,15 @@
 selectedOptionMenu('10000', 'br-menu-link active');
 $(document).on('ready', function() {
 
+    var server = "";
+    var pathname = document.location.pathname;
+    var pathnameArray = pathname.split("/public/");
+    var tituloimg = '';
+    var descripcionImg = '';
+
+    server = pathnameArray.length > 0 ? pathnameArray[0] + "/public/" : "";
+
+
     var objetoDataTables_personal = ''
     var idMedicamento = '';
     var nombreMedicamento = '';
@@ -217,11 +226,10 @@ $(document).on('ready', function() {
             alert(statusCode + ' ' + errorThrown);
         }).done(function(response) {
             console.log(response);
-            $("#nombrePac").text(response.Nombres);
-            $("#apellidosPac").text(response.Apellidos);
-            $("#sexoPac").text(response.sexo == 'M' ? 'Masculino' : 'Femenino');
-            $("#fecNacPac").text(response.fecNac);
-            $("#edadPac").text(response.edad);
+            $("#nombrePaciente").text(response.Nombres + ' ' + response.Apellidos);
+            dato = response.sexo == 'M' ? '<i class="text-info fas fa-male"></i> Masculino' : '<i class="text-info fas fa-female"></i> Femenino' + ' <i class="text-primary far fa-calendar-alt"></i> ' +
+                response.fecNac + ' <i class="text-warning fas fa-birthday-cake"></i> ' + response.edad + ' años';
+            $("#otrosDatosPaciente").html(dato);
         });
     }
 
@@ -282,7 +290,7 @@ $(document).on('ready', function() {
     }
 
     function cargaGaleriaImagenes(idPaciente) {
-
+        $("#galeriaImagenes").html('<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;"><i class="text-info fa-5x fas fa-spinner fa-pulse"></i> Espere cargando las imagenes del paciente...</div>');
         $.ajax({
             url: 'listar-imagenes',
             type: 'get',
@@ -294,7 +302,7 @@ $(document).on('ready', function() {
         }).fail(function(statusCode, errorThrown) {
             alert(statusCode + ' ' + errorThrown);
         }).done(function(response) {
-            console.log(response)
+            //console.log(response)
             $.unblockUI();
             $("#galeriaImagenes").html(response);
             baguetteBox.run('.cards-gallery', {
@@ -506,10 +514,163 @@ $(document).on('ready', function() {
                 "indicaciones": medicamento[2].trim()
             });
 
-
         })
 
         return JSON.stringify(arreglo);
+    }
+
+    $('#btnNuevaImagen').click(function() {
+        $.get(
+            "body-agregar-imagen",
+            function(data) {
+
+                $("#modal-Gral").modal('show');
+                $("#titleModalGral").html('<i class="fas fa-cloud-upload-alt"></i> Subir imagen');
+                $("#bodyModalGral").html(data);
+                jQuery.validator.setDefaults({
+                    rules: {
+                        tituloImg: "required",
+                        descripcionImg: "required"
+                    },
+                    messages: {
+                        tituloImg: "Titulo requerido.",
+                        descripcionImg: "Descripción requerida."
+                    },
+                    errorClass: 'help-block',
+                    focusInvalid: true,
+                    highlight: function(element) {
+                        $(element).removeClass('is-valid').addClass('is-invalid');
+                    },
+                    unhighlight: function(element) {
+                        $(element).removeClass('is-invalid').addClass('is-valid');
+                    },
+                    errorPlacement: function(error, element) {
+                        if (element.parent().hasClass('input-group')) {
+                            error.insertAfter(element.parent());
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    }
+                });
+                $('#wizard4').steps({
+                    headerTag: 'h3',
+                    bodyTag: 'section',
+                    autoFocus: true,
+                    transitionEffect: "slideLeft",
+                    labels: {
+                        cancel: "Cancel",
+                        current: "current step:",
+                        pagination: "Pagination",
+                        finish: '<i class="fas fa-cloud-upload-alt"></i> Subir Imagen',
+                        next: "Próximo",
+                        previous: "Previo",
+                        loading: "Loading ..."
+                    },
+                    titleTemplate: '#index# #title#',
+                    onStepChanging: function(event, currentIndex, newIndex) {
+                        tituloimg = $("#tituloImg").val();
+
+                        descripcionImg = $("#descripcionImg").val();
+                        form = $("#formBasic");
+                        return form.valid();
+                    },
+                    onFinishing: function(event, currentIndex) {
+                        form = $("#formBasic");
+                        return form.valid();
+                    },
+                    onFinished: function(event, currentIndex) {
+                        $("#btnSubirImagen").click(); // Submit the form
+                        return true;
+                    }
+                });
+
+                idPac = $("#chosenPacientes").val();
+                configuraDropZone(idPac);
+            }
+        );
+
+    });
+
+
+    function configuraDropZone(idPaciente) {
+        //console.log(idPaciente)
+        Dropzone.autoDiscover = false;
+
+        myAwesomeDropzone = myAwesomeDropzone = {
+            maxFilesize: 12,
+            renameFile: function(file) {
+                var dt = new Date();
+                var time = dt.getTime();
+                return time + file.name;
+            },
+            autoProcessQueue: false,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 50000,
+            init: function() {
+                var submitBtn = document.querySelector("#btnSubirImagen");
+                myDropzone = this;
+                submitBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    myDropzone.processQueue();
+                });
+                this.on("addedfile", function(file) {
+
+                });
+
+                this.on("complete", function(file) {
+                    // myDropzone.removeFile(file);
+                });
+
+                this.on("success",
+                    myDropzone.processQueue.bind(myDropzone)
+                );
+            },
+            removedfile: function(file) {
+                var name = file.upload.filename;
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: '{{ url("delete") }}',
+                    data: {
+                        filename: name
+                    },
+                    success: function(data) {
+                        console.log("File has been successfully removed!!");
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
+                });
+                var fileRef;
+                return (fileRef = file.previewElement) != null ?
+                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
+            },
+            params: {
+                idPaciente: idPaciente,
+                tituloAux: tituloimg,
+                descripcionAux: descripcionImg
+            },
+            success: function(file, response) {
+                console.log(response);
+                cargaGaleriaImagenes(idPaciente);
+                $("#modal-Gral").modal('hide');
+            },
+            error: function(file, response) {
+                return false;
+            }
+        }
+
+        //console.log(myAwesomeDropzone)
+        Dropzone.prototype.defaultOptions.dictRemoveFile = '<i class="text-danger far fa-trash-alt"></i><span class="text-danger"> Borrar Imagen</span>'
+        var myDropzone = new Dropzone("#dZUploadImagen", myAwesomeDropzone);
+        myDropzone.on("queuecomplete", function(file, response) {
+
+        });
     }
 
 });

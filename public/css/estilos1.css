@@ -1,3 +1,16 @@
+.wizard .content {
+    min-height: 100px;
+}
+.wizard .content > .body {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    position: absolute;
+}
+.wizard .content .body.current {
+    position: relative;
+}
+
 .reversed{padding: 3rem 0 0 0;}
 .reversed .control-label{margin: -4.5rem 0 0 0; float: left;}
 

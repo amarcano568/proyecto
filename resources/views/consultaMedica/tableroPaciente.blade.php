@@ -13,6 +13,49 @@
           @endforeach
       </select>
     </div>
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+      <div class="dropdown">
+            <a style="float: right;" href="./index.html" class="nav-link nav-link-profile" data-toggle="dropdown">
+              <span class="logged-name hidden-md-down">Inf. Paciente</span>
+              <i style="font-size: 18px;" class="fas fa-caret-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-header" style="margin-top: -1em;">
+              <div class="col-sm-12 col-lg-12">
+              <div class="card shadow-base bd-0 ht-100p ">
+                <figure class="mg-b-0 bg-reef ht-150 overflow-hidden rounded-top wd-300">
+                  <img src="{{ asset('img/fondo2.jpg')}}" class="img-fluid rounded-top op-3" alt="">
+                </figure>
+                <div class="card-body tx-center">
+                  <div class="pos-relative">
+                    <div class="pos-absolute x-0 t--60">
+                      <a href="#"><img src="{{ asset('img/img12.jpg')}}" class="wd-100 ht-100 rounded-circle" alt=""></a>
+                    </div><!-- pos-relative -->
+                  </div>
+                  <h4 class="tx-normal tx-roboto mg-t-60 mg-b-5 tx-inverse"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><span id="nombrePaciente"></span></font></font></h4>
+                  <p class="tx-14 mg-b-25"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><span id="otrosDatosPaciente"></span></font></font></p>
+                  
+                </div><!-- card-body -->
+                <div class="card-footer bg-transparent pd-0 bd-gray-200 mg-t-auto">
+                  <div class="row no-gutters tx-center">
+                    <div class="col pd-y-15">
+                      <a href="#" class="tx-24 tx-bold tx-lato d-block tx-gray-800 hover-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0.00 </font></font></a>
+                      <small class="tx-10 tx-mont tx-uppercase tx-medium"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="fas fa-money-check-alt"></i> Saldo</font></font></small>
+                    </div><!-- col -->
+                    <div class="col pd-y-15 bd-l bd-gray-200">
+                      <a href="#" class="tx-24 tx-bold tx-lato d-block tx-gray-800 hover-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0.00 </font></font></a>
+                      <small class="tx-10 tx-mont tx-uppercase tx-medium"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="fas fa-money-check-alt"></i> Crédito</font></font></small>
+                    </div><!-- col -->
+                    <div class="col pd-y-15 bd-l bd-gray-200">
+                      <a href="#" class="tx-24 tx-bold tx-lato d-block tx-gray-800 hover-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0 </font></font></a>
+                      <small class="tx-10 tx-mont tx-uppercase tx-medium"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Visitas</font></font></small>
+                    </div><!-- col -->
+                  </div><!-- row -->
+                </div><!-- card-footer -->
+              </div><!-- card -->
+            </div>
+            </div><!-- dropdown-menu -->
+          </div><!-- dropdown -->
+    </div>
   </div>
   <div class="row row-sm mg-t-20">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -20,10 +63,10 @@
 
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link  active" href="#datos_personales" role="tab" data-toggle="tab" aria-selected="true"><i class="far fa-user"></i> Datos personales</a>
+          <a class="nav-link  active" href="#datos_personales" role="tab" data-toggle="tab" aria-selected="true"><i class="far fa-user"></i> Inf.</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#Anamnesis" role="tab" data-toggle="tab" aria-selected="true"><i class="far fa-question-circle"></i> Anamnesis General</a>
+          <a class="nav-link" href="#Anamnesis" role="tab" data-toggle="tab" aria-selected="true"><i class="far fa-question-circle"></i> Anamnesis</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#consultasTab" role="tab" data-toggle="tab" aria-selected="true"><i class="fas fa-tooth"></i> Consultas</a>
@@ -37,11 +80,21 @@
         <li class="nav-item">
           <a class="nav-link" href="#references" role="tab" data-toggle="tab">Presupuestos</a>
         </li>
-        <li class="nav-item">
+<!--         <li class="nav-item">
           <a class="nav-link" href="#recipes" role="tab" data-toggle="tab"><i class="fas fa-tablets"></i> Recipes / Examenes</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="#Imagenes" role="tab" data-toggle="tab"><i class="far fa-images"></i> Imagenes</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Más opciones</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#recipes"  role="tab" data-toggle="tab"><i class="fas fa-tablets"></i> Recipes</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-file-medical-alt"></i> Examenes</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-notes-medical"></i> Informes</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Otros</a>
+          </div>
         </li>
       </ul>
 
@@ -80,15 +133,13 @@
 
     </div>
   </div>
-  <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-    @include('consultaMedica.fichaPaciente')
-  </div> -->
+  
   
 </div>
 </div>
 @include('pdf.modal-recipe')
-
-@include('consultaMedica.modal-newRecipe')
+@include('consultaMedica.modal-Gral')
+<!-- @include('consultaMedica.modal-newRecipe') -->
 
 @endsection
 

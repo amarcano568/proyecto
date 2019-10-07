@@ -51,19 +51,25 @@ $(document).on('ready', function() {
         }).done(function(data) {
             console.log(data)
             $.unblockUI();
+
             if (idSucursal == '1') {
                 $("#empresa_config_group").show();
             } else {
                 $("#empresa_config_group").hide();
             }
 
-            if (data.logo == '' || data.logo === null) {
+            if (idSucursal == '' || idSucursal === null) {
+                if (Dropzone.instances.length > 0) Dropzone.instances.forEach(bz => bz.destroy());
+                $("#formDropZone").html('<center><i class="fa-4x far fa-images"></i><br><h6>Para agregar un Logo a esta nueva sucursal debe primero guardar sus datos.</h6></center>')
+            } else if (data.logo == '' || data.logo === null) {
                 iconoDropZone = '<i class="far fa-images"></i><br><h6>Click para agregar Logo.</h6>';
+                configuraDropZone(iconoDropZone, data.id);
             } else {
                 iconoDropZone = '<img class="img-thumbnail" src="' + data.logo + '" style="width:100px;height:98px">';
+                configuraDropZone(iconoDropZone, data.id);
             }
 
-            configuraDropZone(iconoDropZone, data.id);
+
 
             $("#id_sucursal").val(data.id);
             $("#nombre_clinica").val(data.nombreEmpresa);

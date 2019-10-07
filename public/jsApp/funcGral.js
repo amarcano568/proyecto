@@ -1,7 +1,7 @@
 function selectedOptionMenu(id, clase, subId = '', navlink = '') {
 
     if (subId != '') {
-        $(".nav-link").attr('class', 'nav-link');
+        // $(".nav-link").attr('class', 'nav-link');
         $("#" + subId).attr('class', navlink);
     }
 

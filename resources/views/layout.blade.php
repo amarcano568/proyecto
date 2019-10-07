@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="{{ asset('css/baguetteBox.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('lib/dropzone/dropzone.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/cards-gallery.css') }}" />
+    <link rel="stylesheet" href="{{ asset('lib/jquery.steps/jquery.steps.css') }}" />
     
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
     
@@ -745,8 +746,8 @@
     <script src="{{ asset('js/tellis-sticky-note.js') }}"></script>
     <script src="{{ asset('js/baguetteBox.min.js') }}"></script>
     <script src="{{ asset('lib/dropzone/dropzone.js') }}"></script>
-
-    <script src="{{ asset('lib/alertifyjs/alertify.min.js') }}"></script>
+    <script src="{{ asset('lib/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('lib/jquery.steps/jquery.steps.js') }}"></script>
       <!-- CSS -->
       <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/alertify.min.css') }}"/>
       <!-- Default theme -->

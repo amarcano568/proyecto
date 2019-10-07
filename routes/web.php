@@ -42,7 +42,11 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('buscar-medicamentos', 'consultaMedicaController@buscarMedicamentos');
 	Route::get('agregar-recipe-paciente', 'consultaMedicaController@agregarRecipePaciente');
 	Route::get('listar-imagenes', 'consultaMedicaController@listarImagenes');
-
+	Route::get('body-agregar-imagen', function(){	
+	    return View::make("consultaMedica.body-AgregarImagen")
+	        ->render();
+	});
+	Route::post('subir-imagen', 'consultaMedicaController@subirImagenGaleria');
 	/**
 	 * 				configuracionController
 	 */
