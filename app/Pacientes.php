@@ -20,21 +20,30 @@ class Pacientes extends Model
         }else{
             $paciente = \App\Pacientes::on($BD)->find($request->idPaciente);    
         }
+
         
-        $paciente->Nombres       = $request->nomPaciente ;
-        $paciente->Apellidos     = $request->apePaciente ;
-        $paciente->tipoDoc       = $request->tipoDoc;
-        $paciente->nroDoc        = $request->nroDocumento ;
-        $paciente->fecNac        = $request->fecNac ;
-        $paciente->sexo          = $request->sexo ;
-        $paciente->email         = $request->mailPac ;
-        $paciente->Pais          = $request->pais ;
-        $paciente->ciudad        = $request->estadoProvincia;
-        $paciente->direccion     = $request->direccion ;
-        $paciente->telFijo       = $request->telFijo ;
-        $paciente->telMovil      = $request->telMovil ;
-        $paciente->tipoSangre    = $request->tipoSangre;
-        $paciente->telEmergencia = $request->telEmergencia ;        
+        $paciente->Nombres           = $request->nombre;
+        $paciente->Apellidos         = $request->apellido;
+        $paciente->nroDoc            = $request->nroDocumento;
+        $paciente->email             = $request->email;
+        $paciente->medicoProfesional = $request->medicoProfesional;
+        $paciente->nombre_contacto   = $request->nombre_contacto; 
+        $paciente->fono_contacto     = $request->fono_contacto;
+        $paciente->relacion_contacto = $request->relacion;
+        $paciente->sexo              = $request->genero;
+        $paciente->Pais              = $request->nacionalidad;
+        $paciente->idioma            = $request->idioma;
+        $paciente->telFijo           = $request->fonofijo;
+        $paciente->telMovil          = $request->fonoMovil;
+        $paciente->direccion         = $request->direccion;
+        $paciente->ocupacion         = $request->ocupacion;
+        $paciente->convenio          = $request->convenio;
+        $paciente->porc_convenio     = $request->porcConvenio; 
+        $paciente->notas_convenio    = $request->convenio_notas;
+        $paciente->responsable_pago  = $request->nombre_resp;
+        $paciente->fecNac            = $request->fec_nacimiento;
+        $paciente->tipoSangre        = '';
+
         return $paciente->save();
     }
 

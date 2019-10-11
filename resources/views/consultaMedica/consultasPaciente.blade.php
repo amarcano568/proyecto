@@ -13,7 +13,7 @@
   </div>
   <br>
   <div class="table-wrapper">
-    <table id="datatable-consultas" class="table display responsive nowrap">
+    <table id="datatable-consultas" class="table display responsive nowrap" style="width: 100%">
       <thead>
         <tr>
           <th class="wd-15p">Id</th>

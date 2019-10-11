@@ -132,29 +132,27 @@ CREATE TABLE IF NOT EXISTS `filestore` (
   `nombreOriginal` varchar(100) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `titulo` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(500) DEFAULT NULL,
+  `descripcion` varchar(5000) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 COMMENT='Galería de Imagenes';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1 COMMENT='Galería de Imagenes';
 
--- Volcando datos para la tabla dentalcare.filestore: ~14 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.filestore: ~10 rows (aproximadamente)
 /*!40000 ALTER TABLE `filestore` DISABLE KEYS */;
-REPLACE INTO `filestore` (`id`, `idPaciente`, `nombreOriginal`, `nombre`, `titulo`, `descripcion`, `updated_at`, `created_at`) VALUES
-	(1, 1, 'imagen-1.jpg', 'imagen-1.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
-	(2, 1, 'imagen-2.jpg', 'imagen-2.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
-	(3, 1, 'imagen-3.jpg', 'imagen-3.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
-	(4, 1, 'imagen-4.jpg', 'imagen-4.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
-	(5, 1, 'imagen-5.jpg', 'imagen-5.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
-	(6, 1, 'imagen-6.jpg', 'imagen-6.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00'),
-	(7, 1, '1570465845171images.jpg', '100720191630475d9b683738e95.jpeg', '[object HTMLInputElement]', NULL, '2019-10-07 16:30:47', '2019-10-07 16:30:47'),
-	(8, 1, '1570466249324images.jpg', '100720191637435d9b69d76134b.jpeg', NULL, NULL, '2019-10-07 16:37:43', '2019-10-07 16:37:43'),
-	(21, 2, '1570482478931images.jpg', '100720192108035d9ba9333742b.jpeg', 'prueba', 'dddddddddd', '2019-10-07 21:08:03', '2019-10-07 21:08:03'),
-	(22, 2, '1570482519655check-mark-48.png', '100720192108435d9ba95ba5030.png', NULL, NULL, '2019-10-07 21:08:43', '2019-10-07 21:08:43'),
-	(23, 2, '1570482539461images.jpg', '100720192109025d9ba96e5d2f9.jpeg', 'prueba', 'dddddddddd', '2019-10-07 21:09:02', '2019-10-07 21:09:02'),
-	(24, 2, '1570482567011WhatsApp Image 2019-09-16 at 14.20.18.jpeg', '100720192109295d9ba9898b64e.jpeg', 'prueba', 'dddddddddd', '2019-10-07 21:09:29', '2019-10-07 21:09:29'),
-	(25, 2, '1570482744189images.jpg', '100720192112265d9baa3ada885.jpeg', NULL, NULL, '2019-10-07 21:12:26', '2019-10-07 21:12:26'),
-	(26, 2, '1570482779945images.jpg', '100720192113015d9baa5d84abc.jpeg', 'prueba', 'www eee e eerreer rgrgrgrgrgrgrgrgrgrgrgrgrgrg rgrrtrt  rttrtrt  rtrtrtrt www eee e eerreer rgrgrgrgrgrgrgrgrgrgrgrgrgrg rgrrtrt  rttrtrt  rtrtrtrt', '2019-10-07 21:13:01', '2019-10-07 21:13:01');
+REPLACE INTO `filestore` (`id`, `idPaciente`, `nombreOriginal`, `nombre`, `titulo`, `descripcion`, `updated_at`, `created_at`, `created_by`) VALUES
+	(1, 1, 'imagen-1.jpg', 'imagen-1.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00', 1),
+	(2, 1, 'imagen-2.jpg', 'imagen-2.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00', 1),
+	(3, 1, 'imagen-3.jpg', 'imagen-3.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00', 1),
+	(4, 1, 'imagen-4.jpg', 'imagen-4.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00', 1),
+	(5, 1, 'imagen-5.jpg', 'imagen-5.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00', 1),
+	(6, 1, 'imagen-6.jpg', 'imagen-6.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00', 1),
+	(7, 1, '1570465845171images.jpg', '100720191630475d9b683738e95.jpeg', '[object HTMLInputElement]', NULL, '2019-10-07 16:30:47', '2019-10-07 16:30:47', 1),
+	(8, 1, '1570466249324images.jpg', '100720191637435d9b69d76134b.jpeg', NULL, NULL, '2019-10-07 16:37:43', '2019-10-07 16:37:43', 1),
+	(27, 2, '1570722519435images.jpg', '101020191548435d9f52db6ea0f.jpeg', NULL, NULL, '2019-10-10 15:48:43', '2019-10-10 15:48:43', 1),
+	(28, 2, '1570722606898imagen-2.jpg', '101020191550105d9f5332e993d.jpeg', 'Radiografia perfil', 'Lorem ipsum dolor sit amet, mattis et elementum ullamcorper sed nunc, dignissim nullam elementum velit integer magna lacinia, porttitor nullam suscipit. Nulla ornare risus luctus risus, wisi convallis congue arcu mi adipiscing phasellus, nunc lorem magnis consequat dolor taciti enim, parturient posuere nec sed. Interdum justo libero pellentesque. Placerat pellentesque morbi, arcu suspendisse amet sodales, pulvinar vehicula arcu est dui ante ornare. Cursus vel, mauris morbi, nunc eget ridiculus enim nullam quis, purus pulvinar vestibulum nec at, porttitor velit in amet. Ipsum nec cum sem sollicitudin mauris adipiscing. Elit donec, rutrum alias elit nulla dictumst tellus eros, diam ante tempor luctus, cras tellus. Turpis nulla neque rutrum velit. Pede felis non mauris ut lorem, quis eros nonummy dictumst aliquam en hendrerit, neque interdum sodales. Facilisi nisl, congue wisi netus nibh ac neque tincidunt. Feugiat aliquam, volutpat ipsum et sit ipsum. Molestiae sed praesent sed placerat fusce neque.', '2019-10-10 15:50:10', '2019-10-10 15:50:10', 2),
+	(29, 2, '1570726233299imagen-3.jpg', '101020191650355d9f615b32548.jpeg', 'Otra Prueba de Imagen', 'Lorem Ipsum es simplemente un texto ficticio de la industria de impresión y composición tipográfica. Lorem Ipsum ha sido el texto ficticio estándar de la industria desde el año 1500, cuando una impresora desconocida tomó una galera de tipo y la mezcló para hacer un libro de muestras. Ha sobrevivido no solo cinco siglos, sino también el salto a la composición electrónica, permaneciendo esencialmente sin cambios. Se popularizó en la década de 1960 con el lanzamiento de las hojas de Letraset que contienen pasajes de Lorem Ipsum, y más recientemente con software de publicación de escritorio como Aldus PageMaker, incluidas las versiones de Lorem Ipsum.', '2019-10-10 16:50:35', '2019-10-10 16:50:35', 1);
 /*!40000 ALTER TABLE `filestore` ENABLE KEYS */;
 
 -- Volcando estructura para procedimiento dentalcare.listarRecipes
@@ -18143,30 +18141,42 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   `idpacientes` int(11) NOT NULL AUTO_INCREMENT,
   `Nombres` varchar(45) DEFAULT NULL,
   `Apellidos` varchar(45) DEFAULT NULL,
-  `tipoDoc` varchar(10) DEFAULT NULL,
   `nroDoc` int(11) DEFAULT NULL,
   `fecNac` date DEFAULT NULL,
   `sexo` char(1) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `medicoProfesional` int(11) DEFAULT NULL,
   `Pais` char(2) DEFAULT NULL,
-  `ciudad` int(11) DEFAULT NULL,
   `direccion` varchar(500) DEFAULT NULL,
   `telFijo` varchar(45) DEFAULT NULL,
   `telMovil` varchar(45) DEFAULT NULL,
   `tipoSangre` varchar(45) DEFAULT NULL,
   `telEmergencia` varchar(45) DEFAULT NULL,
+  `nombre_contacto` varchar(50) DEFAULT NULL,
+  `fono_contacto` varchar(45) DEFAULT NULL,
+  `relacion_contacto` varchar(45) DEFAULT NULL,
+  `idioma` char(2) DEFAULT NULL,
+  `ocupacion` varchar(100) DEFAULT NULL,
+  `convenio` int(11) DEFAULT NULL,
+  `porc_convenio` decimal(5,2) DEFAULT NULL,
+  `notas_convenio` varchar(500) DEFAULT NULL,
+  `responsable_pago` varchar(45) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`idpacientes`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='Pacientes de la Empresa DentalCare';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='Pacientes de la Empresa DentalCare';
 
--- Volcando datos para la tabla dentalcare.pacientes: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.pacientes: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `pacientes` DISABLE KEYS */;
-REPLACE INTO `pacientes` (`idpacientes`, `Nombres`, `Apellidos`, `tipoDoc`, `nroDoc`, `fecNac`, `sexo`, `email`, `Pais`, `ciudad`, `direccion`, `telFijo`, `telMovil`, `tipoSangre`, `telEmergencia`, `updated_at`, `created_at`) VALUES
-	(1, 'Lurianny', 'Salazar Peña', 'C.E.', 72145236, '1981-10-31', 'F', 'luriannys_salalazar@hotmail.com', 'VE', 17, 'Av. Pedro Miotta #714 Zona A', '973256321973256321', NULL, NULL, NULL, '2019-08-09 15:50:37', NULL),
-	(2, 'Alexander José', 'Marcano Aguilera', 'C.E.', 73827223, '1974-09-06', 'M', 'amarcano568@gmail.com', 'VE', 17, 'Av. Pedro Miotta #714 Zona A', '973256321973256321', NULL, 'A+', NULL, '2019-08-08 21:54:49', NULL),
-	(3, 'pedro', 'salazar', 'C.E.', 222, '2019-08-09', 'M', 'amarcano568q@gmail.com', 'VE', 3, '111', '1', '1', NULL, '1', '2019-08-09 17:15:12', '2019-08-09 17:15:12'),
-	(4, 'Juan', 'Marin', 'C.E.', 333, '2019-08-22', 'M', 'amarcano568@gmail.om', 'VE', 2, '4', '44', '4', NULL, '4', '2019-08-09 18:41:07', '2019-08-09 18:41:07');
+REPLACE INTO `pacientes` (`idpacientes`, `Nombres`, `Apellidos`, `nroDoc`, `fecNac`, `sexo`, `email`, `medicoProfesional`, `Pais`, `direccion`, `telFijo`, `telMovil`, `tipoSangre`, `telEmergencia`, `nombre_contacto`, `fono_contacto`, `relacion_contacto`, `idioma`, `ocupacion`, `convenio`, `porc_convenio`, `notas_convenio`, `responsable_pago`, `updated_at`, `created_at`) VALUES
+	(1, 'Luriannys', 'Salazar Peña', 72145236, '1981-10-31', 'F', 'luriannys_salalazar@hotmail.com', NULL, 'VE', 'Av. Pedro Miotta #714 Zona A', '973256321973256321', NULL, '', NULL, NULL, NULL, NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 18:54:10', NULL),
+	(2, 'Alexander José', 'Marcano Aguilera', 73827223, '1974-09-06', 'M', 'amarcano568@gmail.com', NULL, 'VE', 'Av. Pedro Miotta #714 Zona A', '973256321973256321', NULL, '', NULL, NULL, NULL, NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 18:51:57', NULL),
+	(3, 'pedro', 'salazar', 222, '2019-08-09', 'M', 'amarcano568q@gmail.com', NULL, 'VE', '111', '1', '1', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-08-09 17:15:12', '2019-08-09 17:15:12'),
+	(4, 'Juan', 'Marin', 333, '2019-08-22', 'M', 'amarcano568@gmail.om', NULL, 'VE', '4', '44', '4', NULL, '4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-08-09 18:41:07', '2019-08-09 18:41:07'),
+	(5, 'Miguel', 'Alfonso', 12345678, '2019-10-11', 'M', 'miguel_alfonzo@cayro.com', NULL, 'PE', 'Los Olivos city', '931256412', '9532621', '', NULL, 'A su mama', '975124562', NULL, 'ES', 'Programador de App', NULL, NULL, 'nota de prueba', 'el mismo', '2019-10-11 16:50:49', '2019-10-11 16:50:49'),
+	(6, 'Roxana', 'Diaz', 123123456, '2089-10-11', 'F', 'roxana@pruab.com', NULL, 'PE', NULL, '945123456', NULL, '', NULL, 'A su mama', '32344334', NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 16:55:31', '2019-10-11 16:55:31'),
+	(7, 'Pedro', 'Perez', 12345678, '1974-09-06', 'M', 'pedro_perez@gmail.com', NULL, 'VE', NULL, '945123456', NULL, '', NULL, NULL, '32344334', NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 16:57:43', '2019-10-11 16:57:43'),
+	(8, 'Sofia', 'Marcano A', 323232, '2012-11-09', 'M', 'sofi_marcano@hotmail.com', NULL, 'AR', 'Porlamar', NULL, NULL, '', NULL, NULL, NULL, NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 18:14:53', '2019-10-11 17:48:29');
 /*!40000 ALTER TABLE `pacientes` ENABLE KEYS */;
 
 -- Volcando estructura para tabla dentalcare.perfil_usuario

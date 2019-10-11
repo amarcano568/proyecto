@@ -28,12 +28,55 @@ $(document).on('ready', function() {
     });
 
     $("#chosenPacientes").on('change', function() {
+        loadingUI('Espere procesando...', 'white')
         muestraFichaPaciente($(this).val());
         cargaConsultas($(this).val());
         cargaRecipes($(this).val());
         cargaGaleriaImagenes($(this).val());
-
+        cargaDatosPersonales($(this).val());
     });
+
+    function cargaDatosPersonales(idPaciente) {
+        $.ajax({
+            url: 'buscar-paciente',
+            type: 'get',
+            dataType: "json",
+            data: {
+                _token: "{{ csrf_token() }}",
+                idPaciente: idPaciente
+            }
+        }).fail(function(statusCode, errorThrown) {
+            alert(statusCode + ' ' + errorThrown);
+        }).done(function(response) {
+            console.log(response);
+            $("#idPaciente").val(idPaciente);
+            $("#nombre").val(response.Nombres);
+            $("#apellido").val(response.Apellidos);
+            $("#nroDocumento").val(response.nroDoc);
+            $("#email").val(response.email);
+            $("#medicoProfesional").val(response.medicoProfesional);
+            $("#nombre_contacto").text(response.nombre_contacto);
+            $("#fono_contacto").val(response.fono_contacto);
+            $("#relacion").val(response.relacion_contacto);
+            $("#genero").val(response.sexo);
+            $("#nacionalidad").val(response.Pais);
+            $("#idioma").val(response.idioma);
+            $("#fonofijo").val(response.telFijo);
+            $("#fonoMovil").val(response.telMovil);
+            $("#direccion").val(response.direccion);
+            $("#ocupacion").val(response.ocupacion);
+            $("#convenio").val(response.convenio);
+            $("#porcConvenio").val(response.porc_convenio);
+            $("#convenio_notas").val(response.notas_convenio);
+            $("#nombre_resp").val(response.responsable_pago);
+            $("#fec_nacimiento").val(response.fecNac);
+
+            $(".chosen-select").trigger("chosen:updated");
+
+            $("#modal-paciente").modal('show');
+        });
+
+    }
 
     seeker($('.medicamentos-seeker'), 'Medicamentos', 'buscar-medicamentos');
 
@@ -308,6 +351,13 @@ $(document).on('ready', function() {
             baguetteBox.run('.cards-gallery', {
                 animation: 'slideIn'
             });
+            $('[data-toggle="popover"]').popover({
+                html: true,
+                content: function() {
+                    return $('.popover').html();
+                }
+            });
+            $('[data-toggle="tooltip"]').tooltip();
         });
 
 
@@ -672,5 +722,167 @@ $(document).on('ready', function() {
 
         });
     }
+
+    $(document).on('click', '.verDetalleImagen', function(event) {
+        event.preventDefault();
+        titulo = $(this).attr('titulo');
+        descripcion = $(this).attr('descripcion');
+        fechaImg = $(this).attr('fechaImg');
+        usuario = $(this).attr('usuario');
+        $.get(
+            "body-detalle-imagen",
+            function(data) {
+                $("#modal-Gral").modal('show');
+                $("#titleModalGral").html('<i class="fas fa-info"></i> Detalle imagen');
+                $("#bodyModalGral").html(data);
+                $("#tituloImgDetalle").val(titulo);
+                $("#descripcionImgDetalle").val(descripcion);
+                $("#fechaImgDetalle").val(fechaImg);
+                $("#usuarioImgDetalle").val(usuario);
+            });
+
+    });
+
+    $(document).on('click', '.enviarCorreoImagen', function(event) {
+        event.preventDefault();
+        alert('Enviar Correo')
+    });
+
+    $(document).on('click', '#btnSavePaciente', function(event) {
+        event.preventDefault();
+        var validarForm = $("#form_register_paciente").valid();
+        if (validarForm === false) {
+            return false;
+        }
+        alertify.confirm('Datos del paciente', '<h4 class="text-info">Esta seguro de guardar estos datos..?</h4>', function() {
+
+            var form = $('#form_register_paciente');
+            var formData = form.serialize();
+
+            var route = form.attr('action');
+            $.ajax({
+                url: route,
+                type: 'POST',
+                data: formData,
+                beforeSend: function() {
+                    loadingUI('Actualizando');
+                }
+            }).done(function(data) {
+                console.log(data)
+                $.unblockUI();
+                alertify.success('Datos personales actualizados...');
+            }).fail(function(statusCode, errorThrown) {
+                $.unblockUI();
+                console.log(errorThrown);
+                ajaxError(statusCode, errorThrown);
+            });
+
+        }, function() { // En caso de Cancelar              
+            alertify.error('Se Cancelo el Proceso para Guardar los datos del paciente.');
+        }).set('labels', {
+            ok: 'Confirmar',
+            cancel: 'Cancelar'
+        }).set({
+            transition: 'zoom'
+        }).set({
+            modal: true,
+            closableByDimmer: false
+        });
+    });
+
+    jQuery.validator.setDefaults({
+        errorClass: 'help-block',
+        focusInvalid: true,
+        ignore: ":hidden:not(select)",
+        highlight: function(element) {
+            $(element).removeClass('is-valid').addClass('is-invalid');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('is-invalid').addClass('is-valid');
+        },
+        errorPlacement: function(error, element) {
+            if (element.parent().hasClass('input-group')) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
+
+    $("#form_register_paciente").validate({
+        rules: {
+            nombre: {
+                required: true,
+                minlength: 4
+            },
+            apellido: {
+                required: true,
+                minlength: 4
+            },
+            nroDocumento: {
+                required: true,
+                number: true,
+                maxlength: 11
+            },
+            email: {
+                required: true
+            },
+            medicoProfesional: {
+                required: false
+            },
+            fec_nacimiento: {
+                required: true
+            },
+            genero: {
+                required: true
+            },
+            direccion: {
+                required: true
+            },
+            direccion2: {
+                required: true
+            },
+            nacionalidad: {
+                required: true
+            }
+        },
+        messages: {
+            nombre: {
+                required: "",
+                minlength: "Mínimo cuatro (4) caracteres"
+            },
+            apellido: {
+                required: "",
+                minlength: "Mínimo cuatro (4) caracteres"
+            },
+            nroDocumento: {
+                required: "",
+                number: "Solo números",
+                maxlength: 'Máx 11 digitos'
+            },
+            email: {
+                required: "Correo del paciente requerido"
+            },
+            medicoProfesional: {
+                required: "Profesional requerido"
+            },
+            fec_nacimiento: {
+                required: "Requerida"
+            },
+            genero: {
+                required: "Genero requerido"
+            },
+            nacionalidad: {
+                required: "Nacionalida requerida"
+            }
+        },
+
+        submitHandler: function(form) {
+
+
+
+        }
+    });
 
 });

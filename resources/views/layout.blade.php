@@ -19,7 +19,7 @@
     <title>.:: MediSoft versión Odontologica ::.</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="img/diente.ico" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/Ionicons/css/ionicons.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/jquery-switchbutton/jquery.switchButton.css') }}" rel="stylesheet" />
@@ -726,6 +726,7 @@
     <script src="{{ asset('lib/echarts/echarts.min.js') }}"></script>
     <script src="{{ asset('lib/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('js/bracket.js') }}"></script>
+    <script src="{{ asset('js/all.js') }}"></script>
     <script src="{{ asset('js/ResizeSensor.js') }}"></script>
     <script src="{{ asset('lib/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('lib/datatables/dataTables.bootstrap4.min.js') }}"></script>
@@ -748,14 +749,12 @@
     <script src="{{ asset('lib/dropzone/dropzone.js') }}"></script>
     <script src="{{ asset('lib/dropzone/dropzone.js') }}"></script>
     <script src="{{ asset('lib/jquery.steps/jquery.steps.js') }}"></script>
-      <!-- CSS -->
-      <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/alertify.min.css') }}"/>
-      <!-- Default theme -->
-      <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/themes/default.min.css') }}"/>
-      <!-- Semantic UI theme -->
-      <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/themes/semantic.min.css') }}"/>
-      <!-- Bootstrap theme -->
-      <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/themes/bootstrap.min.css') }}"/>
+
+    <script src="{{ asset('lib/alertifyjs/alertify.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/alertify.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/themes/default.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/themes/semantic.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('lib/alertifyjs/css/themes/bootstrap.min.css') }}"/>
 
     @yield('javascript')   
     

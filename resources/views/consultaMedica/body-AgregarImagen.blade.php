@@ -33,7 +33,7 @@
 			<div class="form-layout-footer mg-t-30" style="float: right;">
 				<br><br>
 				<button type="submit" id="btnSubirImagen" class="btn btn-info" style="display: none;"><i class="fas fa-cloud-upload-alt"></i> Subir imagen</button>
-				<button type="button" id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+				<button type="button" id="btnCancelar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
 			</div>
 		</div><!-- form-layout -->

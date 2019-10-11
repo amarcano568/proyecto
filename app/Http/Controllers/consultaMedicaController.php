@@ -233,26 +233,54 @@ class consultaMedicaController extends Controller
     {
 
         $BD = Auth::user()->Empresa;
-        $galeria = \App\FileStore::on($BD)->where('idPaciente',$request->idPaciente)->get();
+        $galeria = \App\FileStore::on($BD)->join('odontosoft.users', 'created_by', '=', 'users.id')->where('idPaciente',$request->idPaciente)->get();
         //$paciente = \App\Pacientes::on($BD)->find($request->idPaciente);
         $salida = '';
         foreach($galeria as $imagen)
         {
             $ima = "Empresas\\".$BD."\\galeriaImagenes\\".$imagen->nombre;
+            $fec = \Carbon\Carbon::parse($imagen->created_at)->format('d/m/Y h:i A');
             $salida .= '<div class="col-md-6 col-lg-4">
                             <div class="card border-0 transform-on-hover">
                                 <a class="lightbox" href="'.$ima.'">
                                     <img src="'.$ima.'" alt="Card Image" class="card-img-top" style="width: 323px;height:200px">
                                 </a>
                                 <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                        <span class="badge badge-warning"><i class="far fa-calendar-alt"></i> '.$fec.'</span>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="icono-action">
+                                                <a href="" class="enviarCorreoImagen">
+                                                    <i data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Enviar por correo." class="text-info fas fa-envelope"></i>
+                                                </a>
+                                                <a href="" class="verDetalleImagen" usuario="'.$imagen->name.' '.$imagen->lastName.'" fechaImg="'.$fec.'" titulo="'.$imagen->titulo.'" descripcion="'.$imagen->descripcion.'">
+                                                    <i data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Ver detalle de esta imagen." class="text-danger far fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <h6><a href="#">'.$imagen->titulo.'</a></h6>
-                                    <p class="text-muted card-text">'.$imagen->descripcion.'</p>
+                                    <p class="text-muted card-text">'.substr($imagen->descripcion,0,30).'...</p>
                                 </div>
                             </div>
                         </div>';
             
         }
 
+
+ // <figure class="overlay">
+ //                                <a class="lightbox" href="'.$ima.'">
+ //                                    <img src="'.$ima.'" alt="Card Image" class="card-img-top" style="width: 323px;height:200px">
+ //                                    <figcaption class="overlay-body d-flex align-items-end justify-content-center">
+ //    <div class="img-option">
+ //      <a href="#" class="img-option-link"><div><i class="icon ion-android-share-alt"></i></div></a>
+ //      <a href="#" class="img-option-link"><div><i class="icon ion-ios-gear"></i></div></a>      
+ //    </div>
+ //  </figcaption>
+ //      </a>
+ //  </figure>
         return $salida;
         
     }
@@ -280,6 +308,7 @@ class consultaMedicaController extends Controller
         $fileStore->nombre = $myPicture.'.'.$ext[1];
         $fileStore->titulo = $request->tituloAux;
         $fileStore->descripcion= $request->descripcionAux;
+        $fileStore->created_by = Auth::user()->id;
         $fileStore->save();
         DB::commit();
         //Storage::move($path.$fileName, $path.'usuario-'.$request->idSucursal);

@@ -27,9 +27,14 @@ Route::group(['middleware' => 'auth'], function (){
 	 * 				pacientesController
 	 */
 	Route::get('pacientes', 'pacientesController@listarPacientes'); 
+	Route::get('muestra-Listado-Pacientes', 'pacientesController@muestraListadoPacientes'); 
 	Route::get('filtro-estadosProvincias', 'pacientesController@filtroEstadosProvincia'); 
 	Route::get('buscar-paciente', 'pacientesController@buscarPaciente'); 
 	Route::post( 'registrar-paciente', 'pacientesController@registrarPaciente');
+	Route::get('body-detalle-pacientes', function(){	
+	    return View::make("consultaMedica.datos_personales")
+	        ->render();
+	});
 
 	/**
 	 * 				consultaMedicaController
@@ -47,6 +52,10 @@ Route::group(['middleware' => 'auth'], function (){
 	        ->render();
 	});
 	Route::post('subir-imagen', 'consultaMedicaController@subirImagenGaleria');
+	Route::get('body-detalle-imagen', function(){	
+	    return View::make("consultaMedica.body-DetalleImagen")
+	        ->render();
+	});
 	/**
 	 * 				configuracionController
 	 */

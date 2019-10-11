@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-Gral" tabindex="-1" role="dialog" aria-labelledby="ModalClient">
+<div class="modal fade effect-super-scaled" id="modal-Gral" tabindex="-1" role="dialog" aria-labelledby="ModalClient">
   <div class="modal-dialog modal-lg" role="document" style="width: 200%">
     <div class="modal-content tx-size-sm">
       <div class="modal-header pd-x-20">

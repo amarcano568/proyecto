@@ -1,94 +1,103 @@
 selectedOptionMenu('20000', 'br-menu-link active');
 $(document).on('ready', function() {
 
-    $("#tablePacientes").DataTable({
-        "order": [
-            [1, "desc"]
-        ],
-        dom: "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-        buttons: [{
-            extend: 'copyHtml5',
-            title: '',
-            messageTop: null,
-            text: '<i class="far fa-copy"></i> Copiar '
-        }, {
-            extend: 'excel',
-            title: '',
-            messageTop: null,
-            text: '<i class="far fa-file-excel"></i> Excel ',
-            exportOptions: {
-                columns: [0, 2, 3, 4, 5, 6, 8, 9, 10, 11, 13]
-            },
-            messageTop: 'Listado de Pacientes.'
-        }, {
-            extend: 'csvHtml5',
-            text: '<i class="fas fa-file-csv"></i> CSV '
-        }],
-        //"dom"                                : '<"top"i>rt<"bottom"flp><"clear">',
-        "paginationType": "input",
-        "sPaginationType": "full_numbers",
-        "language": {
-            buttons: {
-                copyTitle: '<i class="fa fa-files-o fa-2x text-info" ></i> Listado de pacientes copiado al Portapales',
-                copySuccess: {
-                    _: '%d Registros copiados.',
-                    1: '1 Registro copiado.'
+    listarPacientes();
+
+    function listarPacientes() {
+        table_paciente = $("#tablePacientes").DataTable({
+            "order": [
+                [1, "asc"]
+            ],
+            dom: "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [{
+                extend: 'copyHtml5',
+                title: '',
+                messageTop: null,
+                text: '<i class="far fa-copy"></i> Copiar '
+            }, {
+                extend: 'excel',
+                title: '',
+                messageTop: null,
+                text: '<i class="far fa-file-excel"></i> Excel ',
+                // exportOptions: {
+                //     columns: [0, 2, 3, 4, 5, 6, 8, 9, 10, 11, 13]
+                // },
+                messageTop: 'Listado de Pacientes.'
+            }, {
+                extend: 'csvHtml5',
+                text: '<i class="fas fa-file-csv"></i> CSV '
+            }],
+            //"dom"                                : '<"top"i>rt<"bottom"flp><"clear">',
+            "paginationType": "input",
+            "sPaginationType": "full_numbers",
+            "language": {
+                buttons: {
+                    copyTitle: '<i class="fa fa-files-o fa-2x text-info" ></i> Listado de pacientes copiado al Portapales',
+                    copySuccess: {
+                        _: '%d Registros copiados.',
+                        1: '1 Registro copiado.'
+                    }
+                },
+                "searchPlaceholder": "Buscar",
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ Pacientes",
+                "sZeroRecords": "No se encontró ningun Paciente con la Condición del Filtro",
+                "sEmptyTable": "Ningun Paciente Agregado aún...",
+                "sInfo": "Del _START_ al _END_ de un total de _TOTAL_ Pacientes",
+                "sInfoEmpty": "De 0 al 0 de un total de 0 Paciente",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ Pacientes)",
+                "sInfoPostFix": "",
+                "sSearch": "",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": loadingUI('Procesando...', 'white'),
+                "oPaginate": {
+                    "sFirst": "<<",
+                    "sLast": ">>",
+                    "sNext": ">",
+                    "sPrevious": "<",
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
             },
-            "searchPlaceholder": "Buscar",
-            "sProcessing": "Procesando...",
-            "sLengthMenu": "Mostrar _MENU_ Pacientes",
-            "sZeroRecords": "No se encontró ningun Paciente con la Condición del Filtro",
-            "sEmptyTable": "Ningun Paciente Agregado aún...",
-            "sInfo": "Del _START_ al _END_ de un total de _TOTAL_ Pacientes",
-            "sInfoEmpty": "De 0 al 0 de un total de 0 Paciente",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ Pacientes)",
-            "sInfoPostFix": "",
-            "sSearch": "",
-            "sUrl": "",
-            "sInfoThousands": ",",
-            "sLoadingRecords": loadingUI('Procesando...', 'white'),
-            "oPaginate": {
-                "sFirst": "<<",
-                "sLast": ">>",
-                "sNext": ">",
-                "sPrevious": "<",
+            "ajax": {
+                "method": "get",
+                "url": "muestra-Listado-Pacientes",
+                "data": {}
             },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            "lengthMenu": [
+                [5, 10, 20, 25, 50, -1],
+                [5, 10, 20, 25, 50, "Todos"]
+            ],
+            // "columnDefs": [{
+            //     "width": "5%",
+            //     "targets": 0
+            // }, {
+            //     "width": "25%",
+            //     "targets": 1
+            // }, {
+            //     "width": "25%",
+            //     "targets": 2
+            // }, {
+            //     "width": "15%",
+            //     "targets": 3
+            // }, {
+            //     "width": "15%",
+            //     "targets": 4
+            // }, {
+            //     "width": "10%",
+            //     "targets": 5
+            // }],
+            "iDisplayLength": 10,
+            "initComplete": function(settings, json) {
+                $.unblockUI();
             }
-        },
-        "lengthMenu": [
-            [5, 10, 20, 25, 50, -1],
-            [5, 10, 20, 25, 50, "Todos"]
-        ],
-        // "columnDefs": [{
-        //     "width": "5%",
-        //     "targets": 0
-        // }, {
-        //     "width": "25%",
-        //     "targets": 1
-        // }, {
-        //     "width": "25%",
-        //     "targets": 2
-        // }, {
-        //     "width": "15%",
-        //     "targets": 3
-        // }, {
-        //     "width": "15%",
-        //     "targets": 4
-        // }, {
-        //     "width": "10%",
-        //     "targets": 5
-        // }],
-        "iDisplayLength": 10,
-        "initComplete": function(settings, json) {
-            $.unblockUI();
-        }
-    });
+        });
+    }
 
     $('[data-toggle="popover"]').popover();
 
@@ -102,36 +111,55 @@ $(document).on('ready', function() {
         idPaciente = $(this).attr('idPaciente');
         switch (accion_ok) {
             case 'editar-paciente':
-                $.ajax({
-                    url: 'buscar-paciente',
-                    type: 'get',
-                    dataType: "json",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        idPaciente: idPaciente
-                    }
-                }).fail(function(statusCode, errorThrown) {
-                    alert(statusCode + ' ' + errorThrown);
-                }).done(function(response) {
-                    console.log(response);
-                    $("#idPaciente").val(response.idpacientes);
-                    $("#nomPaciente").val(response.Nombres);
-                    $("#apePaciente").val(response.Apellidos);
-                    $("#nroDocumento").val(response.nroDoc);
-                    $("#TipoDoc").text(response.tipoDoc);
-                    $("#fecNac").val(response.fecNac);
-                    $("#sexo").val(response.sexo);
-                    $("#mailPac").val(response.email);
-                    $("#pais").val(response.Pais);
-                    $("#estadoProvincia").val(response.ciudad);
-                    $("#telFijo").val(response.telFijo);
-                    $("#telMovil").val(response.telMovil);
-                    $("#direccion").val(response.direccion);
-                    $("#tipoSangre").val(response.tipoSangre);
-                    $("#telEmergencia").val(response.telEmergencia);
-                    $(".chosen-select").trigger("chosen:updated");
-                    $("#modal-paciente").modal('show');
+                $('#form-register-paciente').each(function() {
+                    this.reset();
                 });
+                $.get(
+                    "body-detalle-pacientes",
+                    function(data) {
+                        $("#body-modal-paciente").html(data);
+                        $("#modal-paciente").modal('show');
+                        $("#titleModalGral").html('<i class="far fa-user"></i> Editar datos del  paciente');
+                        $.ajax({
+                            url: 'buscar-paciente',
+                            type: 'get',
+                            dataType: "json",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                idPaciente: idPaciente
+                            }
+                        }).fail(function(statusCode, errorThrown) {
+                            alert(statusCode + ' ' + errorThrown);
+                        }).done(function(response) {
+                            console.log(response);
+                            $("#idPaciente").val(idPaciente);
+                            $("#nombre").val(response.Nombres);
+                            $("#apellido").val(response.Apellidos);
+                            $("#nroDocumento").val(response.nroDoc);
+                            $("#email").val(response.email);
+                            $("#medicoProfesional").val(response.medicoProfesional);
+                            $("#nombre_contacto").text(response.nombre_contacto);
+                            $("#fono_contacto").val(response.fono_contacto);
+                            $("#relacion").val(response.relacion_contacto);
+                            $("#genero").val(response.sexo);
+                            $("#nacionalidad").val(response.Pais);
+                            $("#idioma").val(response.idioma);
+                            $("#fonofijo").val(response.telFijo);
+                            $("#fonoMovil").val(response.telMovil);
+                            $("#direccion").val(response.direccion);
+                            $("#ocupacion").val(response.ocupacion);
+                            $("#convenio").val(response.convenio);
+                            $("#porcConvenio").val(response.porc_convenio);
+                            $("#convenio_notas").val(response.notas_convenio);
+                            $("#nombre_resp").val(response.responsable_pago);
+                            $("#fec_nacimiento").val(response.fecNac);
+
+                            $(".chosen-select").trigger("chosen:updated");
+
+                            $("#modal-paciente").modal('show');
+                        });
+                    });
+
 
                 break;
             case y:
@@ -195,125 +223,17 @@ $(document).on('ready', function() {
         }
     }
 
-    $.validator.setDefaults({
-        ignore: ":hidden:not(select)"
-    });
-    $("#form-register-paciente").validate({
-        errorElement: 'div',
-        errorClass: 'help-block',
-        focusInvalid: true,
-        rules: {
-            nomPaciente: {
-                required: true,
-                minlength: 2
-            },
-            apePaciente: {
-                required: true,
-                minlength: 2
-            },
-            nroDocumento: {
-                required: true,
-                number: true
-            },
-            fecNac: {
-                required: true
-            },
-            sexo: {
-                required: true
-            },
-            mailPac: {
-                required: true,
-                email: true
-            },
-            pais: {
-                required: true
-            },
-            estadoProvincia: {
-                required: true
-            },
-            direccion: {
-                required: true
-            }
-        },
-        messages: {
-            nomPaciente: {
-                required: "Nombre del paciente requerido",
-                minlength: "Mínimo dos (2) caracteres"
-            },
-            apePaciente: {
-                required: "Apellido del paciente requerido",
-                minlength: "Mínimo dos (2) caracteres"
-            },
-            nroDocumento: {
-                required: "# Documento requerido",
-                number: "Solo números"
-            },
-            fecNac: {
-                required: "Fecha nacimiento requerida"
-            },
-            sexo: {
-                required: "Sexo requerido"
-            },
-            mailPac: {
-                required: "Correo requerido",
-                email: 'Debe ingresar un correo valido'
-            },
-            pais: {
-                required: "País requerido"
-            },
-            estadoProvincia: {
-                required: "Requerido"
-            },
-            direccion: {
-                required: "Direcciión requerida"
-            }
-        },
-        invalidHandler: function(event, validator) { //display error alert on form submit   
-            $('.alert-danger', $('.login-form')).show();
-        },
-        highlight: function(e) {
-            $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-        },
 
-        success: function(e) {
-            $(e).closest('.form-group').removeClass('has-error').addClass('has-info');
-            $(e).remove();
-        },
-        errorPlacement: function(error, element) {
-            if (element.is(':checkbox') || element.is(':radio')) {
-                var controls = element.closest('div[class*="col-"]');
-                if (controls.find(':checkbox,:radio').length > 1) controls.append(error);
-                else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-            } else if (element.is('.select2')) {
-                error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-            } else if (element.is('.chosen-select')) {
-                error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-            } else error.insertAfter(element.parent());
-        },
-        submitHandler: function(form) {
-
-
-
-        }
-
-
-    });
-
-    //Validate send register solicitude
-    $('#registrar').on('click', function() {
-        var validarForm = $("#form-register-paciente").valid();
+    $(document).on('click', '#btnSavePaciente', function(event) {
+        var validarForm = $("#form_register_paciente").valid();
         if (validarForm === false) {
             return false;
         }
         alertify.confirm('Datos del paciente', '<h4 class="text-info">Esta seguro de guardar estos datos..?</h4>', function() {
-            tipoDoc = $("#TipoDoc").text();
-            var form = $('#form-register-paciente');
-            var formData = form.serialize() + "&tipoDoc=" + tipoDoc;
 
-            // formData.push({
-            //     name: 'tipoDoc',
-            //     value: tipoDoc
-            // });
+            var form = $('#form_register_paciente');
+            var formData = form.serialize();
+
             var route = form.attr('action');
             $.ajax({
                 url: route,
@@ -326,10 +246,8 @@ $(document).on('ready', function() {
                 console.log(data)
                 $.unblockUI();
                 alertify.success('Paciente registrado...');
-                // setTimeout(function() {
-                //     window.location.href = '/pacientes';
-                // }, 900);
-
+                table_paciente.ajax.reload();
+                $("#modal-paciente").modal('hide');
             }).fail(function(statusCode, errorThrown) {
                 $.unblockUI();
                 console.log(errorThrown);
@@ -353,7 +271,109 @@ $(document).on('ready', function() {
         $('#form-register-paciente').each(function() {
             this.reset();
         });
-        $("#modal-paciente").modal('show');
+        $.get(
+            "body-detalle-pacientes",
+            function(data) {
+                $("#body-modal-paciente").html(data);
+                $("#modal-paciente").modal('show');
+                $("#titleModalGral").html('<i class="far fa-user"></i> Registrar nuevo paciente');
+            });
+
+    });
+
+    jQuery.validator.setDefaults({
+        errorClass: 'help-block',
+        focusInvalid: true,
+        ignore: ":hidden:not(select)",
+        highlight: function(element) {
+            $(element).removeClass('is-valid').addClass('is-invalid');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('is-invalid').addClass('is-valid');
+        },
+        errorPlacement: function(error, element) {
+            if (element.parent().hasClass('input-group')) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
+
+    $("#form_register_paciente").validate({
+        rules: {
+            nombre: {
+                required: true,
+                minlength: 4
+            },
+            apellido: {
+                required: true,
+                minlength: 4
+            },
+            nroDocumento: {
+                required: true,
+                number: true,
+                maxlength: 11
+            },
+            email: {
+                required: true
+            },
+            medicoProfesional: {
+                required: false
+            },
+            fec_nacimiento: {
+                required: true
+            },
+            genero: {
+                required: true
+            },
+            direccion: {
+                required: true
+            },
+            direccion2: {
+                required: true
+            },
+            nacionalidad: {
+                required: true
+            }
+        },
+        messages: {
+            nombre: {
+                required: "",
+                minlength: "Mínimo cuatro (4) caracteres"
+            },
+            apellido: {
+                required: "",
+                minlength: "Mínimo cuatro (4) caracteres"
+            },
+            nroDocumento: {
+                required: "",
+                number: "Solo números",
+                maxlength: 'Máx 11 digitos'
+            },
+            email: {
+                required: "Correo del paciente requerido"
+            },
+            medicoProfesional: {
+                required: "Profesional requerido"
+            },
+            fec_nacimiento: {
+                required: "Requerida"
+            },
+            genero: {
+                required: "Genero requerido"
+            },
+            nacionalidad: {
+                required: "Nacionalida requerida"
+            }
+        },
+
+        submitHandler: function(form) {
+
+
+
+        }
     });
 
 

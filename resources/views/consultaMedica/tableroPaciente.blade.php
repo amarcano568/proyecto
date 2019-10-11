@@ -102,7 +102,10 @@
       <div class="tab-content">
 
         <div role="tabpanel" class="tab-pane active" id="datos_personales">
-          @include('consultaMedica.datos_personales')
+          <form id="form_register_paciente" method="post" enctype="multipart/form-data" action="registrar-paciente">
+            @csrf
+            @include('consultaMedica.datos_personales')
+          </form>
         </div>
         <div role="tabpanel" class="tab-pane" id="Anamnesis">
           @include('consultaMedica.Anamnesis_general')
