@@ -86,6 +86,12 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('listar_especialidades', 'administradorController@listarEspecialidades');
 	Route::post('subir-foto', 'administradorController@subirFoto');
 
+	/**
+	 *   				Citas EventController
+	 */
+	Route::get('modulo-citas', 'EventController@index');
+	Route::post('registrar-cita', 'EventController@registrarCita');
+
 
 });
 

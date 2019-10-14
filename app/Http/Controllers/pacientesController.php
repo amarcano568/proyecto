@@ -68,8 +68,7 @@ class pacientesController extends Controller
     }
 
     public function buscarPaciente(Request $request)
-    {
-        
+    {        
         $BD = Auth::user()->Empresa;
         return \App\Pacientes::on($BD)->find($request->idPaciente);
     }

@@ -29,12 +29,13 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/datatables/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/datatables/responsive.bootstrap.min.css') }}" rel="stylesheet" />
+     <link href="{{ asset('lib/datatables/buttons.dataTables.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/component-chosen.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/floating-labels.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/estilos1.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/ion.rangeSlider/css/ion.rangeSlider.css') }}" rel="stylesheet" />
     <link href="{{ asset('lib/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css') }}" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+s
     <link rel="stylesheet" href="{{ asset('css/bracket.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/typeahead.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/tellis-sticky-note.css') }}" />
@@ -42,6 +43,7 @@
     <link rel="stylesheet" href="{{ asset('lib/dropzone/dropzone.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/cards-gallery.css') }}" />
     <link rel="stylesheet" href="{{ asset('lib/jquery.steps/jquery.steps.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/fullcalendar.min.css') }}" />
     
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
     
@@ -70,7 +72,7 @@
             <span class="menu-item-label">Pacientes</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        <a id="60000" href="#" class="br-menu-link">
+        <a id="60000" href="{{URL::to('modulo-citas')}}" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon tx-18 fas fa-book"></i>
             <span class="menu-item-label">Agenda de citas</span>
