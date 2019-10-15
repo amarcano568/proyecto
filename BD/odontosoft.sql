@@ -104,13 +104,14 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla odontosoft.migrations: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla odontosoft.migrations: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
-	(2, '2014_10_12_100000_create_password_resets_table', 1);
+	(2, '2014_10_12_100000_create_password_resets_table', 1),
+	(3, '2019_10_12_171811_create_events_table', 2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Volcando estructura para tabla odontosoft.paises
@@ -378,7 +379,7 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla odontosoft.password_resets: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla odontosoft.password_resets: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 REPLACE INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 	('amarcano568@gmail.com', '$2y$10$asS3HOHrAzDyl4Hl/a7sWOcfcLweoS4367CrmLlUaDc2/FZRUPWW6', '2019-09-30 14:40:30');
@@ -417,7 +418,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Volcando datos para la tabla odontosoft.users: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`id`, `name`, `lastName`, `userName`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Empresa`, `sucursal`, `status`, `perfil`, `sexo`, `especialidadMedica`, `idioma`, `rut_dni`, `fecNacimiento`, `telefonoFijo`, `telefonoCelular`, `direccion`, `changePassword`, `foto`) VALUES
-	(1, 'Alexander Jose', 'Marcano A', 'amarcano', 'amarcano568@gmail.com', NULL, '$2y$10$WjJFwV7nCQ6nzMWZel.44OLxGBpDa03dsHF1nKM7.jFpLflsiX.3W', 'ooxBXrCAIM4KQrHsfqfednNZPOcJSNfkrz3IPQGcDZG7doJINeX2ozB2RoG5', '2019-07-30 15:47:32', '2019-09-26 20:25:16', 'DentalCare', '1,2', 1, 4, 'M', '2', 'ES', '87654321', '1974-09-06', '931288300', '931288300', 'Av.', 'N', 'Empresas\\DentalCare\\fotos\\usuario-1.png'),
+	(1, 'Alexander Jose', 'Marcano A', 'amarcano', 'amarcano568@gmail.com', NULL, '$2y$10$WjJFwV7nCQ6nzMWZel.44OLxGBpDa03dsHF1nKM7.jFpLflsiX.3W', 'YobyFhdtmCjLVa1WntxQC9DHV7KXUVVnNAemOsTlc6nP2qqTTRdOHqjsNvmv', '2019-07-30 15:47:32', '2019-09-26 20:25:16', 'DentalCare', '1,2', 1, 4, 'M', '2', 'ES', '87654321', '1974-09-06', '931288300', '931288300', 'Av.', 'N', 'Empresas\\DentalCare\\fotos\\usuario-1.png'),
 	(2, 'Luriannys', 'Salazar P.', 'luri', 'luriannys_salazar@hotmail.com', NULL, '$2y$10$HYaq5jTxWxLKvqniu9ebiu4NV5szhbSmtOkSMvcuGS.vA9LYIxxp2', NULL, '2019-09-23 16:39:17', '2019-09-26 20:23:31', 'DentalCare', '1,2', 1, 4, 'F', '2,3', 'ES', '12345678', '1981-10-31', '973253612', '3333', 'Prueba', 'S', 'Empresas\\DentalCare\\fotos\\usuario-2.jpeg'),
 	(4, 'Adrian', 'Marcano C', 'adrian', 'adrian@hotmail.com', NULL, '$2y$10$02mKkCRSFZkhdjZybkEpB.Madh3i9VrfOArdf7cPHNEs/Qllq8QNK', NULL, '2019-09-23 20:28:34', '2019-09-23 20:28:34', 'DentalCare', '2', 1, 2, 'M', '1', 'ES', '2333333', '2002-09-17', '973253612', '3333', 'wwwww', 'S', NULL),
 	(5, 'Alexandra de los Angeles', 'Marcano Salazar', 'pastorita', 'alexandra_pastorita@gmail.com', NULL, '$2y$10$73TQbhuVvhZe9AkNmbngKujtdMD566PfQnqfQ31ZC5KZa0SRaaQJ6', NULL, '2019-09-24 16:24:40', '2019-09-24 16:24:40', 'DentalCare', '1,2', 1, 2, 'F', '5,7', 'ES', '12345678', '2012-10-01', '973253612', '3333', NULL, 'S', NULL);

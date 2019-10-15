@@ -16,6 +16,45 @@
 CREATE DATABASE IF NOT EXISTS `dentalcare` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `dentalcare`;
 
+-- Volcando estructura para tabla dentalcare.citas
+CREATE TABLE IF NOT EXISTS `citas` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idPaciente` int(11) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `idMedico` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `notas` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla dentalcare.citas: ~4 rows (aproximadamente)
+/*!40000 ALTER TABLE `citas` DISABLE KEYS */;
+REPLACE INTO `citas` (`id`, `idPaciente`, `start_date`, `end_date`, `idMedico`, `created_at`, `updated_at`, `notas`) VALUES
+	(1, 2, '2019-10-14 08:30:00', '2019-10-14 09:00:00', 2, '2019-10-14 18:29:26', '2019-10-14 18:29:26', '222222'),
+	(2, 2, '2019-10-03 00:00:00', '2019-10-03 00:00:00', 1, '2019-10-14 18:42:28', '2019-10-14 18:42:28', NULL),
+	(3, 2, '2019-10-17 00:00:00', '2019-10-17 00:00:00', 1, '2019-10-14 18:42:51', '2019-10-14 18:42:51', NULL),
+	(4, 1, '2019-10-09 00:00:00', '2019-10-09 00:00:00', 1, '2019-10-14 18:52:40', '2019-10-14 18:52:40', NULL);
+/*!40000 ALTER TABLE `citas` ENABLE KEYS */;
+
+-- Volcando estructura para tabla dentalcare.config_agenda
+CREATE TABLE IF NOT EXISTS `config_agenda` (
+  `diasLaborables` varchar(20) NOT NULL,
+  `horaDesde` varchar(10) DEFAULT NULL,
+  `horaHasta` varchar(20) DEFAULT NULL,
+  `tiempoMinutos` int(11) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Configuración de la agenda';
+
+-- Volcando datos para la tabla dentalcare.config_agenda: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `config_agenda` DISABLE KEYS */;
+REPLACE INTO `config_agenda` (`diasLaborables`, `horaDesde`, `horaHasta`, `tiempoMinutos`, `updated_at`, `created_at`, `id`) VALUES
+	('1,3,5', '8:00 AM', '8:00 PM', 15, '2019-10-15 18:58:55', NULL, 1);
+/*!40000 ALTER TABLE `config_agenda` ENABLE KEYS */;
+
 -- Volcando estructura para tabla dentalcare.consultas
 CREATE TABLE IF NOT EXISTS `consultas` (
   `id` int(11) NOT NULL,
@@ -118,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='Estados de la citas';
 
--- Volcando datos para la tabla dentalcare.estados: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.estados: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `estados` DISABLE KEYS */;
 REPLACE INTO `estados` (`id`, `nombre`, `email`, `icono`, `color`, `updated_at`, `created_at`) VALUES
 	(1, 'No Confirmado', 0, '<i class=\'text-danger fas fa-minus-circle\'></i>', NULL, '2019-09-23 16:33:42', '2019-09-18 19:45:57'),
@@ -137,9 +176,9 @@ CREATE TABLE IF NOT EXISTS `filestore` (
   `created_at` timestamp NULL DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1 COMMENT='Galería de Imagenes';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 COMMENT='Galería de Imagenes';
 
--- Volcando datos para la tabla dentalcare.filestore: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.filestore: ~14 rows (aproximadamente)
 /*!40000 ALTER TABLE `filestore` DISABLE KEYS */;
 REPLACE INTO `filestore` (`id`, `idPaciente`, `nombreOriginal`, `nombre`, `titulo`, `descripcion`, `updated_at`, `created_at`, `created_by`) VALUES
 	(1, 1, 'imagen-1.jpg', 'imagen-1.jpg', 'Titulo prueba', 'Imagen de Prueba', NULL, '2019-09-30 00:00:00', 1),
@@ -152,7 +191,10 @@ REPLACE INTO `filestore` (`id`, `idPaciente`, `nombreOriginal`, `nombre`, `titul
 	(8, 1, '1570466249324images.jpg', '100720191637435d9b69d76134b.jpeg', NULL, NULL, '2019-10-07 16:37:43', '2019-10-07 16:37:43', 1),
 	(27, 2, '1570722519435images.jpg', '101020191548435d9f52db6ea0f.jpeg', NULL, NULL, '2019-10-10 15:48:43', '2019-10-10 15:48:43', 1),
 	(28, 2, '1570722606898imagen-2.jpg', '101020191550105d9f5332e993d.jpeg', 'Radiografia perfil', 'Lorem ipsum dolor sit amet, mattis et elementum ullamcorper sed nunc, dignissim nullam elementum velit integer magna lacinia, porttitor nullam suscipit. Nulla ornare risus luctus risus, wisi convallis congue arcu mi adipiscing phasellus, nunc lorem magnis consequat dolor taciti enim, parturient posuere nec sed. Interdum justo libero pellentesque. Placerat pellentesque morbi, arcu suspendisse amet sodales, pulvinar vehicula arcu est dui ante ornare. Cursus vel, mauris morbi, nunc eget ridiculus enim nullam quis, purus pulvinar vestibulum nec at, porttitor velit in amet. Ipsum nec cum sem sollicitudin mauris adipiscing. Elit donec, rutrum alias elit nulla dictumst tellus eros, diam ante tempor luctus, cras tellus. Turpis nulla neque rutrum velit. Pede felis non mauris ut lorem, quis eros nonummy dictumst aliquam en hendrerit, neque interdum sodales. Facilisi nisl, congue wisi netus nibh ac neque tincidunt. Feugiat aliquam, volutpat ipsum et sit ipsum. Molestiae sed praesent sed placerat fusce neque.', '2019-10-10 15:50:10', '2019-10-10 15:50:10', 2),
-	(29, 2, '1570726233299imagen-3.jpg', '101020191650355d9f615b32548.jpeg', 'Otra Prueba de Imagen', 'Lorem Ipsum es simplemente un texto ficticio de la industria de impresión y composición tipográfica. Lorem Ipsum ha sido el texto ficticio estándar de la industria desde el año 1500, cuando una impresora desconocida tomó una galera de tipo y la mezcló para hacer un libro de muestras. Ha sobrevivido no solo cinco siglos, sino también el salto a la composición electrónica, permaneciendo esencialmente sin cambios. Se popularizó en la década de 1960 con el lanzamiento de las hojas de Letraset que contienen pasajes de Lorem Ipsum, y más recientemente con software de publicación de escritorio como Aldus PageMaker, incluidas las versiones de Lorem Ipsum.', '2019-10-10 16:50:35', '2019-10-10 16:50:35', 1);
+	(29, 2, '1570726233299imagen-3.jpg', '101020191650355d9f615b32548.jpeg', 'Otra Prueba de Imagen', 'Lorem Ipsum es simplemente un texto ficticio de la industria de impresión y composición tipográfica. Lorem Ipsum ha sido el texto ficticio estándar de la industria desde el año 1500, cuando una impresora desconocida tomó una galera de tipo y la mezcló para hacer un libro de muestras. Ha sobrevivido no solo cinco siglos, sino también el salto a la composición electrónica, permaneciendo esencialmente sin cambios. Se popularizó en la década de 1960 con el lanzamiento de las hojas de Letraset que contienen pasajes de Lorem Ipsum, y más recientemente con software de publicación de escritorio como Aldus PageMaker, incluidas las versiones de Lorem Ipsum.', '2019-10-10 16:50:35', '2019-10-10 16:50:35', 1),
+	(30, 2, '1570915719085Koala.jpg', '101220192128485da24590db585.jpeg', NULL, NULL, '2019-10-12 21:28:48', '2019-10-12 21:28:48', 1),
+	(31, 2, '1570915764944Penguins.jpg', '101220192129275da245b719c96.jpeg', 'titulo luri', 'prueba luri', '2019-10-12 21:29:27', '2019-10-12 21:29:27', 1),
+	(32, 2, '1570915814605Chrysanthemum.jpg', '101220192130165da245e8f20f3.jpeg', 'rrrrrrrrrrrrr', 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrr', '2019-10-12 21:30:17', '2019-10-12 21:30:17', 1);
 /*!40000 ALTER TABLE `filestore` ENABLE KEYS */;
 
 -- Volcando estructura para procedimiento dentalcare.listarRecipes
@@ -179,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `medicamentos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla dentalcare.medicamentos: ~16,264 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.medicamentos: ~17,334 rows (aproximadamente)
 /*!40000 ALTER TABLE `medicamentos` DISABLE KEYS */;
 REPLACE INTO `medicamentos` (`id`, `nombre`, `concentrado`, `tipo1`, `tipo2`, `presentacion`) VALUES
 	(1, 'A FOLIC', '0.5 mg', 'Tableta', 'TABLETA', 'Caja Envase Blister Tabletas'),
@@ -18127,7 +18169,7 @@ CREATE TABLE IF NOT EXISTS `motivos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='Motivos de la Consulta';
 
--- Volcando datos para la tabla dentalcare.motivos: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.motivos: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `motivos` DISABLE KEYS */;
 REPLACE INTO `motivos` (`id`, `nombre`, `tiempo`, `agenda`, `updated_at`, `created_at`) VALUES
 	(1, 'Control de Tratamiento', 30, 1, '2019-09-13 22:05:52', '2019-09-13 22:05:52'),
@@ -18164,9 +18206,9 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`idpacientes`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='Pacientes de la Empresa DentalCare';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COMMENT='Pacientes de la Empresa DentalCare';
 
--- Volcando datos para la tabla dentalcare.pacientes: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.pacientes: ~9 rows (aproximadamente)
 /*!40000 ALTER TABLE `pacientes` DISABLE KEYS */;
 REPLACE INTO `pacientes` (`idpacientes`, `Nombres`, `Apellidos`, `nroDoc`, `fecNac`, `sexo`, `email`, `medicoProfesional`, `Pais`, `direccion`, `telFijo`, `telMovil`, `tipoSangre`, `telEmergencia`, `nombre_contacto`, `fono_contacto`, `relacion_contacto`, `idioma`, `ocupacion`, `convenio`, `porc_convenio`, `notas_convenio`, `responsable_pago`, `updated_at`, `created_at`) VALUES
 	(1, 'Luriannys', 'Salazar Peña', 72145236, '1981-10-31', 'F', 'luriannys_salalazar@hotmail.com', NULL, 'VE', 'Av. Pedro Miotta #714 Zona A', '973256321973256321', NULL, '', NULL, NULL, NULL, NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 18:54:10', NULL),
@@ -18176,7 +18218,8 @@ REPLACE INTO `pacientes` (`idpacientes`, `Nombres`, `Apellidos`, `nroDoc`, `fecN
 	(5, 'Miguel', 'Alfonso', 12345678, '2019-10-11', 'M', 'miguel_alfonzo@cayro.com', NULL, 'PE', 'Los Olivos city', '931256412', '9532621', '', NULL, 'A su mama', '975124562', NULL, 'ES', 'Programador de App', NULL, NULL, 'nota de prueba', 'el mismo', '2019-10-11 16:50:49', '2019-10-11 16:50:49'),
 	(6, 'Roxana', 'Diaz', 123123456, '2089-10-11', 'F', 'roxana@pruab.com', NULL, 'PE', NULL, '945123456', NULL, '', NULL, 'A su mama', '32344334', NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 16:55:31', '2019-10-11 16:55:31'),
 	(7, 'Pedro', 'Perez', 12345678, '1974-09-06', 'M', 'pedro_perez@gmail.com', NULL, 'VE', NULL, '945123456', NULL, '', NULL, NULL, '32344334', NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 16:57:43', '2019-10-11 16:57:43'),
-	(8, 'Sofia', 'Marcano A', 323232, '2012-11-09', 'M', 'sofi_marcano@hotmail.com', NULL, 'AR', 'Porlamar', NULL, NULL, '', NULL, NULL, NULL, NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 18:14:53', '2019-10-11 17:48:29');
+	(8, 'Sofia', 'Marcano A', 323232, '2012-11-09', 'M', 'sofi_marcano@hotmail.com', NULL, 'AR', 'Porlamar', NULL, NULL, '', NULL, NULL, NULL, NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 18:14:53', '2019-10-11 17:48:29'),
+	(9, 'Leonardo D', 'Bustamante', 123456789, '2004-08-18', 'M', 'cabezita@hotmail.com', NULL, 'VE', 'Avenida Pedro Miotta #714 zona a SJM', '92332156', NULL, '', NULL, NULL, NULL, NULL, 'ES', NULL, NULL, NULL, NULL, NULL, '2019-10-11 23:36:12', '2019-10-11 23:34:45');
 /*!40000 ALTER TABLE `pacientes` ENABLE KEYS */;
 
 -- Volcando estructura para tabla dentalcare.perfil_usuario
@@ -18212,7 +18255,7 @@ CREATE TABLE IF NOT EXISTS `recipes` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Recipes emitidos a los pacientes....';
 
--- Volcando datos para la tabla dentalcare.recipes: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.recipes: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `recipes` DISABLE KEYS */;
 REPLACE INTO `recipes` (`id`, `idPacientes`, `fecha`, `medicamentos_id`, `idMedico`, `indicaciones`, `updated_at`, `created_at`) VALUES
 	(1, 1, '2019-08-21 00:00:00', 2, 2, 'Tomar cada 8 horas', NULL, NULL),
@@ -18243,7 +18286,7 @@ CREATE TABLE IF NOT EXISTS `sucursales` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla dentalcare.sucursales: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.sucursales: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `sucursales` DISABLE KEYS */;
 REPLACE INTO `sucursales` (`id`, `nombreEmpresa`, `nombre`, `nroFiscal`, `nombreCortoSucursal`, `direccion`, `telPrincipal`, `telSecundario`, `email`, `web`, `sillones`, `logo`, `updated_at`, `created_at`) VALUES
 	(1, 'Dental Cares', 'Sucursal 1', '1234567890', 'dentalCare', 'Av. Principal Surquillos', '931288300', NULL, 'contacto@dentalcare.com.pe', 'www.dentalcare.com', 10, 'Empresas\\DentalCare\\fotos\\logo-1.jpeg', '2019-10-02 21:11:56', NULL),
@@ -18259,7 +18302,7 @@ CREATE TABLE IF NOT EXISTS `tratamientos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='Tratamientos de los Pacientes.';
 
--- Volcando datos para la tabla dentalcare.tratamientos: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.tratamientos: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `tratamientos` DISABLE KEYS */;
 REPLACE INTO `tratamientos` (`id`, `tratamientos`, `status`) VALUES
 	(1, 'Limpieza Dental', 1),

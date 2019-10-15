@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Sucursales;
 use \DB;
+use ConfigAgenda;
 
 class configuracionController extends Controller
 {
@@ -110,9 +111,63 @@ class configuracionController extends Controller
     public function configAgenda()
     {
         $BD = Auth::user()->Empresa;
-            
-        return view('configuracion.configAgenda');
+        $configAgenda = \App\ConfigAgenda::on($BD)->find('1');  
+        
+        $dias[] = array( 'id' => 0,'dia' => 'Domingo' );
+        $dias[] = array( 'id' => 1,'dia' => 'Lunes' );
+        $dias[] = array( 'id' => 2,'dia' => 'Martes' );
+        $dias[] = array( 'id' => 3,'dia' => 'Miercoles' );
+        $dias[] = array( 'id' => 4,'dia' => 'Jueves' );
+        $dias[] = array( 'id' => 5,'dia' => 'Viernes' );
+        $dias[] = array( 'id' => 6,'dia' => 'Sabado' );
+
+        $diasArray = explode(',',$configAgenda->diasLaborables);
+        $data = array(  
+                        'configAgenda' => $configAgenda,
+                        'dias' => $dias
+                     ); 
+        $data['diaArray'] = $diasArray;
+
+        return view('configuracion.configAgenda',$data);
     }
+
+
+    /**
+     * [registrarMotivo description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function registrarConfigAgenda(Request $request)
+    {
+
+        try {
+            DB::beginTransaction();   
+            $BD = Auth::user()->Empresa;  
+  
+            $ConfigAgenda = \App\ConfigAgenda::on($BD)->find('1');    
+
+            $ConfigAgenda->diasLaborables = $request->diasTrabajoMultiple;
+            $ConfigAgenda->horaDesde      = $request->hora_desde;
+            $ConfigAgenda->horaHasta      = $request->hora_hasta;
+            $ConfigAgenda->tiempoMinutos  = $request->tiempoMinutos;
+    
+            if ( $ConfigAgenda->save() ){
+                $resp = array(   'success' => true,
+                                'id' => $ConfigAgenda->id);
+            }else{
+                $resp = array(   'success' => false,
+                                'id' => 0);
+            }
+
+            return response()->json($resp);
+
+        } catch (Exception $e) {
+            DB::rollback();
+            return $this->internalException($e, __FUNCTION__);
+        }
+    }
+
+    
 
 }
 

@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('config-agenda', 'configuracionController@configAgenda');
 	Route::get('buscar_sucursal', 'configuracionController@buscarSucursal');
 	Route::post('registrar-empresa', 'configuracionController@registrarEmpresa');
+	Route::post('registrar-configAgenda', 'configuracionController@registrarConfigAgenda');
 	Route::post('subir-logo', 'configuracionController@subirLogo');
 	/**
 	 * 				administradorController
