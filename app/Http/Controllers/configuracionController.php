@@ -107,6 +107,13 @@ class configuracionController extends Controller
         
     }
 
+    public function configAgenda()
+    {
+        $BD = Auth::user()->Empresa;
+            
+        return view('configuracion.configAgenda');
+    }
+
 }
 
 

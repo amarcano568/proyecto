@@ -76,7 +76,23 @@ class EventController extends Controller
        		}',
        		'eventRender' => 'function(event, element) {
                 
-            }'
+            }',
+            'select'=> 'function(start, end, allDay) {
+                var check = start;
+                var today = new Date();
+                console.log(check)
+                console.log(today)
+                if(check < today)
+                {
+                    alert("Fecha anterior")
+                    return false;
+                }
+                else
+                {
+                    // Its a right date
+                    // Do something
+                }
+          }',
 
     ]);
 
@@ -101,7 +117,6 @@ class EventController extends Controller
 	    // Si la hora de inicio es superior a la hora fin
 	    // añadimos un día más a la hora fin
 	    if ($hora_inicio > $hora_fin) {
-
 	        $hora_fin->modify('+1 day');
 	    }
 

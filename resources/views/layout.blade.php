@@ -112,7 +112,7 @@ s
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
           <li class="nav-item"><a id="50001" href="{{URL::to('config-empresa')}}" class="nav-link">Empresa</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Agenda</a></li>
+          <li class="nav-item"><a id="50002" href="{{URL::to('config-agenda')}}" class="nav-link">Agenda</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Correos</a></li>
         </ul>
       </div><!-- br-sideleft-menu -->

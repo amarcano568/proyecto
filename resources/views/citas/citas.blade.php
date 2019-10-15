@@ -22,7 +22,6 @@
 @endsection
 
 @section('javascript')
-
     <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('js/lang-all.js') }}"></script>
     <script src="{{ asset('jsApp/citas.js') }}"></script>
