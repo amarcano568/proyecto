@@ -147,8 +147,8 @@ class configuracionController extends Controller
             $ConfigAgenda = \App\ConfigAgenda::on($BD)->find('1');    
 
             $ConfigAgenda->diasLaborables = $request->diasTrabajoMultiple;
-            $ConfigAgenda->horaDesde      = $request->hora_desde;
-            $ConfigAgenda->horaHasta      = $request->hora_hasta;
+            $ConfigAgenda->horaDesde      = date("H:i", strtotime($request->hora_desde)); 
+            $ConfigAgenda->horaHasta      = date("H:i", strtotime($request->hora_hasta));
             $ConfigAgenda->tiempoMinutos  = $request->tiempoMinutos;
     
             if ( $ConfigAgenda->save() ){

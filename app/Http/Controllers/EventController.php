@@ -13,6 +13,9 @@ use Carbon\Carbon;
 use DateTime;
 use DatePeriod;
 use DateInterval;
+Use \ConfigAgenda;
+use Illuminate\Support\Collection as Collection;
+use Illuminate\Support\Arr;
 
 class EventController extends Controller
 {
@@ -21,6 +24,7 @@ class EventController extends Controller
     {
     	$BD = Auth::user()->Empresa;
         $pacientes = \App\Pacientes::on($BD)->get();
+        $configAgenda = \App\ConfigAgenda::on($BD)->find('1');
         $medicos = User::select('id','name','lastName')->where('Empresa',$BD)->get();
         
         $events = [];
@@ -53,7 +57,7 @@ class EventController extends Controller
 				'allDay'           => true,
 				'axisFormat'       => 'h:mm T',
 				'lang'             => 'es',
-				'slotMinutes'      => 30,
+				'slotMinutes'      => $configAgenda->tiempoMinutos,
 				'editable'         => true,
 				'navLinks'         => true,
 				'displayEventTime' => true,
@@ -61,9 +65,9 @@ class EventController extends Controller
 				'defaultView'      => 'month',
 				'selectHelper'     => true,
 				'businessHours'    => array(
-				'start'            => '08:00', // hora final
-				'end'              => '20:00', // hora inicial
-				'dow'				=> [ 1, 2, 3, 4, 5 ] // dias de semana, 0=Domingo
+				'start'            => $configAgenda->horaDesde, // hora final
+				'end'              => $configAgenda->horaHasta, // hora inicial
+				'dow'				=> $configAgenda->diasLaborables // dias de semana, 0=Domingo
 			)
 
     ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
@@ -71,13 +75,14 @@ class EventController extends Controller
           	'eventClick' => 'function(event) { console.log(event); $("#modal-citaAdd").modal("show"); }',
           	'dayClick' => 'function(date, jsEvent, view) 	
           	{ 
-          		$("#fechaCita").val(date.format())
+          		$("#fechaCita").val(date.format());
+                $("#idMedico").val()
           		$("#modal-citaAdd").modal("show"); 
        		}',
        		'eventRender' => 'function(event, element) {
                 
             }',
-            'select'=> 'function(start, end, allDay) {
+            /*'select'=> 'function(start, end, allDay) {
                 var check = start;
                 var today = new Date();
                 console.log(check)
@@ -92,17 +97,14 @@ class EventController extends Controller
                     // Its a right date
                     // Do something
                 }
-          }',
+          }',*/
 
     ]);
-
-    	$horasCitas = $this->intervaloHora( '08:00:00', '18:00:00' );
-
+    	        
  		$data = array(  
-						'Pacientes' => $pacientes,
-						'calendar' => $calendar,
-						'medicos' => $medicos,
-						'HorasCitas'=> $horasCitas
+                        'Pacientes'  => $pacientes,
+                        'calendar'   => $calendar,
+                        'medicos'    => $medicos
                      ); 		
 
          return view('citas.citas',$data);
@@ -156,4 +158,42 @@ class EventController extends Controller
             return $this->internalException($e, __FUNCTION__);
         }
     }
+
+    public function horasCitasNoDisponibles(Request $request )
+    {
+        $BD = Auth::user()->Empresa;
+        $empresa = \App\Empresa::on($BD)->first();
+
+        $citaOcupadas = Citas::on($BD)->select('start_date')->whereDate('start_date','=',$request->dia)->get();
+        $configAgenda = \App\ConfigAgenda::on($BD)->find('1');
+
+        $citaOcupadas->map(function($fecHor){
+            $hora = substr($fecHor->start_date,10); 
+            $fecHor->hora = $hora;
+        });
+
+        $horasCitas = $this->intervaloHora( $configAgenda->horaDesde, $configAgenda->horaHasta );
+
+        $citas = '';
+
+        $horasCitas = Collection::make($horasCitas);
+
+        foreach( $horasCitas as $hora ){
+     
+            $salida = '<a href="" class="horaCita"><span class="badge badge-success"> <i class="far fa-clock"></i> '.$hora['hora'].' </span></a> ';
+            foreach( $citaOcupadas as $citaHoraOcupada ){
+                if ( trim($citaHoraOcupada->hora) == trim($hora['hora']) ){
+                    $salida = '<span class="badge badge-secondary"> <i class="far fa-clock"></i> '.$hora['hora'].' </span> ';
+                    break;
+                }
+            }
+
+            $citas .= $salida;      
+        }
+                
+        return $citas;
+
+    }
+
+
 }

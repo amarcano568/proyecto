@@ -123,5 +123,35 @@ $(document).on('ready', function() {
     });
 
 
+    function ActualizaHorasCitasDisponibles() {
+        nameMedico = $("#chosenMedico option:selected").text();
+        idMedico = $("#chosenMedico").text();
+        $("#esperaHorasCitas").html('<i class="text-success fa-2x fas fa-spinner fa-spin"></i> Espere cargando horario disponible para el día seleccionado.');
+
+        var dia = $("#fechaCita").val();
+        $.ajax({
+            url: 'horas-cita-NoDisponibles',
+            type: 'get',
+            data: {
+                'dia': dia,
+                'idMedico': idMedico
+            },
+            datatype: 'json',
+            beforeSend: function() {
+                loadingUI('Buscando Horas para el Médico ' + nameMedico);
+            }
+        }).done(function(data) {
+            $("#esperaHorasCitas").html(data);
+            $.unblockUI();
+        }).fail(function(statusCode, errorThrown) {
+            $.unblockUI();
+            console.log(errorThrown);
+            ajaxError(statusCode, errorThrown);
+        });
+    }
+
+    $(document).on('change', '#chosenMedico', function(event) {
+        ActualizaHorasCitasDisponibles();
+    });
 
 });

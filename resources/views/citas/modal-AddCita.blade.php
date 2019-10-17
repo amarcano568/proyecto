@@ -11,22 +11,7 @@
         </div>
         <div class="modal-body pd-20">
           <div id="bodyModalGral">
-            <div class="row">
-              <label class="col-lg-3 col-sm-4 form-control-label">Dia de la cita:</label>
-              <div class="col-lg-3 col-sm-5 mg-t-10 mg-sm-t-0">
-                <input type="date" class="form-control"  id="fechaCita" name="fechaCita">
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <label class="col-lg-3 col-sm-12 form-control-label">Hora:</label>
-              <div class="col-lg-9 mg-t-10 mg-sm-t-0">
-                @foreach( $HorasCitas as $hora )
-                <span class="badge badge-success"><i class="far fa-clock"></i> {{$hora['hora']}}</span>
-                @endforeach
-              </div>
-            </div>
-            <br>
+            <!-- <input type="text" class="form-control"  id="idMedico" name="idMedico"> -->
             <div class="row">
               <label class="col-lg-3 col-sm-4 form-control-label">Paciente:</label>
               <div class="col-lg-9 col-sm-8 mg-t-10 mg-sm-t-0">
@@ -55,6 +40,22 @@
               </div>
             </div>
             <br>
+            <div class="row">
+              <label class="col-lg-3 col-sm-4 form-control-label">Dia de la cita:</label>
+              <div class="col-lg-3 col-sm-5 mg-t-10 mg-sm-t-0">
+                <input type="date" class="form-control"  id="fechaCita" name="fechaCita">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <label class="col-lg-3 col-sm-12 form-control-label">Hora:</label>
+              <div class="col-lg-9 mg-t-10 mg-sm-t-0">
+                <div id="esperaHorasCitas">
+                  
+                </div>
+              </div>
+            </div>
+            <br>            
             <div class="row">
               <label class="col-lg-3 col-sm-4 form-control-label">Nota:</label>
               <div class="col-lg-9 col-sm-8 mg-t-10 mg-sm-t-0">

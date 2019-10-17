@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth'], function (){
 	 */
 	Route::get('modulo-citas', 'EventController@index');
 	Route::post('registrar-cita', 'EventController@registrarCita');
+	Route::get('horas-cita-NoDisponibles', 'EventController@horasCitasNoDisponibles');
 
 
 });
