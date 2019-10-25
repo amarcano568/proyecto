@@ -25,7 +25,7 @@ class EventController extends Controller
     	$BD = Auth::user()->Empresa;
         $pacientes = \App\Pacientes::on($BD)->get();
         $configAgenda = \App\ConfigAgenda::on($BD)->find('1');
-        $medicos = User::select('id','name','lastName')->where('Empresa',$BD)->get();
+        $medicos = User::select('id','name','lastName')->where('Empresa',$BD)->whereIn('perfil',array(2,4,7))->get();
         
         $events = [];
         $data = Citas::on($BD)->join('pacientes', 'pacientes.idpacientes', '=', 'citas.idPaciente')->get();
@@ -164,7 +164,7 @@ class EventController extends Controller
         $BD = Auth::user()->Empresa;
         $empresa = \App\Empresa::on($BD)->first();
 
-        $citaOcupadas = Citas::on($BD)->select('start_date')->whereDate('start_date','=',$request->dia)->get();
+        $citaOcupadas = Citas::on($BD)->select('start_date')->whereDate('start_date','=',$request->dia)->where('idMedico','=',$request->idMedico)->get();
         $configAgenda = \App\ConfigAgenda::on($BD)->find('1');
 
         $citaOcupadas->map(function($fecHor){
@@ -180,7 +180,7 @@ class EventController extends Controller
 
         foreach( $horasCitas as $hora ){
      
-            $salida = '<a href="" class="horaCita"><span class="badge badge-success"> <i class="far fa-clock"></i> '.$hora['hora'].' </span></a> ';
+            $salida = '<a href="" hora="'.$hora['hora'].'" class="horaCita"><span class="badge badge-success"> <i class="far fa-clock"></i> '.$hora['hora'].' </span></a> ';
             foreach( $citaOcupadas as $citaHoraOcupada ){
                 if ( trim($citaHoraOcupada->hora) == trim($hora['hora']) ){
                     $salida = '<span class="badge badge-secondary"> <i class="far fa-clock"></i> '.$hora['hora'].' </span> ';

@@ -16,8 +16,8 @@ class Citas extends Model
         $cita->setConnection($BD);
         
 		$cita->idPaciente = $request->chosenPacientes;
-		$cita->start_date = $request->fechaCita;
-		$cita->end_date = $request->fechaCita;
+		$cita->start_date = $request->fechaCita.' '.$request->horaCita;
+		$cita->end_date = $request->fechaCita.' '.$request->horaCita;
 		$cita->idMedico = $request->chosenMedico;
 		$cita->notas = $request->notas;
 	

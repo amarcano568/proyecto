@@ -66,10 +66,18 @@ $(document).on('ready', function() {
             var combo = document.getElementById("chosenPacientes");
             pacCita = combo.options[combo.selectedIndex].text;
 
+            if ($("#horaCita").length == 0) {
+                alertify.set('notifier', 'position', 'top-center');
+                alertify.error('<i class="fas fa-exclamation-triangle"></i><br> Debe selecionar la hora de la cita..!');
+                return false;
+            }
+
+            hora = $("#horaCita").text();
+
             alertify.confirm('Cita Médica', '<h4 class="text-info">Esta seguro de guardar estos datos..?</h4>', function() {
 
                 var form = $('#formCitas');
-                var formData = form.serialize();
+                var formData = form.serialize() + "&horaCita=" + hora;
 
                 var route = form.attr('action');
                 $.ajax({
@@ -125,7 +133,7 @@ $(document).on('ready', function() {
 
     function ActualizaHorasCitasDisponibles() {
         nameMedico = $("#chosenMedico option:selected").text();
-        idMedico = $("#chosenMedico").text();
+        idMedico = $("#chosenMedico").val();
         $("#esperaHorasCitas").html('<i class="text-success fa-2x fas fa-spinner fa-spin"></i> Espere cargando horario disponible para el día seleccionado.');
 
         var dia = $("#fechaCita").val();
@@ -152,6 +160,14 @@ $(document).on('ready', function() {
 
     $(document).on('change', '#chosenMedico', function(event) {
         ActualizaHorasCitasDisponibles();
+    });
+
+    $(document).on('click', '.horaCita', function(event) {
+        event.preventDefault();
+        hora = $(this).attr('hora');
+        span = '<h4><span id="horaCita" class="badge badge-pill badge-info"> <i class="far fa-clock"></i> ' + hora + ' </span></h4>';
+        $("#divHoraCita").html(span);
+
     });
 
 });
