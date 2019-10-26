@@ -45,8 +45,8 @@
               <div class="col-lg-3 col-sm-5 mg-t-10 mg-sm-t-0">
                 <input type="date" class="form-control"  id="fechaCita" name="fechaCita">
               </div>
-              <label class="col-lg-1 col-sm-1 form-control-label">Hora:</label>
-              <div class="col-lg-2 col-sm-2 mg-t-10 mg-sm-t-0" id="divHoraCita">
+              <label class="col-lg-1 col-md-1 col-sm-2 form-control-label">Hora:</label>
+              <div class="col-lg-2 col-md-2 col-sm-2 mg-t-10 mg-sm-t-0" id="divHoraCita">
                 
               </div>
             </div>

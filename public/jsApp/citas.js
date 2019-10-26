@@ -134,7 +134,7 @@ $(document).on('ready', function() {
     function ActualizaHorasCitasDisponibles() {
         nameMedico = $("#chosenMedico option:selected").text();
         idMedico = $("#chosenMedico").val();
-        $("#esperaHorasCitas").html('<i class="text-success fa-2x fas fa-spinner fa-spin"></i> Espere cargando horario disponible para el día seleccionado.');
+        
 
         var dia = $("#fechaCita").val();
         $.ajax({
@@ -146,7 +146,8 @@ $(document).on('ready', function() {
             },
             datatype: 'json',
             beforeSend: function() {
-                loadingUI('Buscando Horas para el Médico ' + nameMedico);
+              //  loadingUI('Buscando Horas para el Médico ' + nameMedico);
+              $("#esperaHorasCitas").html('<i class="text-success fa-2x fas fa-spinner fa-spin"></i> Espere cargando horario disponible para el día seleccionado.');
             }
         }).done(function(data) {
             $("#esperaHorasCitas").html(data);
@@ -159,6 +160,10 @@ $(document).on('ready', function() {
     }
 
     $(document).on('change', '#chosenMedico', function(event) {
+        ActualizaHorasCitasDisponibles();
+    });
+
+     $(document).on('change', '#fechaCita', function(event) {
         ActualizaHorasCitasDisponibles();
     });
 
