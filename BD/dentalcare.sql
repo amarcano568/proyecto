@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `citas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla dentalcare.citas: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.citas: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `citas` DISABLE KEYS */;
 REPLACE INTO `citas` (`id`, `idPaciente`, `start_date`, `end_date`, `idMedico`, `created_at`, `updated_at`, `notas`) VALUES
 	(1, 2, '2019-10-14 08:30:00', '2019-10-14 09:00:00', 2, '2019-10-14 18:29:26', '2019-10-14 18:29:26', '222222'),
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `config_agenda` (
   `id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Configuración de la agenda';
 
--- Volcando datos para la tabla dentalcare.config_agenda: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.config_agenda: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `config_agenda` DISABLE KEYS */;
 REPLACE INTO `config_agenda` (`diasLaborables`, `horaDesde`, `horaHasta`, `tiempoMinutos`, `updated_at`, `created_at`, `id`) VALUES
 	('1,2,3,4,5,6', '09:00', '20:00', 60, '2019-10-16 15:01:12', NULL, 1);
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `convenios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla dentalcare.convenios: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.convenios: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `convenios` DISABLE KEYS */;
 REPLACE INTO `convenios` (`id`, `nombreConvenio`, `encargado`, `porceDscto`, `nota`, `status`, `updated_at`, `created_at`) VALUES
 	(1, 'Empleados del Sunat', 1, 25, 'Convenio empleados Sunat, deben traer carta de compromiso de la institución...', 0, '2019-09-23 16:35:18', '2019-09-23 16:31:36');
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla dentalcare.empresa: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.empresa: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
 REPLACE INTO `empresa` (`id`, `razonSocial`, `razonComercial`, `nroFiscal`, `direccion`, `telefono1`, `telefono2`, `logo`, `representanteLegal`, `correo`, `web`, `facebook`, `instagram`, `twitter`, `whatsapp`) VALUES
 	(1, 'Dental Care sac', 'Dental Care sac', '1234567890', 'Av. Pedro miotta # 714', '931288300', NULL, 'logo.jpg', 'Ing. Alexander Marcano', 'amarcano568@gmail.com', 'www.dentalcare.com.pe', NULL, NULL, NULL, NULL);
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `medicamentos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla dentalcare.medicamentos: ~17,913 rows (aproximadamente)
+-- Volcando datos para la tabla dentalcare.medicamentos: ~17,334 rows (aproximadamente)
 /*!40000 ALTER TABLE `medicamentos` DISABLE KEYS */;
 REPLACE INTO `medicamentos` (`id`, `nombre`, `concentrado`, `tipo1`, `tipo2`, `presentacion`) VALUES
 	(1, 'A FOLIC', '0.5 mg', 'Tableta', 'TABLETA', 'Caja Envase Blister Tabletas'),
