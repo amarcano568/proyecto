@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+  
     <title>Sistema para el Control  Odontológico V1.0 - Medisoft</title>
     <link rel="shortcut icon" type="image/x-icon" href="img/diente.ico" />
     <!-- Scripts -->
